@@ -2,5 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.dao.BorrowInfoDao">
-    
+     <!--查看所有借阅信息-->
+    <select id="findAllBorrowMsg" resultType="BorrowInfo" >
+        select * from  borrowinfo
+    </select>
+    <!--多条件查询-->
+    <!--包括借阅id,图书id-->
+    <select id="findBorrowMsgById" parameterType="String" resultType="BorrowInfo">
+      select * from   borrowinfo
+        <where>
+            <if test="borrowID !=null and borrowID !=''">
+                <bind name="borrowID" value="'%'+_parameter.getBorrowID()+'%'" />
+             and  borrowID=#{borrowID}
+            </if>
+            <if test="bookId !=null and bookId !=''">
+                <bind name="bookId" value="'%'+_parameter.getBookId()+'%'" />
+                and  bookId=#{bookId}
+            </if>
+        </where>
+    </select>
+    <!--增加借阅信息-->
 </mapper>

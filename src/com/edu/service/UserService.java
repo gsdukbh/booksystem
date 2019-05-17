@@ -9,7 +9,14 @@ import com.edu.po.User;
  * @version: 1
  */
 public interface UserService {
-    // 通过账号和密码查询用户
-    
+
+    /**
+     *   通过账号和密码查询用户
+     * @param usercode   账号
+     * @param password   密码
+     * @return login
+     */
     public User findUser(String usercode, String password);
+    
+    
 }

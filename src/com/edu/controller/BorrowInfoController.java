@@ -1,5 +1,7 @@
 package com.edu.controller;
 
+import org.springframework.stereotype.Controller;
+
 /**
  * @author ：lijiawei
  * @date ：Created in 2019/05/2019/5/14 9:38
@@ -7,6 +9,7 @@ package com.edu.controller;
  * @modified By：
  * @version: 1$
  */
+@Controller
 public class BorrowInfoController {
 
 }

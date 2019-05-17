@@ -11,10 +11,13 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserDao {
     /**
-     * 通过账号和密码登录
+     *通过账号和密码登录 
+     *@param  usercode  账号
+     * @param password  密码 
+     * @return User
      */
-    public User findUser(@Param("usercode") String usercode,
+
+    public User findUser(@Param("usercode") String usercode, 
                          @Param("password") String password);
     
-
 }

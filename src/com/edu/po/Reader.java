@@ -19,7 +19,6 @@ public class Reader {
     private String readerType;
     private Date readerTime;
     private String raederCondition;
-
     @Override
     public String toString() {
         return "Reader{" +
@@ -34,7 +33,6 @@ public class Reader {
                 ", raederCondition='" + raederCondition + '\'' +
                 '}';
     }
-
     public String getBorrowID() {
         return borrowID;
     }

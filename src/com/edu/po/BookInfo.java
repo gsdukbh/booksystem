@@ -12,8 +12,8 @@ public class BookInfo {
     private  String   bookName ;
     private  String   bookAuthor;
     private  String   bookPublishUnit ;
-    private  Integer   bookRate;
-    private  Integer  bookSortNum;
+    private  Integer  bookRate;
+    private  String   bookSort;
     private  String   bookCover;
     private  String   bookRemark;
 
@@ -25,10 +25,18 @@ public class BookInfo {
                 ", bookAuthor='" + bookAuthor + '\'' +
                 ", bookPublishUnit='" + bookPublishUnit + '\'' +
                 ", bookRate=" + bookRate +
-                ", bookSortNum=" + bookSortNum +
+                ", bookSort='" + bookSort + '\'' +
                 ", bookCover='" + bookCover + '\'' +
                 ", bookRemark='" + bookRemark + '\'' +
                 '}';
+    }
+
+    public String getBookSort() {
+        return bookSort;
+    }
+
+    public void setBookSort(String bookSort) {
+        this.bookSort = bookSort;
     }
 
     public String getBookId() {
@@ -70,14 +78,7 @@ public class BookInfo {
     public void setBookRate(Integer bookRate) {
         this.bookRate = bookRate;
     }
-
-    public Integer getBookSortNum() {
-        return bookSortNum;
-    }
-
-    public void setBookSortNum(Integer bookSortNum) {
-        this.bookSortNum = bookSortNum;
-    }
+    
 
     public String getBookCover() {
         return bookCover;

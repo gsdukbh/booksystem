@@ -3,12 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.edu.dao.ReaderDao">
    <!--查询所有的读者用户-->
-   <select id="fandAllReaderMsg" resultType="Reader" >
+   <select id="findAllReaderMsg" resultType="Reader" >
              select * from readerinfo
     </select>
     <!--条件查询信息-->
     <!--包括按姓名,借阅证号,电话,身份证,单位-->
-    <select id="findlikeReaderMsg" parameterType="String" resultType="Reader">
+    <select id="findLikeReaderMsg" parameterType="String" resultType="Reader">
          select * from   readerinfo
         <where> 
             <if test="borrowID !=null and borrowID !='' ">
@@ -35,7 +35,10 @@
     </select> 
     
       <!--添加读者信息-->
-    <insert id="addReaderMsg"
+    <insert id="addReaderMsg" parameterType="Reader"    >
+        insert into  readerinfo(borrowID,readerName,readerSex,readerUnit,readerPhone,readerIDCard,readerType)   
+        values (#{borrowID},#{readerName},#{readerSex},#{readerUnit},#{readerPhone},#{readerIDCard},#{readerType})
+    </insert>
       <!--修改数据-->
     <update id="upReaderMsg" parameterType="Reader" >
         update  readerinfo
@@ -57,6 +60,16 @@
             </if>
         </set>
     </update>
-    
-    
+      <!--按照借阅id删除信息,or 身份证删除-->
+      <delete id="delReaderMsg" parameterType="String">
+          delete from  readerinfo
+          <where>
+              <if test="borrowID !=null and borrowID !='' ">
+                  and borrowID =#{borrowID}
+              </if>
+              <if test="readerIDCard !=null and readerIDCard !='' ">
+                  and readerIDCard =#{readerIDCard}
+              </if>
+          </where>
+      </delete>
 </mapper>

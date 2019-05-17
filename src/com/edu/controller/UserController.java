@@ -19,7 +19,9 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class UserController {
-    // 依赖注入
+    /**
+     * 依赖注入 
+     */
     @Autowired
     private UserService userService;
     /**
@@ -37,6 +39,17 @@ public class UserController {
 			return "admin";
         }
         return "../index";
+        
+    }
+    /**
+     * 退出登录
+     */
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session) {
+        // 清除Session
+        session.invalidate();
+        // 重定向到登录页面的跳转方法
+        return "redirect:login";
     }
 }
 
