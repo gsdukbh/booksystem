@@ -13,11 +13,7 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class BookInfoController {
-    @Autowired
-    private BookInfoService bookInfoService;
-    /**
-     * 按照图书编号查询
-     */
+   
     
 }
 
