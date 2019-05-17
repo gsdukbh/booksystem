@@ -15,5 +15,6 @@ public interface UserDao {
      */
     public User findUser(@Param("usercode") String usercode,
                          @Param("password") String password);
+    
 
 }

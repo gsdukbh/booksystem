@@ -3,9 +3,60 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.edu.dao.ReaderDao">
    <!--查询所有的读者用户-->
- <select id="fandAllReaderMsg" resultType="" >
-  
- </select>
- 
- 
+   <select id="fandAllReaderMsg" resultType="Reader" >
+             select * from readerinfo
+    </select>
+    <!--条件查询信息-->
+    <!--包括按姓名,借阅证号,电话,身份证,单位-->
+    <select id="findlikeReaderMsg" parameterType="String" resultType="Reader">
+         select * from   readerinfo
+        <where> 
+            <if test="borrowID !=null and borrowID !='' ">
+                <bind name="borrowID" value="'%'+_parameter.getBorrowID()+'%'" />
+                and borrowID like  #{borrowID}
+            </if>
+           <if test="readerName !=null and readerName !=''">
+               <bind name="readerName" value="'%'+_parameter.getReaderName()+'%'" />
+               and   readerName like #{readerName}
+           </if>
+            <if test="readerPhone !=null nd readerPhone !='' ">
+               <bind name="readerPhone" value="'%'+_parameter.getReaderPhone()+'%'"/>
+                and readerPhone like #{readerPhone}
+            </if>
+            <if test="readerIDCard !=null nd readerIDCard !='' ">
+                <bind name="readerIDCard" value="'%'+_parameter.getReaderIDCard()+'%'"/>
+                and readerIDCard like #{readerIDCard}
+            </if>
+            <if test="readerUnit !=null nd readerUnit !='' ">
+                <bind name="readerUnit" value="'%'+_parameter.getReaderUnit()+'%'"/>
+                and readerUnit like #{readerUnit}
+            </if>
+        </where>
+    </select> 
+    
+      <!--添加读者信息-->
+    <insert id="addReaderMsg"
+      <!--修改数据-->
+    <update id="upReaderMsg" parameterType="Reader" >
+        update  readerinfo
+        <set>
+            <if test="readerName !=null and readerName !=''">
+                readerName=#{readerName}
+            </if>
+            <if test="readerSex !=null and readerSex !=''">
+                readerSex=#{readerSex}
+            </if>
+            <if test="readerUnit !=null and readerUnit !=''">
+                readerUnit=#{readerUnit}
+            </if>
+            <if test="readerPhone !=null and readerPhone !=''">
+                readerPhone=#{readerPhone}
+            </if>
+            <if test="raederCondition !=null and raederCondition !=''">
+                raederCondition=#{raederCondition}
+            </if>
+        </set>
+    </update>
+    
+    
 </mapper>

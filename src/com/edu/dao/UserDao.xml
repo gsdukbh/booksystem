@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.edu.dao.UserDao" >
+    
+    <!--登陆查询-->
     <select id="findUser" parameterType="String" resultType="User">
         select * from  bookDBuser where buser = #{usercode} and bpwd = #{password}
     </select>
