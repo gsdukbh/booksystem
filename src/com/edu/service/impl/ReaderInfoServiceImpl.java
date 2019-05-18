@@ -29,6 +29,7 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      */
     @Override
     public List<Reader> findAllReaderMsg() {
+        
         return null;
     }
 

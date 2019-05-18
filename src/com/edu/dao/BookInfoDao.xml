@@ -12,9 +12,57 @@
         select * from bookinfo
         <where>
             <if test="bookId !=null and bookId !='' ">
-                <bind name="bookId" value="'%'+_parameter.getBookId()+'%'" />
-                and bookId like  #{bookId}
+                and bookId =#{bookId}
+            </if>
+            <if test="bookName !=null and bookName !='' ">
+                <bind name="bookName" value="'%'+_parameter.getBookName()+'%'" />
+                and bookName like  #{bookName}
+            </if>
+            <if test="bookAuthor !=null and bookAuthor !='' ">
+                <bind name="bookAuthor" value="'%'+_parameter.getBookAuthor()+'%'" />
+                and bookAuthor like  #{bookAuthor}
+            </if>
+            <if test="bookPublishUnit !=null and bookPublishUnit !='' ">
+                <bind name="bookPublishUnit" value="'%'+_parameter.getBookPublishUnit()+'%'" />
+                and bookPublishUnit like  #{bookPublishUnit}
+            </if>
+            <if test="bookSort !=null and bookSort !='' ">
+                <bind name="bookSort" value="'%'+_parameter.getbookSort()+'%'" />
+                and bookSort like  #{bookSort}
             </if>
         </where>
     </select>
+     <!--添加图书信息-->
+    <insert id="addBookMsg" parameterType="BookInfo"  >
+        insert into bookinfo  
+        values (#{bookId},#{bookName},#{bookAuthor},#{bookPublishUnit},#{bookRate},#{bookSort},#{bookCover},#{bookRemark})
+    </insert>
+     <!--修改图书信息-->
+    <update id="upBookMsgBys" parameterType="BookInfo" >
+        update   bookinfo
+        <set>
+            <if test="bookName !=null and bookName !=''">
+                bookName=#{bookName}
+            </if>
+            <if test="bookAuthor !=null and bookAuthor !=''">
+                bookAuthor=#{bookAuthor}
+            </if>
+            <if test="bookPublishUnit !=null and bookPublishUnit !=''">
+                bookPublishUnit=#{bookPublishUnit}
+            </if>
+            <if test="bookRate !=null and bookRate !=''">
+                bookRate=#{bookRate}
+            </if>
+            <if test="bookSort !=null and bookSort !=''">
+                bookSort=#{bookSort}
+            </if>
+            <if test="bookCover !=null and bookCover !=''">
+                bookCover=#{bookCover}
+            </if>
+            <if test="bookRemark !=null and bookRemark !=''">
+                bookRemark=#{bookRemark}
+            </if>
+        </set>
+        where bookId=#{bookId}
+    </update>
 </mapper>

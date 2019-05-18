@@ -43,6 +43,7 @@
                 borrowstatus=#{borrowstatus}
             </if>
         </set>
+            where  borrowID=#{borrowID} and bookId=#{bookId}
     </update>
     <!--删除信息通过id-->
     <delete id="delBorrowMsgByid" parameterType="String" >

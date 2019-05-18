@@ -8,9 +8,8 @@ import java.util.List;
  * @description：图书集合
  * @version: 1
  */
-public class BookList {
+public class BookList<T> {
     private List<BookInfo> bookInfoList;
-
     public List<BookInfo> getBookInfoList() {
         return bookInfoList;
     }

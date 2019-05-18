@@ -13,7 +13,7 @@ public class BookInfo {
     private  String   bookAuthor;
     private  String   bookPublishUnit ;
     private  Integer  bookRate;
-    private  String   bookSort;
+    private  Integer   bookSort;
     private  String   bookCover;
     private  String   bookRemark;
 
@@ -31,11 +31,11 @@ public class BookInfo {
                 '}';
     }
 
-    public String getBookSort() {
+    public Integer getBookSort() {
         return bookSort;
     }
 
-    public void setBookSort(String bookSort) {
+    public void setBookSort(Integer bookSort) {
         this.bookSort = bookSort;
     }
 

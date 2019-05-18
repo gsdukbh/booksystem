@@ -59,6 +59,7 @@
                 raederCondition=#{raederCondition}
             </if>
         </set>
+        where borrowID=#{borrowID}
     </update>
       <!--按照借阅id删除信息,or 身份证删除-->
       <delete id="delReaderMsg" parameterType="String">
