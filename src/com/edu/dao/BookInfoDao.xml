@@ -2,5 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.dao.BookInfoDao">
-    
+        <!--查看所有的图书信息-->
+    <select id="findAllBookMsg" resultType="BookInfo"  >
+        select * from bookinfo
+    </select>
+    <!--查询图书数据-->
+    <!--多条件查询模糊-->
+    <select id="findBookMsgBys" resultType="BookInfo"  parameterType="String" >
+        select * from bookinfo
+        <where>
+            <if test="bookId !=null and bookId !='' ">
+                <bind name="bookId" value="'%'+_parameter.getBookId()+'%'" />
+                and bookId like  #{bookId}
+            </if>
+        </where>
+    </select>
 </mapper>

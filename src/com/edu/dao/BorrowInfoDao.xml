@@ -22,4 +22,38 @@
         </where>
     </select>
     <!--增加借阅信息-->
+    <insert id="addBorrowMsg" parameterType="BorrowInfo"  >
+        insert into  borrowinfo(borrowID,bookId,borrowRenewDay,borrowRemandDay,borrowPenalty,borrowstatus) 
+        values(${borrowID},${bookId},${borrowRenewDay},${borrowRemandDay},${borrowPenalty},${borrowstatus})  
+    </insert>
+    <!--修改信息-->
+    <update id="upBorrowMsg" parameterType="BorrowInfo"  >
+        update borrowinfo
+        <set>
+            <if test="borrowRenewDay !=null and borrowRenewDay !=''">
+                borrowRenewDay=#{borrowRenewDay}
+            </if>
+            <if test="borrowRemandDay !=null and borrowRemandDay !=''">
+                borrowRemandDay=#{borrowRemandDay}
+            </if>
+            <if test="borrowPenalty !=null and borrowPenalty !=''">
+                borrowPenalty=#{borrowPenalty}
+            </if>
+            <if test="borrowstatus !=null and borrowstatus !=''">
+                borrowstatus=#{borrowstatus}
+            </if>
+        </set>
+    </update>
+    <!--删除信息通过id-->
+    <delete id="delBorrowMsgByid" parameterType="String" >
+        delete from  borrowinfo
+        <where>
+            <if test="borrowID !=null and borrowID !='' ">
+                and borrowID =#{borrowID}
+            </if>
+            <if test="bookId !=null and bookId !='' ">
+                and bookId =#{bookId}
+            </if>
+        </where>
+    </delete>
 </mapper>

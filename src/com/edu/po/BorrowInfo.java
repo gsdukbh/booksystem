@@ -12,24 +12,23 @@ import java.util.Date;
 public class BorrowInfo {
     private  String   borrowID;
     private  String   bookId;
+    /**
+     *borrowDay 
+     * 借阅日期
+     * */
     private  Date    borrowDay;
+    /**
+     * borrowRenewDay
+     * 续借日期
+     */
     private  Date    borrowRenewDay;
+    /**
+     *borrowRemandDay
+     * 归还日期 
+     */
     private  Date    borrowRemandDay;
     private  Integer   borrowPenalty;
-    private  Integer    Borrowstatus;
-
-    @Override
-    public String toString() {
-        return "BorrowInfo{" +
-                "borrowID='" + borrowID + '\'' +
-                ", bookId='" + bookId + '\'' +
-                ", borrowDay=" + borrowDay +
-                ", borrowRenewDay=" + borrowRenewDay +
-                ", borrowRemandDay=" + borrowRemandDay +
-                ", borrowPenalty=" + borrowPenalty +
-                ", Borrowstatus=" + Borrowstatus +
-                '}';
-    }
+    private  Integer    borrowstatus;
 
     public String getBorrowID() {
         return borrowID;
@@ -80,11 +79,24 @@ public class BorrowInfo {
     }
 
     public Integer getBorrowstatus() {
-        return Borrowstatus;
+        return borrowstatus;
     }
 
     public void setBorrowstatus(Integer borrowstatus) {
-        Borrowstatus = borrowstatus;
+        this.borrowstatus = borrowstatus;
+    }
+
+    @Override
+    public String toString() {
+        return "BorrowInfo{" +
+                "borrowID='" + borrowID + '\'' +
+                ", bookId='" + bookId + '\'' +
+                ", borrowDay=" + borrowDay +
+                ", borrowRenewDay=" + borrowRenewDay +
+                ", borrowRemandDay=" + borrowRemandDay +
+                ", borrowPenalty=" + borrowPenalty +
+                ", borrowstatus=" + borrowstatus +
+                '}';
     }
 }
 

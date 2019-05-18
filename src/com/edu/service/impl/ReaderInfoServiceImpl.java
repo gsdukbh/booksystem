@@ -1,7 +1,13 @@
 package com.edu.service.impl;
 
+import com.edu.dao.ReaderDao;
 import com.edu.po.Reader;
 import com.edu.service.ReaderInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author ：lijiawei
@@ -9,7 +15,12 @@ import com.edu.service.ReaderInfoService;
  * @description：
  * @version: 1
  */
+@Service
+@Transactional
 public class ReaderInfoServiceImpl implements ReaderInfoService {
+    
+     @Autowired
+    private    ReaderDao readerDao;
 
     /**
      * 查询读者信息
@@ -17,30 +28,34 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      * @return 读者全部信息
      */
     @Override
-    public Reader findAllReaderMsg() {
+    public List<Reader> findAllReaderMsg() {
         return null;
     }
 
     /**
      * 条件查询信息
-     * 包括按姓名,借阅证号,电话,身份证,单位
      *
-     * @param msg 查询的条件
+     * @param borrowID     借阅证号
+     * @param readerName   姓名
+     * @param readerPhone  电话
+     * @param readerIDCard 身份证
+     * @param readerUnit   单位
      * @return 读者信息
      */
     @Override
-    public Reader findLikeReaderMsg(String msg) {
+    public List<Reader> findLikeReaderMsg(String borrowID, String readerName, String readerPhone, String readerIDCard, String readerUnit) {
         return null;
     }
 
     /**
      * 添加读者信息
+     * 不包含时间 时间自动生成
      *
      * @param reader 添加读者信息
      * @return 一条数据
      */
     @Override
-    public Reader addReaderMsg(Reader reader) {
+    public Integer addReaderMsg(Reader reader) {
         return null;
     }
 
@@ -51,18 +66,19 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      * @return 修改信息
      */
     @Override
-    public Reader upReaderMsg(Reader reader) {
+    public Integer upReaderMsg(Reader reader) {
         return null;
     }
 
     /**
      * 删除数据
      *
-     * @param msg 删除的条件
+     * @param borrowID     借阅证号
+     * @param readerIDCard 身份证
      * @return 信息
      */
     @Override
-    public Reader delReaderMsg(String msg) {
+    public Integer delReaderMsg(String borrowID, String readerIDCard) {
         return null;
     }
 }
