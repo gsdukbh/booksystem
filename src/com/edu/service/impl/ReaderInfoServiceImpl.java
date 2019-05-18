@@ -29,8 +29,7 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      */
     @Override
     public List<Reader> findAllReaderMsg() {
-        
-        return null;
+        return this.readerDao.findAllReaderMsg();
     }
 
     /**
@@ -45,30 +44,28 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      */
     @Override
     public List<Reader> findLikeReaderMsg(String borrowID, String readerName, String readerPhone, String readerIDCard, String readerUnit) {
-        return null;
+        return this.readerDao.findLikeReaderMsg(borrowID,readerName,readerPhone,readerIDCard,readerUnit);
     }
 
     /**
      * 添加读者信息
      * 不包含时间 时间自动生成
-     *
      * @param reader 添加读者信息
      * @return 一条数据
      */
     @Override
     public Integer addReaderMsg(Reader reader) {
-        return null;
+        return this.readerDao.addReaderMsg(reader);
     }
 
     /**
      * 修改数据
-     *
      * @param reader 读者信息更新
      * @return 修改信息
      */
     @Override
     public Integer upReaderMsg(Reader reader) {
-        return null;
+        return this.readerDao.upReaderMsg(reader);
     }
 
     /**
@@ -80,7 +77,7 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      */
     @Override
     public Integer delReaderMsg(String borrowID, String readerIDCard) {
-        return null;
+        return this.readerDao.delReaderMsg(borrowID,readerIDCard);
     }
 }
 

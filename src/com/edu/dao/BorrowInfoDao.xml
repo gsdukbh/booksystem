@@ -47,14 +47,6 @@
     </update>
     <!--删除信息通过id-->
     <delete id="delBorrowMsgByid" parameterType="String" >
-        delete from  borrowinfo
-        <where>
-            <if test="borrowID !=null and borrowID !='' ">
-                and borrowID =#{borrowID}
-            </if>
-            <if test="bookId !=null and bookId !='' ">
-                and bookId =#{bookId}
-            </if>
-        </where>
+        delete from  borrowinfo  where borrowID =#{borrowID} and bookId =#{bookId}
     </delete>
 </mapper>

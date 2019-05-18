@@ -28,7 +28,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public List<BookInfo> findAllBookMsg() {
-        return null;
+        return this.bookInfoDao.findAllBookMsg();
     }
 
     /**
@@ -43,7 +43,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public List<BookInfo> findBookMsgBys(String bookId, String bookName, String bookAuthor, String bookPublishUnit, String bookSort) {
-        return null;
+        return this.bookInfoDao.findBookMsgBys(bookId,bookName,bookAuthor,bookPublishUnit,bookSort);
     }
 
     /**
@@ -54,7 +54,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public Integer addBookMsg(BookInfo bookInfo) {
-        return null;
+        return this.bookInfoDao.addBookMsg(bookInfo);
     }
 
     /**
@@ -65,7 +65,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public Integer upBookMsgBys(BookInfo bookInfo) {
-        return null;
+        return this.bookInfoDao.upBookMsgBys(bookInfo);
     }
 }
 

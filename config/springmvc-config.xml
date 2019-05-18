@@ -27,4 +27,23 @@
 		<property name="prefix" value="/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<!-- 显示的装配自定义类型转换器 -->
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<!-- 自定义类型转换器配置 -->
+	 	<bean id="conversionService" class=
+         "org.springframework.context.support.ConversionServiceFactoryBean">
+            <property name="converters">
+                <set>
+                    <bean class="utils.DateConverter" />
+                </set>
+            </property>
+        </bean>
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="utils.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

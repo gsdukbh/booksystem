@@ -34,7 +34,7 @@ public class UserController {
         User user = userService.findUser(usercode, password);
         if(user != null){
             // 将用户对象添加到Session
-            session.setAttribute("USER_SESSION", user);
+            session.setAttribute("admin", user);
             // 跳转到主页面
 			return "admin";
         }

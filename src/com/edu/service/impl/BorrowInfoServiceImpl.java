@@ -40,18 +40,17 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
      */
     @Override
     public List<BorrowInfo> findBorrowMsgById(String borrowID, String bookId) {
-        return null;
+        return this.borrowInfoDao.findBorrowMsgById(borrowID,bookId);
     }
 
     /**
      * 增加信息
-     *
      * @param borrowInfo 借阅信息
      * @return integer 插入成功条数
      */
     @Override
     public Integer addBorrowMsg(BorrowInfo borrowInfo) {
-        return null;
+        return this.borrowInfoDao.addBorrowMsg(borrowInfo);
     }
 
     /**
@@ -62,7 +61,8 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
      */
     @Override
     public Integer upBorrowMsg(BorrowInfo borrowInfo) {
-        return null;
+        
+        return this.borrowInfoDao.upBorrowMsg(borrowInfo);
     }
 
     /**
@@ -74,7 +74,7 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
      */
     @Override
     public Integer delBorrowMsgByid(String borrowID, String bookId) {
-        return null;
+        return this.borrowInfoDao.delBorrowMsgByid(borrowID,bookId);
     }
 }
 
