@@ -1,8 +1,10 @@
 package utils;
+import com.edu.po.Reader;
+
 import java.util.List;
-public class Page<T> {
+public class Page<T>  {
 	/**
-	 * 总条数
+	 *  总条数
 	 */
 	private int total;
 	/**
@@ -10,11 +12,11 @@ public class Page<T> {
 	 */
 	private int page;
 	/**
-	 *  每页数
+	 *   每页数
 	 */
 	private int size;
 	/**
-	 *结果集 
+	 * 结果集
 	 */
 	private List<T> rows; 
 	public int getTotal() {

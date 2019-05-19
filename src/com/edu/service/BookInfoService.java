@@ -1,6 +1,7 @@
 package com.edu.service;
 
 import com.edu.po.BookInfo;
+import utils.Page;
 
 import java.util.List;
 
@@ -17,8 +18,10 @@ public interface BookInfoService {
      * 查找所有的图书信息
      * @return    BookInfo
      */
-    public List<BookInfo> findAllBookMsg();
-
+    public Page<BookInfo> findAllBookMsg(Integer page, Integer rows);
+    
+    
+    public Integer selectBookListCount();
     /**
      * 添加查询
      * @param bookId            图书id

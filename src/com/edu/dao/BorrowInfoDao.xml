@@ -3,8 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.dao.BorrowInfoDao">
      <!--查看所有借阅信息-->
-    <select id="findAllBorrowMsg" resultType="BorrowInfo" >
-        select * from  borrowinfo
+    <select id="findAllBookMsg" resultType="BorrowInfo" parameterType="BorrowInfo" >
+        select top(${rows}) * from borrowInfo
+        where  id  not in(
+            select top(${start}) id from  borrowInfo order by id asc
+        )
+        order by id asc
+    </select>
+    <!-- 查询总数 -->
+    <select id="selectBorrowListCount" 
+            resultType="Integer">
+        select count(*) from BorrowInfo
     </select>
     <!--多条件查询-->
     <!--包括借阅id,图书id-->
@@ -23,8 +32,22 @@
     </select>
     <!--增加借阅信息-->
     <insert id="addBorrowMsg" parameterType="BorrowInfo"  >
-        insert into  borrowinfo(borrowID,bookId,borrowRenewDay,borrowRemandDay,borrowPenalty,borrowstatus) 
-        values(${borrowID},${bookId},${borrowRenewDay},${borrowRemandDay},${borrowPenalty},${borrowstatus})  
+        insert into  borrowinfo(
+                                borrowID,
+                                bookId,
+                                borrowRenewDay,
+                                borrowRemandDay,
+                                borrowPenalty,
+                                borrowstatus
+                                ) 
+        values(
+               ${borrowID},
+               ${bookId},
+               ${borrowRenewDay},
+               ${borrowRemandDay},
+               ${borrowPenalty},
+               ${borrowstatus}
+               )  
     </insert>
     <!--修改信息-->
     <update id="upBorrowMsg" parameterType="BorrowInfo"  >

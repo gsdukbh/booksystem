@@ -35,7 +35,7 @@ public class NavigationTag extends TagSupport {
 		try {
 			// 计算总页数
 			int pageCount = page.getTotal() / page.getSize();
-			if (page.getTotal() % page.getSize() > 0) 
+			if (page.getTotal() % page.getSize() > 0)
 			{
 				pageCount++;
 			}
@@ -45,13 +45,14 @@ public class NavigationTag extends TagSupport {
 			//末页链接路径
 			String backUrl = append(url, "page", pageCount);
 			// 显示“上一页”按钮
-			if (page.getPage() > 1)
+			if (page.getPage() > 1) 
 			{
 				String preUrl = append(url, "page", page.getPage() - 1);
 				preUrl = append(preUrl, "rows", page.getSize());
 				writer.print("<li><a href=\"" + homeUrl + "\">" + "首页</a></li>");
 				writer.print("<li><a href=\"" + preUrl + "\">" + "上一页</a></li>");
-			} else 
+			}
+			else
 				{
 					writer.print("<li class=\"disabled\"><a href=\"#\">" + "首页 </a></li>");
 					writer.print("<li class=\"disabled\"><a href=\"#\">" + "上一页 </a></li>");
@@ -60,6 +61,7 @@ public class NavigationTag extends TagSupport {
 			// 若1 则 1 2 3 4 5, 若2 则 1 2 3 4 5, 若3 则1 2 3 4 5,
 			// 若4 则 2 3 4 5 6 ,若10 则 8 9 10 11 12
 			int indexPage =1;
+			
 			if(page.getPage() - 2 <=0)
 			{
 				indexPage=1;
@@ -72,28 +74,32 @@ public class NavigationTag extends TagSupport {
 				{
 				indexPage= page.getPage() - 2;
 			}
-    for (int i= 1;i <= number && indexPage <= pageCount;indexPage++,i++){
-				if (indexPage == page.getPage()) {
-			writer.print("<li class=\"active\"><a href=\"#\">" + indexPage
-				+"<spanclass=\"sr-only\"></span></a></li>");
+    		for (int i= 1;i <= number && indexPage <= pageCount;indexPage++,i++)
+    		{
+				if (indexPage == page.getPage()) 
+				{
+					writer.print("<li class=\"active\"><a href=\"#\">" + indexPage +"<spanclass=\"sr-only\"></span></a></li>");
 					continue;
 				}
 				String pageUrl = append(url, "page", indexPage);
 				pageUrl = append(pageUrl, "rows", page.getSize());
-writer.print("<li><a href=\"" + pageUrl + "\">" + indexPage + "</a></li>");
+				writer.print("<li><a href=\"" + pageUrl + "\">" + indexPage + "</a></li>");
 			}
 			// 显示“下一页”按钮
-			if (page.getPage() < pageCount) {
-				String nextUrl = append(url, "page", page.getPage() + 1);
-				nextUrl = append(nextUrl, "rows", page.getSize());
-		writer.print("<li><a href=\"" + nextUrl + "\">" + "下一页</a></li>");
-		writer.print("<li><a href=\"" + backUrl + "\">" + "尾页</a></li>");
-			} else {
-writer.print("<li class=\"disabled\"><a href=\"#\">" + "下一页</a></li>");
-writer.print("<li class=\"disabled\"><a href=\"#\">" + "尾页</a></li>");
-			}
-			writer.print("</nav>");
-		} catch (IOException e) {
+			if (page.getPage() < pageCount)
+				{
+					String nextUrl = append(url, "page", page.getPage() + 1);
+					nextUrl = append(nextUrl, "rows", page.getSize());
+					writer.print("<li><a href=\"" + nextUrl + "\">" + "下一页</a></li>");
+					writer.print("<li><a href=\"" + backUrl + "\">" + "尾页</a></li>");
+			} else 
+				{
+					writer.print("<li class=\"disabled\"><a href=\"#\">" + "下一页</a></li>");
+					writer.print("<li class=\"disabled\"><a href=\"#\">" + "尾页</a></li>");
+				}
+				writer.print("</nav>");
+		} catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 		return SKIP_BODY;
@@ -126,7 +132,8 @@ writer.print("<li class=\"disabled\"><a href=\"#\">" + "尾页</a></li>");
 	private String resolveUrl(String url, 
         javax.servlet.jsp.PageContext pageContext) throws JspException {
 		Map params = pageContext.getRequest().getParameterMap();
-		for (Object key : params.keySet()) {
+		for (Object key : params.keySet()) 
+		{
 			if ("page".equals(key) || "rows".equals(key)){
 				continue;
 			}

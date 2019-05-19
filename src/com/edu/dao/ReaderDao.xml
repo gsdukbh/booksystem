@@ -5,6 +5,12 @@
    <!--查询所有的读者用户-->
    <select id="findAllReaderMsg" resultType="Reader" >
              select * from readerinfo
+    
+    </select>
+    <!-- 查询总数 -->
+    <select id="selectReaderListCount" 
+            resultType="Integer">
+        select count(*) from readerinfo
     </select>
     <!--条件查询信息-->
     <!--包括按姓名,借阅证号,电话,身份证,单位-->
@@ -32,12 +38,27 @@
                 and readerUnit like #{readerUnit}
             </if>
         </where>
-    </select> 
-    
+    </select>
       <!--添加读者信息-->
     <insert id="addReaderMsg" parameterType="Reader"    >
-        insert into  readerinfo(borrowID,readerName,readerSex,readerUnit,readerPhone,readerIDCard,readerType)   
-        values (#{borrowID},#{readerName},#{readerSex},#{readerUnit},#{readerPhone},#{readerIDCard},#{readerType})
+        insert into  readerinfo(
+                                borrowID,
+                                readerName,
+                                readerSex,
+                                readerUnit,
+                                readerPhone,
+                                readerIDCard,
+                                readerType
+                                )   
+        values (
+                #{borrowID},
+                #{readerName},
+                #{readerSex},
+                #{readerUnit},
+                #{readerPhone},
+                #{readerIDCard},
+                #{readerType}
+                )
     </insert>
       <!--修改数据-->
     <update id="upReaderMsg" parameterType="Reader" >

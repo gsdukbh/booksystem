@@ -29,6 +29,24 @@ public class BorrowInfo {
     private  Date    borrowRemandDay;
     private  Integer   borrowPenalty;
     private  Integer    borrowstatus;
+    private Integer  start;
+    private Integer  rows;
+
+    public Integer getStart() {
+        return start;
+    }
+
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
 
     public String getBorrowID() {
         return borrowID;

@@ -1,6 +1,7 @@
 package com.edu.dao;
 
 import com.edu.po.BorrowInfo;
+import utils.Page;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface BorrowInfoDao {
      * @return 所有信息 BorrowInfo数组对象        
      */
     public List<BorrowInfo> findAllBorrowMsg();
-
+    public Integer selectBorrowListCount();
     /**
      * 多条件查询
      * @param    borrowID  借阅id

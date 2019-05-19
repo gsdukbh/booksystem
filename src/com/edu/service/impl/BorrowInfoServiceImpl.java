@@ -1,11 +1,13 @@
 package com.edu.service.impl;
 
 import com.edu.dao.BorrowInfoDao;
+import com.edu.po.BookInfo;
 import com.edu.po.BorrowInfo;
 import com.edu.service.BorrowInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.Page;
 
 import java.util.List;
 
@@ -27,8 +29,20 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
      * @return 所有信息 BorrowInfo数组对象
      */
     @Override
-    public List<BorrowInfo> findAllBorrowMsg() {
-        return this.borrowInfoDao.findAllBorrowMsg();
+    public Page<BorrowInfo> findAllBorrowMsg(Integer page, Integer rows) {
+        List<BorrowInfo>  borrowInfos=borrowInfoDao.findAllBorrowMsg();
+        Integer integer=borrowInfoDao.selectBorrowListCount();
+        Page<BorrowInfo> res= new Page<>();
+        res.setPage(page);
+        res.setSize(rows);
+        res.setRows(borrowInfos);
+        res.setTotal(integer);
+        return res;
+    }
+
+    @Override
+    public Integer selectBorrowListCount() {
+        return null;
     }
 
     /**

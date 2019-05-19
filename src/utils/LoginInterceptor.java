@@ -6,9 +6,11 @@ import javax.servlet.http.HttpSession;
 import com.edu.po.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import com.edu.*;
-/**
- * 登录拦截器
+
+
+/**  登陆拦截器
+ *
+ * @author werls 
  */
 public class LoginInterceptor implements HandlerInterceptor {
 	@Override
@@ -18,12 +20,12 @@ public class LoginInterceptor implements HandlerInterceptor {
 		// 获取请求的URL
 		String url = request.getRequestURI();
 		// URL:除了登录请求外，其他的URL都进行拦截控制
-		if (url.contains("/Login")) {
+		if (url.indexOf("/login") >= 0) {
 			return true;
 		}
 		// 获取Session
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("admin");
+		User user = (User) session.getAttribute("USER_SESSION");
 		// 判断Session中是否有用户数据，如果有，则返回true,继续向下执行
 		if (user != null) {
 			return true;

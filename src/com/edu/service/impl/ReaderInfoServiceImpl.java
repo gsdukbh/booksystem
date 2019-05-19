@@ -6,6 +6,7 @@ import com.edu.service.ReaderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.Page;
 
 import java.util.List;
 
@@ -28,8 +29,23 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      * @return 读者全部信息
      */
     @Override
-    public List<Reader> findAllReaderMsg() {
-        return this.readerDao.findAllReaderMsg();
+    public Page<Reader> findAllReaderMsg(Integer page, Integer rows) {
+        
+        
+        
+        return null;
+    }
+
+    /**
+     * 查询读者信息
+     *
+     * @return 读者全部信息
+     */
+    
+
+    @Override
+    public Integer selectReaderListCount() {
+        return null;
     }
 
     /**

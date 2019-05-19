@@ -3,8 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.dao.BookInfoDao">
         <!--查看所有的图书信息-->
-    <select id="findAllBookMsg" resultType="BookInfo"  >
-        select * from bookinfo
+    <select id="findAllBookMsg" resultType="BookInfo" parameterType="BookInfo" >
+        select top(${rows})* from bookinfo
+        where  bookId  not in(
+            select top(${start}) bookId from  bookinfo
+            )
+    </select>
+    <!-- 查询总数 -->
+    <select id="selectBookListCount" 
+            resultType="Integer">
+        select count(*) from bookinfo
     </select>
     <!--查询图书数据-->
     <!--多条件查询模糊-->
@@ -35,7 +43,16 @@
      <!--添加图书信息-->
     <insert id="addBookMsg" parameterType="BookInfo"  >
         insert into bookinfo  
-        values (#{bookId},#{bookName},#{bookAuthor},#{bookPublishUnit},#{bookRate},#{bookSort},#{bookCover},#{bookRemark})
+        values (
+                #{bookId},
+                #{bookName},
+                #{bookAuthor},
+                #{bookPublishUnit},
+                #{bookRate},
+                #{bookSort},
+                #{bookCover},
+                #{bookRemark}
+                )
     </insert>
      <!--修改图书信息-->
     <update id="upBookMsgBys" parameterType="BookInfo" >

@@ -1,6 +1,7 @@
 package com.edu.service;
 
 import com.edu.po.BorrowInfo;
+import utils.Page;
 
 import java.util.List;
 
@@ -16,8 +17,8 @@ public interface BorrowInfoService {
      * 查看所有的借阅信息
      * @return 所有信息 BorrowInfo数组对象        
      */
-    public List<BorrowInfo> findAllBorrowMsg();
-
+    public Page<BorrowInfo> findAllBorrowMsg(Integer page, Integer rows);
+    public Integer selectBorrowListCount();
     /**
      * 多条件查询
      * @param    borrowID  借阅id

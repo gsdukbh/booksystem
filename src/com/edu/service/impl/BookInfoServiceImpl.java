@@ -6,6 +6,7 @@ import com.edu.service.BookInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.Page;
 
 import java.util.List;
 
@@ -27,8 +28,24 @@ public class BookInfoServiceImpl implements BookInfoService {
      * @return BookInfo
      */
     @Override
-    public List<BookInfo> findAllBookMsg() {
-        return this.bookInfoDao.findAllBookMsg();
+    public Page<BookInfo> findAllBookMsg(Integer page, Integer rows) {
+          BookInfo bookInfo=new BookInfo();
+          bookInfo.setStart((page - 1)*rows);
+          bookInfo.setRows(rows);
+          List<BookInfo>  bookInfoList=bookInfoDao.findAllBookMsg(bookInfo);
+          Integer integer=bookInfoDao.selectBookListCount();
+          Page<BookInfo> res= new Page<>();
+          res.setPage(page);
+          res.setSize(rows);
+          res.setRows(bookInfoList);
+          res.setTotal(integer);
+        return   res;
+    }
+
+    @Override
+    public Integer selectBookListCount() {
+        
+        return this.bookInfoDao.selectBookListCount();
     }
 
     /**
@@ -43,6 +60,7 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public List<BookInfo> findBookMsgBys(String bookId, String bookName, String bookAuthor, String bookPublishUnit, String bookSort) {
+        
         return this.bookInfoDao.findBookMsgBys(bookId,bookName,bookAuthor,bookPublishUnit,bookSort);
     }
 

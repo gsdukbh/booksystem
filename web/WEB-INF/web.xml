@@ -13,6 +13,7 @@
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
     </listener>
+
     <!-- 编码过滤器 -->
     <filter>
         <filter-name>encoding</filter-name>
@@ -28,9 +29,11 @@
         <filter-name>encoding</filter-name>
         <url-pattern>*.action</url-pattern>
     </filter-mapping>
+
+
     <!-- 配置Spring MVC前端核心控制器 -->
     <servlet>
-        <servlet-name>crm</servlet-name>
+        <servlet-name>springmvc</servlet-name>
         <servlet-class>
             org.springframework.web.servlet.DispatcherServlet
         </servlet-class>
@@ -41,15 +44,14 @@
         <!-- 配置服务器启动后立即加载Spring MVC配置文件 -->
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+
     <servlet-mapping>
-        <servlet-name>crm</servlet-name>
-        <url-pattern>*.action</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>crm</servlet-name>
+        <servlet-name>springmvc</servlet-name>
         <!--/:拦截所有请求（除了jsp）-->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
     <!-- 系统默认页面 -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

@@ -61,7 +61,6 @@
 	</bean>
 	
     <context:component-scan base-package="com.edu.service" />
-    <context:component-scan base-package="com.edu.service" />
     
     	<!-- 配置文件上传解析器 MultipartResolver -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

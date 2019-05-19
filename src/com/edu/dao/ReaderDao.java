@@ -1,6 +1,7 @@
 package com.edu.dao;
 
 import com.edu.po.Reader;
+import utils.Page;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ReaderDao {
      * @return 读者全部信息
      */
     public List<Reader> findAllReaderMsg();
-
+    public Integer selectReaderListCount();
     /**
      * 条件查询信息
      * @param borrowID 借阅证号

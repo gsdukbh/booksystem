@@ -1,6 +1,7 @@
 package com.edu.dao;
 
 import com.edu.po.BookInfo;
+import utils.Page;
 
 import java.util.List;
 
@@ -16,8 +17,8 @@ public interface BookInfoDao {
      * 查找所有的图书信息
      * @return    BookInfo
      */
-    public List<BookInfo> findAllBookMsg();
-
+    public List<BookInfo> findAllBookMsg(BookInfo bookInfo);
+    public Integer selectBookListCount();
     /**
      * 添加查询
      * @param bookId            图书id

@@ -19,6 +19,9 @@ public class Reader {
     private String readerType;
     private Date readerTime;
     private String raederCondition;
+    private Integer  start;
+    private Integer  rows;
+
     @Override
     public String toString() {
         return "Reader{" +
@@ -33,6 +36,23 @@ public class Reader {
                 ", raederCondition='" + raederCondition + '\'' +
                 '}';
     }
+
+    public Integer getStart() {
+        return start;
+    }
+
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
     public String getBorrowID() {
         return borrowID;
     }

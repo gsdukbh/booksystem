@@ -27,16 +27,17 @@ public class UserController {
     /**
      * 用户登录
      */
-    @RequestMapping(value = "/Login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String usercode,String password, Model model,
                         HttpSession session) {
         // 通过账号和密码查询用户
         User user = userService.findUser(usercode, password);
         if(user != null){
             // 将用户对象添加到Session
-            session.setAttribute("admin", user);
+            session.setAttribute("USER_SESSION", user);
             // 跳转到主页面
-			return "admin";
+            final String s = "redirect:reader/list";
+            return s;
         }
         return "../index";
         
@@ -49,7 +50,7 @@ public class UserController {
         // 清除Session
         session.invalidate();
         // 重定向到登录页面的跳转方法
-        return "redirect:login";
+        return "redirect:Login";
     }
 }
 

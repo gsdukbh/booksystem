@@ -1,5 +1,6 @@
 package com.edu.service;
 import com.edu.po.Reader;
+import utils.Page;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public interface ReaderInfoService {
      * 查询读者信息
      * @return 读者全部信息
      */
-    public List<Reader> findAllReaderMsg();
-
+    public Page<Reader> findAllReaderMsg(Integer page, Integer rows);
+    public Integer selectReaderListCount();
     /**
      * 条件查询信息
      * @param borrowID 借阅证号

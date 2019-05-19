@@ -29,12 +29,17 @@
     </div>
     
   </header>
-  <div class="log">
+  <div class="log" style=" 
+    width:100%;
+    height:100% ;
+    background-image: url(https://mywerls.oss-cn-beijing.aliyuncs.com/16397.jpg?Expires=1558255468&OSSAccessKeyId=TMP.AgFJqFm9D2pa3GjfOM9FfCOioSyb9nOF-HtZ3imTdS_zbZPf4MCN9CVhZLLQADAtAhQntGq725se-aP1GYmcsuUB4xe7xgIVAJluB7DrYpdeElm_5V3tKa7EuWGl&Signature=Wa20EHYECAgiR8yHE3dQ2bGqYc0%3D);
+    background-size:100% 100%;
+    color:#ffffff;">
     <div class="am-g">
       <div class="am-u-lg-3 am-u-md-6 am-u-sm-8 am-u-sm-centered log-content">
-        <h1 class="log-title am-animation-slide-top">Werls.top</h1>
+        <h1 class="log-title am-animation-slide-top">图书管理系统</h1>
         <br>
-        <form class="am-form" id="log-form" action="${pageContext.request.contextPath}/Login" method="post">
+        <form class="am-form" id="log-form" action="${pageContext.request.contextPath}/login" method="post">
           <div class="am-input-group am-radius am-animation-slide-left">
             <input type="email" id="doc-vld-email-2-1" class="am-radius" data-validation-message="请输入正确邮箱地址" placeholder="邮箱" required name="usercode" value="admin@admin.com"/>
             <span class="am-input-group-label log-icon am-radius"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>

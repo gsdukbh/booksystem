@@ -16,6 +16,23 @@ public class BookInfo {
     private  Integer   bookSort;
     private  String   bookCover;
     private  String   bookRemark;
+    private Integer  start;
+    private Integer  rows;
+    public Integer getStart() {
+        return start;
+    }
+
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
 
     @Override
     public String toString() {
