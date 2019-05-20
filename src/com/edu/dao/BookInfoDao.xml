@@ -20,7 +20,7 @@
         select * from bookinfo
         <where>
             <if test="bookId !=null and bookId !='' ">
-                and bookId =#{bookId}
+                and bookId like #{bookId}
             </if>
             <if test="bookName !=null and bookName !='' ">
                 <bind name="bookName" value="'%'+_parameter.getBookName()+'%'" />
@@ -82,4 +82,8 @@
         </set>
         where bookId=#{bookId}
     </update>
+    <!--删除信息-->
+    <delete id="deleteBook" parameterType="Integer">
+        delete from  bookinfo where bookId=#{id}
+    </delete>
 </mapper>

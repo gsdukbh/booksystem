@@ -36,7 +36,7 @@ public class UserController {
             // 将用户对象添加到Session
             session.setAttribute("USER_SESSION", user);
             // 跳转到主页面
-            final String s = "redirect:reader/list";
+            final String s = "redirect:book/list";
             return s;
         }
         return "../index";

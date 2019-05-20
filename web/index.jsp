@@ -32,7 +32,7 @@
   <div class="log" style=" 
     width:100%;
     height:100% ;
-    background-image: url(https://mywerls.oss-cn-beijing.aliyuncs.com/16397.jpg?Expires=1558255468&OSSAccessKeyId=TMP.AgFJqFm9D2pa3GjfOM9FfCOioSyb9nOF-HtZ3imTdS_zbZPf4MCN9CVhZLLQADAtAhQntGq725se-aP1GYmcsuUB4xe7xgIVAJluB7DrYpdeElm_5V3tKa7EuWGl&Signature=Wa20EHYECAgiR8yHE3dQ2bGqYc0%3D);
+    background-image: url(https://love.werls.top/16397.jpg);
     background-size:100% 100%;
     color:#ffffff;">
     <div class="am-g">

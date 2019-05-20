@@ -5,8 +5,11 @@ import com.edu.po.User;
 import com.edu.service.ReaderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.portlet.bind.annotation.ResourceMapping;
+import utils.Page;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,20 +24,28 @@ public class ReaderController {
      * @param session   session
      * @return  String
      */
-    @ResourceMapping ("/addReader")
+    @RequestMapping ("/addReader")
     @ResponseBody
     public String readerCreate(Reader reader, HttpSession session){
-        User user=(User) session.getAttribute("admin");
+        User user=(User) session.getAttribute("USER_SESSION");
         int rows =readerInfoService.addReaderMsg(reader);
         if (rows>0)
         {
-            return "ok";
+            return "OK";
         }
         else 
             {
-                return "fail";
+                return "FAIL";
             }
     }
-    
+    @RequestMapping("/read/list")
+    public String list(@RequestParam(defaultValue = "1")Integer page,
+                       @RequestParam(defaultValue = "10") Integer rows,
+                       Model model)
+    {
+        Page<Reader> readerPage=readerInfoService.findAllReaderMsg(page,rows);
+        model.addAttribute("page",readerPage);
+        return "reader";
+    }
     
 }

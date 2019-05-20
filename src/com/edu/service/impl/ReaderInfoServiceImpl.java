@@ -3,6 +3,7 @@ package com.edu.service.impl;
 import com.edu.dao.ReaderDao;
 import com.edu.po.Reader;
 import com.edu.service.ReaderInfoService;
+import org.apache.ibatis.type.IntegerTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,22 +31,27 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      */
     @Override
     public Page<Reader> findAllReaderMsg(Integer page, Integer rows) {
-        
-        
-        
-        return null;
+           Reader reader=new Reader();
+           reader.setStart((page - 1) * rows);
+           reader.setRows(rows);
+           List<Reader>  readerList=readerDao.findAllReaderMsg(reader);
+           Integer integer=readerDao.selectReaderListCount();
+           Page<Reader> readerPage=new Page<>();
+           readerPage.setRows(readerList);
+           readerPage.setPage(page);
+           readerPage.setTotal(integer);
+           readerPage.setSize(rows);
+        return readerPage;
     }
 
     /**
      * 查询读者信息
      *
-     * @return 读者全部信息
+     * @return 读者全部信息数目
      */
-    
-
     @Override
     public Integer selectReaderListCount() {
-        return null;
+        return this.readerDao.selectReaderListCount();
     }
 
     /**

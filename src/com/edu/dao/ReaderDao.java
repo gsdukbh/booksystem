@@ -18,7 +18,7 @@ public interface ReaderDao {
      * 查询读者信息
      * @return 读者全部信息
      */
-    public List<Reader> findAllReaderMsg();
+    public List<Reader> findAllReaderMsg(Reader reader);
     public Integer selectReaderListCount();
     /**
      * 条件查询信息

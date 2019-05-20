@@ -50,7 +50,7 @@ public class BookInfoServiceImpl implements BookInfoService {
 
     /**
      * 添加查询
-     *
+     * 没有做分页处理
      * @param bookId          图书id
      * @param bookName        书名
      * @param bookAuthor      作者
@@ -59,9 +59,8 @@ public class BookInfoServiceImpl implements BookInfoService {
      * @return BookInfo
      */
     @Override
-    public List<BookInfo> findBookMsgBys(String bookId, String bookName, String bookAuthor, String bookPublishUnit, String bookSort) {
-        
-        return this.bookInfoDao.findBookMsgBys(bookId,bookName,bookAuthor,bookPublishUnit,bookSort);
+    public BookInfo findBookMsgBys(String bookId, String bookName, String bookAuthor, String bookPublishUnit, String bookSort) {
+        return  this.bookInfoDao.findBookMsgBys(bookId,bookName,bookAuthor,bookPublishUnit,bookSort) ;
     }
 
     /**
@@ -84,6 +83,17 @@ public class BookInfoServiceImpl implements BookInfoService {
     @Override
     public Integer upBookMsgBys(BookInfo bookInfo) {
         return this.bookInfoDao.upBookMsgBys(bookInfo);
+    }
+
+    /**
+     * 删除信息
+     *
+     * @param id BookInfo
+     * @return Integer
+     */
+    @Override
+    public Integer deleteBook(Integer id) {
+        return this.bookInfoDao.deleteBook(id);
     }
 }
 

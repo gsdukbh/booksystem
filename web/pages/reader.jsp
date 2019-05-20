@@ -1,21 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: werls
-  Date: 2019/5/15
-  Time: 22:27
+  Date: 2019/5/19
+  Time: 21:00
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="werls" uri="http://werls.top/commons"%>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName()
-            + ":" + request.getServerPort() + path + "/";
-%>
 <html>
 <head>
-    <title>图书管理系统</title>
+    <title>读者信息管理</title>
+
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -24,8 +20,7 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   
-    
+
 </head>
 <body>
 <%--导航栏--%>
@@ -39,25 +34,25 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list">图书管理系统</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath }/reader/list">图书管理系统</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="#">图书管理</a>
+                        <li >
+                            <a href="${pageContext.request.contextPath }/reader/list">图书管理</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#">读者管理</a>
                         </li>
                         <li>
                             <a href="#">借阅信息管理</a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath }/book/find" method="post">
+                    <form class="navbar-form navbar-left" role="search" action="" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="find"/>
-                        </div> 
+                            <input type="text" class="form-control" />
+                        </div>
                         <button type="submit" class="btn btn-default">搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
@@ -78,35 +73,35 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <h3 class="text-center">
-               这部分被挡住了
+                这部分被挡住了
             </h3>
             <h3 class="text-center">
-                图书信息管理
+                读者信息
             </h3>
             <a id="modal-475217" href="#addbook" role="button" class="btn" data-toggle="modal" onclick="clearBook()">新建</a>
             <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
                     <th>
-                        图书编号
+                        借阅证号
                     </th>
                     <th>
-                        书名
+                        姓名
                     </th>
                     <th>
-                        作者
+                        性别
                     </th>
                     <th>
-                        出版单位
-                    </th>
-                    <%--<th>
-                        分类号
-                    </th>--%>
-                    <th>
-                        单价
+                        单位
                     </th>
                     <th>
-                        备注
+                        联系电话
+                    </th>
+                    <th>
+                        身份证号码
+                    </th>
+                    <th>
+                        办卡时间
                     </th>
                 </tr>
                 </thead>
@@ -114,28 +109,25 @@
                 <c:forEach items="${page.rows}" var="row">
                     <tr class="warning">
                         <td>
-                            ${row.bookId}
+                                ${}
                         </td>
                         <td>
-                            ${row.bookName}
+                                ${r}
                         </td>
                         <td>
-                            ${row.bookAuthor}
+                                ${row.r}
                         </td>
                         <td>
-                            ${row.bookPublishUnit}
-                        </td>
-                        <%--<td>
-                                ${row.bookSort}
-                        </td>--%>
-                        <td>
-                            ${row.bookRate}
+                                ${row.}
                         </td>
                         <td>
-                                ${row.bookRemark}
+                                ${row.}
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookEditDialog" onclick= "editBook(${row.bookId})">修改</a>
+                                ${row.}
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookEditDialog" onclick= "editBookr(${row.bookId})">修改</a>
                             <a href="#" class="btn btn-danger btn-xs" onclick="deleteBook(${row.bookId})">删除</a>
                         </td>
                     </tr>
@@ -182,9 +174,9 @@
                         </div>
                         <div class="control-group">
                             <label class="control-label" >出版单位</label>
-                                <div class="controls">
+                            <div class="controls">
                                 <input type="text" placeholder="placeholder" class="input-xlarge" name="newBookPublishUnit">
-                                 </div>
+                            </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >单价</label>
@@ -203,7 +195,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" onclick="createBook()">创建图书信息</button>
             </div>
         </div>
@@ -217,7 +209,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel2">
-                    修改图书信息
+                    新建图书信息
                 </h4>
             </div>
             <div class="modal-body">
@@ -266,45 +258,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="upBook()">修改图书信息</button>
+                <button type="button" class="btn btn-primary" onclick="editBook()">创建图书信息</button>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    /*清空数据*/
-  function clearBook() {
-      $("#newBookId").val("");
-      $("#newBookName").val("");
-      $("#newBookAuthor").val("");
-      $("#newBookPublishUnit").val("");
-      $("#newBookRate").val("");
-      $("#newBookRemark").val("");
-  }  
-   
-  function createBook() {
-     $.post("<%=basePath%>book/create", 
-         $("#addBookFrom").serialize().Function(data)
-      {
-          if (data == "OK") {
-            alert("添加成功");
-            window.location.reload();
-          }
-          else{
-             alert("添加失败")
-              window.location.reload(); 
-          }
-      }) ;
-  }
-  function editBook(id) {
-   $.ajax({
-       type:"get",
-       url:"<%=basePath%>book/findId",
-       
-   })   
-      
-  }
-  
-</script>
 </body>
 </html>
