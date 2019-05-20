@@ -26,7 +26,7 @@ public interface BorrowInfoService {
      * @return     BorrowInfo数组对象
      */
     public List<BorrowInfo> findBorrowMsgById(String borrowID,String bookId);
-
+    public   BorrowInfo findBorrowById(String borrowID,String bookId);
     /**
      * 增加信息
      * @param    borrowInfo    借阅信息   

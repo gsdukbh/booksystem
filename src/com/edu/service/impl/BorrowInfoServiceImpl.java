@@ -42,7 +42,7 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
 
     @Override
     public Integer selectBorrowListCount() {
-        return null;
+        return this.borrowInfoDao.selectBorrowListCount();
     }
 
     /**
@@ -55,6 +55,11 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
     @Override
     public List<BorrowInfo> findBorrowMsgById(String borrowID, String bookId) {
         return this.borrowInfoDao.findBorrowMsgById(borrowID,bookId);
+    }
+
+    @Override
+    public BorrowInfo findBorrowById(String borrowID, String bookId) {
+        return this.borrowInfoDao.findBorrowById(borrowID,bookId);
     }
 
     /**

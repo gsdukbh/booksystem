@@ -4,6 +4,7 @@ import com.edu.po.BookInfo;
 import com.edu.po.User;
 import com.edu.service.BookInfoService;
 import com.sun.istack.internal.NotNull;
+import javafx.concurrent.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,10 +77,15 @@ public class BookInfoController {
                 return "FAIL";
             }
     }
-    
+
+    /**
+     * 删除
+     * @param id     ss
+     * @return     integer
+     */
     @RequestMapping("/book/deleteBook")
     @ResponseBody
-    public String deleteBook(Integer id){
+    public String deleteBook(String id){
         int rows=bookInfoService.deleteBook(id);
         if (rows > 0){
             return "OK";
@@ -99,18 +105,18 @@ public class BookInfoController {
     @RequestMapping("/book/find")
     @ResponseBody
     public String findBookMsg(String find, Model model){
-        
-        
-       
-        return "admin";
+        Page<BookInfo> bookInfoPage=bookInfoService.findBookMsgBys(null
+        ,find,null,null,null);
+        model.addAttribute("book",bookInfoPage);
+        final String admin = "findBook";
+        return admin;
     }
+    
     @RequestMapping("/book/findId")
     @ResponseBody
     public BookInfo findId(String id){
-       
-        
-        return this.bookInfoService.findBookMsgBys(id,null,null,null,null);
-    } 
+        return this.bookInfoService.findBookById(id);
+    }
     
 }
 

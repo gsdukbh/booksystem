@@ -30,6 +30,7 @@ public interface ReaderDao {
      * @return   读者信息
      */
     public List<Reader> findLikeReaderMsg(String borrowID,String readerName,String readerPhone,String readerIDCard,String readerUnit);
+    public  Reader findReaderId(String borrowID);
 
     /**
      *  添加读者信息
@@ -49,8 +50,8 @@ public interface ReaderDao {
     /**
      * 删除数据
      * @param borrowID  借阅证号
-     * @param readerIDCard  身份证                
      * @return 信息
      */
-    public Integer delReaderMsg(String borrowID,String readerIDCard);
+    public Integer delReaderMsg(String borrowID);
+    
 }

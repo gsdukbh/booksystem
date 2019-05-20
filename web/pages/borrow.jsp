@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: werls
-  Date: 2019/5/19
-  Time: 21:00
+  Date: 2019/5/20
+  Time: 20:46
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,8 +10,7 @@
 <%@ taglib prefix="werls" uri="http://werls.top/commons"%>
 <html>
 <head>
-    <title>读者信息管理</title>
-
+    <title>借阅信息</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,7 +19,7 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    
 </head>
 <body>
 <%--导航栏--%>
@@ -42,11 +41,11 @@
                         <li >
                             <a href="${pageContext.request.contextPath }/reader/list">图书管理</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="${pageContext.request.contextPath }/read/list">读者管理</a>
                         </li>
-                        <li>
-                            <a href="#">借阅信息管理</a>
+                        <li class="active">
+                            <a href="${pageContext.request.contextPath }">借阅信息管理</a>
                         </li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search" action="" method="post">
@@ -75,9 +74,9 @@
                 这部分被挡住了
             </h3>
             <h3 class="text-center">
-                读者信息
+                借阅信息
             </h3>
-            <a id="modal-475217" href="#addReader" role="button" class="btn" data-toggle="modal" onclick="clearReader()">新建</a>
+            <a id="modal-475217" href="#addReader" role="button" class="btn" data-toggle="modal" onclick="clearBorrow()">新建</a>
             <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
@@ -85,25 +84,22 @@
                         借阅证号
                     </th>
                     <th>
-                        姓名
+                        图书编号
                     </th>
                     <th>
-                        性别
+                        借阅日期
                     </th>
                     <th>
-                        单位
+                        续借日期
                     </th>
                     <th>
-                        联系电话
+                        归还日期
                     </th>
                     <th>
-                        身份证号码
+                        罚款金额
                     </th>
                     <th>
-                        办卡时间
-                    </th>
-                    <th>
-                        操作
+                        借阅状态
                     </th>
                 </tr>
                 </thead>
@@ -114,26 +110,26 @@
                                 ${row.borrowID}
                         </td>
                         <td>
-                                ${row.readerName}
+                                ${row.bookId}
                         </td>
                         <td>
-                                ${row.readerSex}
+                                ${row.borrowDay}
                         </td>
                         <td>
-                                ${row.readerUnit}
+                                ${row.borrowRenewDay}
                         </td>
                         <td>
-                                ${row.readerPhone}
+                                ${row.borrowRemandDay}
                         </td>
                         <td>
-                                ${row.readerIDCard}
+                                ${row.borrowPenalty}
                         </td>
                         <td>
-                                ${row.readerTime}
+                                ${row.borrowstatus}
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookEditDialog" onclick= "editReader(${row.borrowID})">修改</a>
-                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteReader(${row.borrowID})">删除</a>
+                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookEditDialog" onclick= "editBorrow(${row.borrowID},${row.bookId})">修改</a>
+                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteBorrow(${row.borrowID}, ${row.bookId})">删除</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -152,55 +148,38 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel">
-                    新建读者信息
+                    新建借阅信息
                 </h4>
             </div>
             <div class="modal-body">
 
-                <form class="form-horizontal" id="addReaderFrom">
+                <form class="form-horizontal" id="addBorrowFrom">
                     <fieldset>
                         <div class="control-group">
                             <label class="control-label" >借阅证号</label>
                             <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" name="borrowID" id="new_borrowID"> 
+                                <input type="text" placeholder="请输入" class="input-xlarge" name="borrowID" id="new_borrowID">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >姓名</label>
+                            <label class="control-label" >图书编号</label>
                             <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" name="readerName" id="new_readerName">
+                                <input type="text" placeholder="请输入" class="input-xlarge" name="bookId" id="new_bookId">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >性别</label>
+                            <label class="control-label" >借阅状态</label>
                             <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" name="readerSex" id="new_readerSex">
+                                <input type="text" placeholder="请输入 1 已归还 0 为在借" class="input-xlarge" name="borrowstatus" id="new_borrowstatus">
                             </div>
                         </div>
-                        <div class="control-group">
-                            <label class="control-label" >单位</label>
-                            <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" name="readerUnit" id="new_readerUnit">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" >联系电话</label>
-                            <div class="controls">
-                                <input type="text" placeholder="输入数字" class="input-xlarge" name="readerPhone" id="new_readerPhone">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" >身份证号码</label>
-                            <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" name="readerIDCard" id="new_readerIDCard">
-                            </div>
-                        </div>
+                        
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="createReader()">创建读者信息</button>
+                <button type="button" class="btn btn-primary" onclick="createBorrow()">创建借阅信息</button>
             </div>
         </div>
     </div>
@@ -213,47 +192,29 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel2">
-                    新建读者信息
+                    修改借阅信息
                 </h4>
             </div>
             <div class="modal-body">
 
-                <form class="form-horizontal" id="editBookFrom">
+                <form class="form-horizontal" id="editBorrowFrom">
                     <fieldset>
                         <div class="control-group">
                             <label class="control-label" >借阅证号</label>
                             <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookId" name="borrowID">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editborrowID" name="borrowID">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >姓名</label>
+                            <label class="control-label" >图书编号</label>
                             <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookName" name="readerName">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editbookId" name="bookId">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >性别</label>
+                            <label class="control-label" >借阅状态</label>
                             <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookAuthor" name="readerSex">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" >单位</label>
-                            <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookPublishUnit" name="readerUnit">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" >联系电话</label>
-                            <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookRate" name="readerPhone">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" >身份证号码</label>
-                            <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookRemark" name="readerIDCard">
+                                <input type="text" placeholder="请输入 1 已归还 0 为在借" class="input-xlarge" id="editborrowstatus" name="borrowstatus">
                             </div>
                         </div>
                     </fieldset>
@@ -261,25 +222,22 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="upReader()">修改读者信息</button>
+                <button type="button" class="btn btn-primary" onclick="upBorrow()">修改借阅信息</button>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
     /*清空数据*/
-    function clearReader() {
+    function clearBorrow() {
         $("#new_borrowID").val("");
-        $("#new_readerName").val("");
-        $("#new_readerSex").val("");
-        $("#newBookPublishUnit").val("");
-        $("#new_readerUnit").val("");
-        $("#new_readerIDCard").val("");
+        $("#new_bookId").val("");
+        $("#borrowstatus").val("");
     }
 
-    function createReader() {
-        $.post("${pageContext.request.contextPath }/addReader",
-            $("#addReaderFrom").serialize(),Function(data)
+    function createBorrow() {
+        $.post("${pageContext.request.contextPath }/borrow/addBorrow",
+            $("#addBorrowFrom").serialize(),Function(data)
         {
             if (data == "OK") {
                 alert("添加成功");
@@ -289,27 +247,25 @@
                 alert("添加失败")
                 window.location.reload();
             }
-        }  );
+        } );
     }
-    function editReader(id) {
+    function editBorrow(borrowID,bookId) {
         $.ajax({
             type:"get",
-            url:"${pageContext.request.contextPath }/reader/findId",
-            data:{"id":id},
+            url:"${pageContext.request.contextPath }/borrow/findId",
+            data:{"borrowID":borrowID,"bookId":bookId},
             success:function (data) {
-                $("#editBookId").val(data.bookId);
-                $("#editBookName").val(data.bookName);
-                $("#editBookAuthor").val(data.bookAuthor);
-                $("#editBookPublishUnit").val(data.bookPublishUnit);
-                $("#editBookRate").val(data.bookRate);
-                $("#editBookRemark").val(data.bookRemark);
+                $("#editborrowID").val(data.borrowID);
+                $("#editbookId").val(data.bookId);
+                $("#editborrowstatus").val(data.borrowstatus);
+              
             }
         })
     }
 
-    function upReader() {
-        $.post("${pageContext.request.contextPath }/reader/upReader"),
-            $("#editBookFrom").serialize(),
+    function upBorrow() {
+        $.post("${pageContext.request.contextPath }/borrow/upBorrow"),
+            $("#editBorrowFrom").serialize(),
             function (date) {
                 if (date == "OK"){
                     alert("更新成功");
@@ -321,10 +277,12 @@
                 }
             }
     }
-    function deleteReader(id) {
+    function deleteBorrow(borrowID,bookId) {
         if (confirm("确定要删除该图书吗?")) {
-            $.post("${pageContext.request.contextPath }/reader/delete",
-                {"id":id},
+            $.post("${pageContext.request.contextPath }/borrow/delete",
+                {"borrowID":borrowID,
+                 "bookId" :bookId
+                },
                 function (date) {
                     if (date == "OK"){
                         alert("删除成功");
@@ -342,10 +300,9 @@
     $(document).ready(function(){
 
     });
-    
-    
-</script>
 
+
+</script>
 
 </body>
 </html>

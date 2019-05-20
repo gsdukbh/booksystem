@@ -45,10 +45,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="#">图书管理</a>
+                            <a href="${pageContext.request.contextPath }/book/list">图书管理</a>
                         </li>
                         <li>
-                            <a href="#">读者管理</a>
+                            <a href="${pageContext.request.contextPath }/read/list">读者管理</a>
                         </li>
                         <li>
                             <a href="#">借阅信息管理</a>
@@ -56,9 +56,9 @@
                     </ul>
                     <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath }/book/find" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="find"/>
+                            <input type="text" class="form-control" name="find" id="find"/>
                         </div> 
-                        <button type="submit" class="btn btn-default">搜索</button>
+                        <button type="submit" class="btn btn-default" id="souSuo">搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <div class="row clearfix">
+    <div class="row clearfix" id="showList">
         <div class="col-md-12 column">
             <h3 class="text-center">
                这部分被挡住了
@@ -107,6 +107,9 @@
                     </th>
                     <th>
                         备注
+                    </th>
+                    <th>
+                        操作
                     </th>
                 </tr>
                 </thead>
@@ -143,12 +146,12 @@
                 </tbody>
             </table>
             <div class="col-md-12 text-right">
-                <werls:page url="${pageContext.request.contextPath }/reader/list" />
+                <werls:page url="${pageContext.request.contextPath }book/list" />
             </div>
         </div>
     </div>
 </div>
-<%-- 新建图书信息模板--%>
+<%-- 新建图书信息模板1--%>
 <div class="modal fade" id="addbook" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -165,38 +168,37 @@
                         <div class="control-group">
                             <label class="control-label" >图书编号</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" name="newBookId">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookId" name="bookId">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >书名</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" name="newBookName">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookName" name="bookName">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >作者</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" name="newBookAuthor">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookAuthor" name="bookAuthor">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >出版单位</label>
                                 <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" name="newBookPublishUnit">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookPublishUnit" name="bookPublishUnit">
                                  </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >单价</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" name="newBookRate">
-                                <p class="help-block">输入数字</p>
+                                <input type="text" placeholder="输入数字" class="input-xlarge" id="newBookRate" name="bookRate">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >备注</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" name="newBookRemark">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookRemark" name="bookRemark">
                             </div>
                         </div>
                     </fieldset>
@@ -227,38 +229,37 @@
                         <div class="control-group">
                             <label class="control-label" >图书编号</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" id="editBookId" name="bookId">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookId" name="bookId">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >书名</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" id="editBookName" name="bookName">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookName" name="bookName">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >作者</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" id="editBookAuthor" name="bookAuthor">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookAuthor" name="bookAuthor">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >出版单位</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" id="editBookPublishUnit" name="bookPublishUnit">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookPublishUnit" name="bookPublishUnit">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >单价</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" id="editBookRate" name="bookRate">
-                                <p class="help-block">输入数字</p>
+                                <input type="text" placeholder="输入数字" class="input-xlarge" id="editBookRate" name="bookRate">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >备注</label>
                             <div class="controls">
-                                <input type="text" placeholder="placeholder" class="input-xlarge" id="editBookRemark" name="bookRemark">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editBookRemark" name="bookRemark">
                             </div>
                         </div>
                     </fieldset>
@@ -284,7 +285,7 @@
    
   function createBook() {
      $.post("<%=basePath%>book/create", 
-         $("#addBookFrom").serialize().Function(data)
+         $("#addBookFrom").serialize(),Function(data)
       {
           if (data == "OK") {
             alert("添加成功");
@@ -293,18 +294,60 @@
           else{
              alert("添加失败")
               window.location.reload(); 
-          }
-      }) ;
+          }  
+      }  );
   }
   function editBook(id) {
    $.ajax({
        type:"get",
        url:"<%=basePath%>book/findId",
-       
-   })   
-      
+       data:{"id":id},
+       success:function (data) {
+           $("#editBookId").val(data.bookId);
+           $("#editBookName").val(data.bookName);
+           $("#editBookAuthor").val(data.bookAuthor);
+           $("#editBookPublishUnit").val(data.bookPublishUnit);
+           $("#editBookRate").val(data.bookRate);
+           $("#editBookRemark").val(data.bookRemark);
+       }
+   })
   }
   
+  function upBook() {
+    $.post("<%=basePath%>book/update"),
+    $("#editBookFrom").serialize(),
+    function (date) {
+        if (date == "OK"){
+            alert("图书更新成功");
+            window.location.reload();
+        } 
+        else {
+            alert("图书更新失败");
+            window.location.reload();
+        }
+    }    
+  }
+   function deleteBook(id) {
+         if (confirm("确定要删除该图书吗?")) {
+             $.post("<%=basePath%>book/deleteBook",
+                 {"id":id},
+                 function (date) {
+                     if (date == "OK"){
+                         alert("图书删除成功");
+                         window.location.reload();
+                     }
+                     else {
+                         alert("图书删除失败");
+                         window.location.reload();
+                     }
+                 }
+             )
+         }
+       
+   }
+    $(document).ready(function(){
+       
+    });
 </script>
 </body>
 </html>

@@ -69,6 +69,11 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
         return this.readerDao.findLikeReaderMsg(borrowID,readerName,readerPhone,readerIDCard,readerUnit);
     }
 
+    @Override
+    public Reader findReaderId(String borrowID) {
+        return this.readerDao.findReaderId(borrowID);
+    }
+
     /**
      * 添加读者信息
      * 不包含时间 时间自动生成
@@ -94,12 +99,11 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      * 删除数据
      *
      * @param borrowID     借阅证号
-     * @param readerIDCard 身份证
      * @return 信息
      */
     @Override
-    public Integer delReaderMsg(String borrowID, String readerIDCard) {
-        return this.readerDao.delReaderMsg(borrowID,readerIDCard);
+    public Integer delReaderMsg(String borrowID) {
+        return this.readerDao.delReaderMsg(borrowID);
     }
 }
 

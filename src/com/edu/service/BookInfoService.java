@@ -31,7 +31,8 @@ public interface BookInfoService {
      * @param bookSort               分类号
      * @return       BookInfo
      */
-    public BookInfo findBookMsgBys(String bookId,String bookName,String bookAuthor,String bookPublishUnit,String bookSort);
+    public Page<BookInfo> findBookMsgBys(String bookId,String bookName,String bookAuthor,String bookPublishUnit,String bookSort);
+    public  BookInfo  findBookById(String id);
 
     /**
      * 添加图书信息
@@ -51,5 +52,5 @@ public interface BookInfoService {
      * @param id    BookInfo
      * @return        Integer
      */
-    public Integer deleteBook(Integer id);
+    public Integer deleteBook(String id);
 }

@@ -17,6 +17,9 @@
     </select>
     <!--多条件查询-->
     <!--包括借阅id,图书id-->
+    <select id="findBorrowById"  parameterType="String"   resultType="BorrowInfo">
+        select * from   borrowinfo where   borrowID=#{borrowID}  and  bookId=#{bookId}
+    </select>
     <select id="findBorrowMsgById" parameterType="String" resultType="BorrowInfo">
       select * from   borrowinfo
         <where>

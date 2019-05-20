@@ -6,6 +6,7 @@ import com.edu.service.ReaderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.EscapedErrors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,5 +48,35 @@ public class ReaderController {
         model.addAttribute("page",readerPage);
         return "reader";
     }
+    
+    @RequestMapping("/reader/delete")
+    @ResponseBody
+    public String del(String id){
+           int rows=readerInfoService.delReaderMsg(id);
+           if (rows>0)
+           {
+               return "OK";
+           }
+            else {
+                return "FAIL";
+           }
+    }
+    @RequestMapping("/reader/findId")
+    @ResponseBody
+    public Reader findReaderID(String id){
+        return  this.readerInfoService.findReaderId(id);
+    }
+    @RequestMapping("/reader/upReader")
+    @ResponseBody
+    public String upReader(Reader reader){
+        int rows=readerInfoService.upReaderMsg(reader);
+        if (rows>0){
+            return "OK";
+        }
+        else {
+            return "FAIL";
+        }
+    }
+    
     
 }

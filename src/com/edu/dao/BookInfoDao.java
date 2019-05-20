@@ -2,6 +2,7 @@ package com.edu.dao;
 
 import com.edu.po.BookInfo;
 import org.apache.ibatis.type.IntegerTypeHandler;
+import org.apache.taglibs.standard.extra.spath.Step;
 import utils.Page;
 
 import java.util.List;
@@ -29,7 +30,8 @@ public interface BookInfoDao {
      * @param bookSort               分类号
      * @return       BookInfo
      */
-    public BookInfo findBookMsgBys(String bookId,String bookName,String bookAuthor,String bookPublishUnit,String bookSort);
+    public List<BookInfo> findBookMsgBys(String bookId,String bookName,String bookAuthor,String bookPublishUnit,String bookSort);
+    public  BookInfo  findBookById(String id);
 
     /**
      * 添加图书信息
@@ -50,5 +52,5 @@ public interface BookInfoDao {
      * @param id    BookInfo
      * @return        Integer
      */
-    public Integer deleteBook(Integer id);
+    public Integer deleteBook(String id);
 }
