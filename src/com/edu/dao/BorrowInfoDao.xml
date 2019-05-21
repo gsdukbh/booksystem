@@ -15,12 +15,11 @@
             resultType="Integer">
         select count(*) from BorrowInfo
     </select>
-    <!--多条件查询-->
-    <!--包括借阅id,图书id-->
     <select id="findBorrowById"  parameterType="String"   resultType="BorrowInfo">
         select * from   borrowinfo where   borrowID=#{borrowID}  and  bookId=#{bookId}
     </select>
-    <select id="findBorrowMsgById" parameterType="String" resultType="BorrowInfo">
+    <!--包括借阅id,图书id-->
+    <select id="findBorrowMsgById" parameterType="BorrowInfo" resultType="BorrowInfo">
       select * from   borrowinfo
         <where>
             <if test="borrowID !=null and borrowID !=''">
@@ -43,13 +42,13 @@
                                 borrowPenalty,
                                 borrowstatus
                                 ) 
-        values(
-               ${borrowID},
-               ${bookId},
-               ${borrowRenewDay},
-               ${borrowRemandDay},
-               ${borrowPenalty},
-               ${borrowstatus}
+        values (
+               #{borrowID},
+               #{bookId},
+               #{borrowRenewDay},
+               #{borrowRemandDay},
+               #{borrowPenalty},
+               #{borrowstatus}
                )  
     </insert>
     <!--修改信息-->
@@ -57,16 +56,16 @@
         update borrowinfo
         <set>
             <if test="borrowRenewDay !=null and borrowRenewDay !=''">
-                borrowRenewDay=#{borrowRenewDay}
+                borrowRenewDay=#{borrowRenewDay} ,
             </if>
             <if test="borrowRemandDay !=null and borrowRemandDay !=''">
-                borrowRemandDay=#{borrowRemandDay}
+                borrowRemandDay=#{borrowRemandDay},
             </if>
             <if test="borrowPenalty !=null and borrowPenalty !=''">
-                borrowPenalty=#{borrowPenalty}
+                borrowPenalty=#{borrowPenalty}  ,
             </if>
             <if test="borrowstatus !=null and borrowstatus !=''">
-                borrowstatus=#{borrowstatus}
+                borrowstatus=#{borrowstatus} ,
             </if>
         </set>
             where  borrowID=#{borrowID} and bookId=#{bookId}

@@ -27,7 +27,7 @@ public class UserController {
     /**
      * 用户登录
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login.action", method = RequestMethod.POST)
     public String login(String usercode,String password, Model model,
                         HttpSession session) {
         // 通过账号和密码查询用户
@@ -36,7 +36,7 @@ public class UserController {
             // 将用户对象添加到Session
             session.setAttribute("USER_SESSION", user);
             // 跳转到主页面
-            final String s = "redirect:book/list";
+            final String s = "redirect:book/list.action";
             return s;
         }
         return "../index";
@@ -45,7 +45,7 @@ public class UserController {
     /**
      * 退出登录
      */
-    @RequestMapping(value = "/logout")
+    @RequestMapping(value = "/logout.action")
     public String logout(HttpSession session) {
         // 清除Session
         session.invalidate();

@@ -10,12 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import utils.Page;
 import java.sql.Timestamp;
-import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -33,7 +32,7 @@ public class BorrowInfoController {
     private ReaderInfoService readerInfoService;
     @Autowired
     private BookInfoService bookInfoService;
-    @RequestMapping("/borrow/list")
+    @RequestMapping("/borrow/list.action")
     public String list(@RequestParam(defaultValue = "1")Integer page,
                        @RequestParam(defaultValue = "10") Integer rows,
                        Model model)
@@ -45,9 +44,16 @@ public class BorrowInfoController {
         model.addAttribute("book",bookInfoPage);
         model.addAttribute("reader",readerPage) ;
         return "borrow";
-    } 
+    }
     
-    @RequestMapping("/borrow/addBorrow")
+    @RequestMapping(value ="/borrow/find.action", method = RequestMethod.POST)
+    public String find( BorrowInfo borrowInfo,Model model){
+        
+          Page<BorrowInfo>  borrowInfoPage=borrowInfoService.findBorrowMsgById(borrowInfo);
+           model.addAttribute("page",borrowInfoPage);
+        return "findBorrow";
+    }
+    @RequestMapping("/borrow/addBorrow.action")
     @ResponseBody
     public String addBorrow(BorrowInfo borrowInfo){
         
@@ -60,7 +66,7 @@ public class BorrowInfoController {
         }
     }
 
-    @RequestMapping("/borrow/delete")
+    @RequestMapping("/borrow/delete.action")
     @ResponseBody
     public String del(String borrowID,String bookId){
         int rows=borrowInfoService.delBorrowMsgByid(borrowID,bookId);
@@ -72,7 +78,7 @@ public class BorrowInfoController {
             return "FAIL";
         }
     }
-    @RequestMapping("/borrow/reBorrow")
+    @RequestMapping("/borrow/reBorrow.action")
     @ResponseBody
     public String reBorrow(String borrowID,String bookId){
         BorrowInfo borrowInfo=new BorrowInfo();
@@ -87,7 +93,7 @@ public class BorrowInfoController {
         }
           else {return null;}
     }
-    @RequestMapping("/borrow/renewBorrow")
+    @RequestMapping("/borrow/renewBorrow.action")
     @ResponseBody
     public String renewBorrow(String borrowID,String bookId){
         BorrowInfo b=new BorrowInfo();
@@ -102,7 +108,7 @@ public class BorrowInfoController {
         }
         else {return null;}
     } 
-    @RequestMapping("/borrow/upBorrow")
+    @RequestMapping("/borrow/upBorrow.action")
     @ResponseBody
     public String upReader(BorrowInfo borrowInfo){
         int rows=borrowInfoService.upBorrowMsg(borrowInfo);

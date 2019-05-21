@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: werls
-  Date: 2019/5/20
-  Time: 20:46
+  Date: 2019/5/21
+  Time: 13:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <%@ taglib prefix="werls" uri="http://werls.top/commons"%>
 <html>
 <head>
-    <title>借阅信息</title>
+    <title>搜索结果</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,7 +19,6 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
 </head>
 <body>
 <%--导航栏--%>
@@ -161,20 +160,20 @@
                     <fieldset>
                         <div class="control-group">
                             <label class="control-label" >借阅证号</label>
-                                <div class="controls">
-                                    <select	class="form-control"  name="borrowID">
-                                        <option value="">--请选择--</option>
-                                        <c:forEach items="${reader.rows}" var="row">
-                                            <option value="${row.borrowID}">
-                                                    ${row.borrowID}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+                            <div class="col-sm-10">
+                                <select	class="form-control"  name="borrowID">
+                                    <option value="">--请选择--</option>
+                                    <c:forEach items="${reader.rows}" var="row">
+                                        <option value="${row.borrowID}">
+                                                ${row.borrowID}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" >图书编号</label>
-                            <div class="controls">
+                            <div class="col-sm-10">
                                 <select	class="form-control"  name="bookId">
                                     <option value="">--请选择--</option>
                                     <c:forEach items="${book.rows}" var="row">
@@ -191,7 +190,7 @@
                                 <input type="text" placeholder="请输入 1 已归还 0 为在借" class="input-xlarge" name="borrowstatus" id="new_borrowstatus">
                             </div>
                         </div>
-                        
+
                     </fieldset>
                 </form>
             </div>
@@ -214,16 +213,16 @@
     function createBorrow() {
         $.post("${pageContext.request.contextPath }/borrow/addBorrow.action",
             $("#addBorrowFrom").serialize(),function(data)
-        {
-            if (data !=null) {
-                alert("添加成功");
-                window.location.reload();
-            }
-            else{
-                alert("添加失败")
-                window.location.reload();
-            }
-        } );
+            {
+                if (data !=null) {
+                    alert("添加成功");
+                    window.location.reload();
+                }
+                else{
+                    alert("添加失败")
+                    window.location.reload();
+                }
+            } );
     }
     function reBorrow(borrowID,bookId) {
         $.post("${pageContext.request.contextPath }/borrow/reBorrow.action",
@@ -239,27 +238,27 @@
             }
         )
     }
-    
+
     function renewBorrow(borrowID,bookId) {
         $.post("${pageContext.request.contextPath }/borrow/renewBorrow.action",
             {"borrowID":borrowID,"bookId":bookId},
-           function (data) {
-               if (data !=null) {
-                   alert("续借成功");
-                   window.location.reload();
-               }
-               else{
-                   alert("续借失败")
-                   window.location.reload();
-               }
-        })
+            function (data) {
+                if (data !=null) {
+                    alert("续借成功");
+                    window.location.reload();
+                }
+                else{
+                    alert("续借失败")
+                    window.location.reload();
+                }
+            })
     }
-    
+
     function deleteBorrow(borrowID,bookId) {
         if (confirm("确定要删除该图书吗?")) {
             $.post("${pageContext.request.contextPath }/borrow/delete.action",
                 {"borrowID":borrowID,
-                 "bookId" :bookId
+                    "bookId" :bookId
                 },
                 function (date) {
                     if (date == "OK"){
@@ -277,6 +276,5 @@
     }
     
 </script>
-
 </body>
 </html>

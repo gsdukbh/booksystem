@@ -22,14 +22,9 @@ public interface ReaderDao {
     public Integer selectReaderListCount();
     /**
      * 条件查询信息
-     * @param borrowID 借阅证号
-     * @param readerName   姓名
-     * @param readerPhone     电话
-     * @param readerIDCard  身份证
-     * @param readerUnit    单位
      * @return   读者信息
      */
-    public List<Reader> findLikeReaderMsg(String borrowID,String readerName,String readerPhone,String readerIDCard,String readerUnit);
+    public List<Reader> findLikeReaderMsg(Reader reader);
     public  Reader findReaderId(String borrowID);
 
     /**

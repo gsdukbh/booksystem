@@ -20,12 +20,10 @@ public interface BorrowInfoDao {
     public List<BorrowInfo> findAllBorrowMsg(BorrowInfo borrowInfo);
     public Integer selectBorrowListCount();
     /**
-     * 多条件查询
-     * @param    borrowID  借阅id
-     * @param    bookId     图书id               
+     * 多条件查询      
      * @return     BorrowInfo数组对象
      */
-    public List<BorrowInfo> findBorrowMsgById(String borrowID,String bookId);
+    public List<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo);
     public   BorrowInfo findBorrowById(String borrowID,String bookId);
 
     /**

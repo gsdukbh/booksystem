@@ -20,12 +20,10 @@ public interface BorrowInfoService {
     public Page<BorrowInfo> findAllBorrowMsg(Integer page, Integer rows);
     public Integer selectBorrowListCount();
     /**
-     * 多条件查询
-     * @param    borrowID  借阅id
-     * @param    bookId     图书id               
+     * 多条件查询      
      * @return     BorrowInfo数组对象
      */
-    public List<BorrowInfo> findBorrowMsgById(String borrowID,String bookId);
+    public Page<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo);
     public   BorrowInfo findBorrowById(String borrowID,String bookId);
     /**
      * 增加信息

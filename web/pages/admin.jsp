@@ -39,22 +39,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list">图书管理系统</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list.action">图书管理系统</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="${pageContext.request.contextPath }/book/list">图书管理</a>
+                            <a href="${pageContext.request.contextPath }/book/list.action">图书管理</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/read/list">读者管理</a>
+                            <a href="${pageContext.request.contextPath }/read/list.action">读者管理</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/borrow/list">借阅信息管理</a>
+                            <a href="${pageContext.request.contextPath }/borrow/list.action">借阅信息管理</a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath }/book/find" method="post">
+                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath}/book/find.action" method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" name="bookName"  placeholder="请输入书名"/>
                         </div>
@@ -77,7 +77,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">我<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/logout">退出登陆</a>
+                                    <a href="${pageContext.request.contextPath}/logout.action">退出登陆</a>
                                 </li>
                             </ul>
                         </li>
@@ -155,7 +155,7 @@
                 </tbody>
             </table>
             <div class="col-md-12 text-right">
-                <werls:page url="${pageContext.request.contextPath }/book/list" />
+                <werls:page url="${pageContext.request.contextPath }/book/list.action" />
             </div>
         </div>
     </div>
@@ -295,7 +295,7 @@
   }  
    
   function createBook() {
-      $.post("${pageContext.request.contextPath }/book/create",
+      $.post("${pageContext.request.contextPath }/book/create.action",
           $("#addBookFrom").serialize(),function(data) {
           alert("添加成功");
           window.location.reload();
@@ -304,7 +304,7 @@
   function editBook(id) {
    $.ajax({
        type:"get",
-       url:"<%=basePath%>book/findId",
+       url:"<%=basePath%>book/findId.action",
        data:{"id":id},
        success:function (data) {
            $("#editBookId").val(data.bookId);
@@ -318,7 +318,7 @@
   }
   
   function upBook() {
-    $.post("${pageContext.request.contextPath }/book/update",
+    $.post("${pageContext.request.contextPath }/book/update.action",
     $("#editBookFrom").serialize(),
     function (date) {
         if (date == "OK"){
@@ -333,7 +333,7 @@
   }
    function deleteBook(id) {
          if (confirm("确定要删除该图书吗?")) {
-             $.post("<%=basePath%>book/deleteBook",
+             $.post("<%=basePath%>book/deleteBook.action",
                  {"id":id},
                  function (date) {
                      if (date == "OK"){

@@ -51,18 +51,13 @@ public class BookInfoServiceImpl implements BookInfoService {
     /**
      * 查询
      * 没有做分页处理
-     * @param bookId          图书id
-     * @param bookName        书名
-     * @param bookAuthor      作者
-     * @param bookPublishUnit 出版单位
-     * @param bookSort        分类号
      * @return BookInfo
      */
     @Override
-    public Page<BookInfo> findBookMsgBys(String bookId, String bookName, String bookAuthor, String bookPublishUnit, String bookSort) {
-        List<BookInfo> bookInfo=bookInfoDao.findBookMsgBys(bookId,bookName,bookAuthor,bookPublishUnit,bookSort);
+    public Page<BookInfo> findBookMsgBys(BookInfo bookInfo) {
+        List<BookInfo> book=bookInfoDao.findBookMsgBys(bookInfo);
         Page<BookInfo> res= new Page<>();
-        res.setRows(bookInfo);
+        res.setRows(book);
         return res; 
     }
 

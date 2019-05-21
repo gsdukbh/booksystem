@@ -3,9 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.edu.dao.ReaderDao">
    <!--查询所有的读者用户-->
-   <select id="findAllReaderMsg" resultType="Reader" >
-             select * from readerinfo
-    
+   <select id="findAllReaderMsg" resultType="Reader" parameterType="Reader" >
+       select top(${rows})* from readerinfo
+       where  borrowID  not in(
+           select top(${start}) borrowID from  readerinfo
+       )
     </select>
     <!-- 查询总数 -->
     <select id="selectReaderListCount" 
@@ -17,7 +19,7 @@
     <select id="findReaderId" parameterType="String" resultType="Reader">
         select * from   readerinfo where borrowID =  #{borrowID}
     </select>
-    <select id="findLikeReaderMsg" parameterType="String" resultType="Reader">
+    <select id="findLikeReaderMsg" parameterType="Reader" resultType="Reader">
          select * from   readerinfo
         <where> 
             <if test="borrowID !=null and borrowID !='' ">
@@ -28,15 +30,15 @@
                <bind name="readerName" value="'%'+_parameter.getReaderName()+'%'" />
                and   readerName like #{readerName}
            </if>
-            <if test="readerPhone !=null nd readerPhone !='' ">
+            <if test="readerPhone !=null and readerPhone !='' ">
                <bind name="readerPhone" value="'%'+_parameter.getReaderPhone()+'%'"/>
                 and readerPhone like #{readerPhone}
             </if>
-            <if test="readerIDCard !=null nd readerIDCard !='' ">
+            <if test="readerIDCard !=null and readerIDCard !='' ">
                 <bind name="readerIDCard" value="'%'+_parameter.getReaderIDCard()+'%'"/>
                 and readerIDCard like #{readerIDCard}
             </if>
-            <if test="readerUnit !=null nd readerUnit !='' ">
+            <if test="readerUnit !=null and readerUnit !='' ">
                 <bind name="readerUnit" value="'%'+_parameter.getReaderUnit()+'%'"/>
                 and readerUnit like #{readerUnit}
             </if>
@@ -68,19 +70,22 @@
         update  readerinfo
         <set>
             <if test="readerName !=null and readerName !=''">
-                readerName=#{readerName}
+                readerName=#{readerName},
             </if>
             <if test="readerSex !=null and readerSex !=''">
-                readerSex=#{readerSex}
+                readerSex=#{readerSex},
             </if>
             <if test="readerUnit !=null and readerUnit !=''">
-                readerUnit=#{readerUnit}
+                readerUnit=#{readerUnit},
             </if>
             <if test="readerPhone !=null and readerPhone !=''">
-                readerPhone=#{readerPhone}
+                readerPhone=#{readerPhone},
+            </if>
+            <if test="readerIDCard !=null and readerIDCard !=''">
+                readerIDCard=#{readerIDCard},
             </if>
             <if test="raederCondition !=null and raederCondition !=''">
-                raederCondition=#{raederCondition}
+                raederCondition=#{raederCondition} ,
             </if>
         </set>
         where borrowID=#{borrowID}

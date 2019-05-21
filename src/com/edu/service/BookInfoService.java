@@ -24,14 +24,9 @@ public interface BookInfoService {
     public Integer selectBookListCount();
     /**
      * 添加查询
-     * @param bookId            图书id
-     * @param bookName           书名
-     * @param bookAuthor         作者
-     * @param bookPublishUnit     出版单位   
-     * @param bookSort               分类号
      * @return       BookInfo
      */
-    public Page<BookInfo> findBookMsgBys(String bookId,String bookName,String bookAuthor,String bookPublishUnit,String bookSort);
+    public Page<BookInfo> findBookMsgBys(BookInfo bookInfo);
     public  BookInfo  findBookById(String id);
 
     /**

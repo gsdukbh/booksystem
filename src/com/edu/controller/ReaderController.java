@@ -6,7 +6,6 @@ import com.edu.service.ReaderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.EscapedErrors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +25,7 @@ public class ReaderController {
      * @param session   session
      * @return  String
      */
-    @RequestMapping ("/addReader")
+    @RequestMapping ("/addReader.action")
     @ResponseBody
     public String readerCreate(Reader reader, HttpSession session){
         User user=(User) session.getAttribute("USER_SESSION");
@@ -40,7 +39,11 @@ public class ReaderController {
                 return "FAIL";
             }
     }
-    @RequestMapping("/read/list")
+    
+    
+    
+    
+    @RequestMapping("/read/list.action")
     public String list(@RequestParam(defaultValue = "1")Integer page,
                        @RequestParam(defaultValue = "10") Integer rows,
                        Model model)
@@ -50,7 +53,7 @@ public class ReaderController {
         return "reader";
     }
     
-    @RequestMapping("/reader/delete")
+    @RequestMapping("/reader/delete.action")
     @ResponseBody
     public String del(String id){
            int rows=readerInfoService.delReaderMsg(id);
@@ -62,11 +65,15 @@ public class ReaderController {
                 return "FAIL";
            }
     }
-    @RequestMapping("/reader/findId")
+    
+    
+    @RequestMapping("/reader/findId.action")
     @ResponseBody
     public Reader findReaderID(String id){
         return  this.readerInfoService.findReaderId(id);
     }
+    
+    
     @RequestMapping("/reader/upReader")
     @ResponseBody
     public String upReader(Reader reader){
@@ -78,17 +85,15 @@ public class ReaderController {
             return "FAIL";
         }
     }
-    @RequestMapping(value = "/reader/find", method = RequestMethod.POST)
-    public String find(String borrowID,
-                       String readerName,
-                       String readerPhone,
-                       String readerIDCard,
-                       String readerUnit ,
-                       Model Model)
+    
+    
+    
+    @RequestMapping(value = "/reader/find.action", method = RequestMethod.POST)
+    public String find(Reader reader, Model Model)
     {
-        Page<Reader> readerPage= readerInfoService.findLikeReaderMsg(borrowID,readerName,readerPhone,readerIDCard,readerUnit )  ;
+        Page<Reader> readerPage= readerInfoService.findLikeReaderMsg(reader)  ;
         Model.addAttribute("page",readerPage);
-        return "findBoorw";
+        return "findReader";
     }
     
 }

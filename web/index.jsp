@@ -39,7 +39,7 @@
       <div class="am-u-lg-3 am-u-md-6 am-u-sm-8 am-u-sm-centered log-content">
         <h1 class="log-title am-animation-slide-top">图书管理系统</h1>
         <br>
-        <form class="am-form" id="log-form" action="${pageContext.request.contextPath}/login" method="post">
+        <form class="am-form" id="log-form" action="${pageContext.request.contextPath}/login.action" method="post">
           <div class="am-input-group am-radius am-animation-slide-left">
             <input type="email" id="doc-vld-email-2-1" class="am-radius" data-validation-message="请输入正确邮箱地址" placeholder="邮箱" required name="usercode" value="admin@admin.com"/>
             <span class="am-input-group-label log-icon am-radius"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>

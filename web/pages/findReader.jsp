@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: werls
-  Date: 2019/5/19
-  Time: 21:00
+  Date: 2019/5/21
+  Time: 17:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,8 +10,7 @@
 <%@ taglib prefix="werls" uri="http://werls.top/commons"%>
 <html>
 <head>
-    <title>读者信息管理</title>
-
+    <title>搜索结果</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,7 +19,6 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 <%--导航栏--%>
@@ -151,12 +149,10 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <div class="col-md-12 text-right">
-                <werls:page url="${pageContext.request.contextPath }/read/list.action" />
-            </div>
         </div>
     </div>
 </div>
+
 <%-- 新建信息模板--%>
 <div class="modal fade" id="addReader" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -174,7 +170,7 @@
                         <div class="control-group">
                             <label class="control-label" >借阅证号</label>
                             <div class="controls">
-                                <input type="text" placeholder="请输入" class="input-xlarge" name="borrowID" id="new_borrowID"> 
+                                <input type="text" placeholder="请输入" class="input-xlarge" name="borrowID" id="new_borrowID">
                             </div>
                         </div>
                         <div class="control-group">
@@ -292,16 +288,16 @@
     function createReader() {
         $.post("${pageContext.request.contextPath }/addReader.action",
             $("#addReaderFrom").serialize(),function(data)
-        {
-            if (data == "OK") {
-                alert("添加成功");
-                window.location.reload();
-            }
-            else{
-                alert("添加失败")
-                window.location.reload();
-            }
-        }  );
+            {
+                if (data == "OK") {
+                    alert("添加成功");
+                    window.location.reload();
+                }
+                else{
+                    alert("添加失败")
+                    window.location.reload();
+                }
+            }  );
     }
     function editReader(id) {
         $.ajax({
@@ -351,9 +347,7 @@
         }
 
     }
-    
+
 </script>
-
-
 </body>
 </html>

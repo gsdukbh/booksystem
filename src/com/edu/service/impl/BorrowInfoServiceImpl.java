@@ -50,14 +50,14 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
 
     /**
      * 多条件查询
-     *
-     * @param borrowID 借阅id
-     * @param bookId   图书id
      * @return BorrowInfo数组对象
      */
     @Override
-    public List<BorrowInfo> findBorrowMsgById(String borrowID, String bookId) {
-        return this.borrowInfoDao.findBorrowMsgById(borrowID,bookId);
+    public Page<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo) {
+        List<BorrowInfo>  borrowInfos=borrowInfoDao.findBorrowMsgById(borrowInfo);
+        Page<BorrowInfo> res= new Page<>();
+        res.setRows(borrowInfos);
+        return  res;
     }
 
     @Override
@@ -72,6 +72,9 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
      */
     @Override
     public Integer addBorrowMsg(BorrowInfo borrowInfo) {
+        borrowInfo.setBorrowDay(null);
+        borrowInfo.setBorrowRemandDay(null);
+        borrowInfo.setBorrowRenewDay(null);
         return this.borrowInfoDao.addBorrowMsg(borrowInfo);
     }
 

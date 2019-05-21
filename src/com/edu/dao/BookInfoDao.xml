@@ -19,7 +19,7 @@
     <select id="findBookById" parameterType="String" resultType="BookInfo">
         select * from bookinfo where  bookId=#{id}
     </select>
-    <select id="findBookMsgBys" resultType="BookInfo"  parameterType="String" >
+    <select id="findBookMsgBys" resultType="BookInfo"  parameterType="BookInfo" >
         select * from bookinfo
         <where>
             <if test="bookId !=null and bookId !='' ">
@@ -62,25 +62,25 @@
         update   bookinfo
         <set>
             <if test="bookName !=null and bookName !=''">
-                bookName=#{bookName}
+                bookName=#{bookName} ,
             </if>
             <if test="bookAuthor !=null and bookAuthor !=''">
-                bookAuthor=#{bookAuthor}
+                bookAuthor=#{bookAuthor},
             </if>
             <if test="bookPublishUnit !=null and bookPublishUnit !=''">
-                bookPublishUnit=#{bookPublishUnit}
+                bookPublishUnit=#{bookPublishUnit} ,
             </if>
             <if test="bookRate !=null and bookRate !=''">
-                bookRate=#{bookRate}
+                bookRate=#{bookRate} ,
             </if>
             <if test="bookSort !=null and bookSort !=''">
-                bookSort=#{bookSort}
+                bookSort=#{bookSort}  ,
             </if>
             <if test="bookCover !=null and bookCover !=''">
-                bookCover=#{bookCover}
+                bookCover=#{bookCover}  ,
             </if>
             <if test="bookRemark !=null and bookRemark !=''">
-                bookRemark=#{bookRemark}
+                bookRemark=#{bookRemark} ,
             </if>
         </set>
         where bookId=#{bookId}

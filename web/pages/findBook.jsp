@@ -6,6 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="werls" uri="http://werls.top/commons"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName()
+            + ":" + request.getServerPort() + path + "/";
+%>
 <html>
 <head>
     <title>搜索结果</title>
@@ -31,22 +38,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list">图书管理系统</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list.action">图书管理系统</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="${pageContext.request.contextPath }/book/list">图书管理</a>
+                            <a href="${pageContext.request.contextPath }/book/list.action">图书管理</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/read/list">读者管理</a>
+                            <a href="${pageContext.request.contextPath }/read/list.action">读者管理</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/borrow/list">借阅信息管理</a>
+                            <a href="${pageContext.request.contextPath }/borrow/list.action">借阅信息管理</a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath }/book/find" method="post">
+                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath }/book/find.action" method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" name="bookName"  placeholder="请输入书名"/>
                         </div>
@@ -69,7 +76,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">我<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/logout">退出登陆</a>
+                                    <a href="${pageContext.request.contextPath}/logout.action">退出登陆</a>
                                 </li>
                             </ul>
                         </li>
@@ -88,6 +95,7 @@
                 图书信息管理
             </h3>
             <span class="label label-success">搜索结果</span>
+            <a id="modal-475217" href="#addbook" role="button" class="btn" data-toggle="modal" onclick="clearBook()">新建</a>
             <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
@@ -152,6 +160,67 @@
         </div>
     </div>
 </div>
+<%-- 新建图书信息模板--%>
+<div class="modal fade" id="addbook" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    新建图书信息
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" id="addBookFrom">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" >图书编号</label>
+                            <div class="controls">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookId" name="bookId">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >书名</label>
+                            <div class="controls">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookName" name="bookName">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >作者</label>
+                            <div class="controls">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookAuthor" name="bookAuthor">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >出版单位</label>
+                            <div class="controls">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookPublishUnit" name="bookPublishUnit">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >单价</label>
+                            <div class="controls">
+                                <input type="text" placeholder="输入数字" class="input-xlarge" id="newBookRate" name="bookRate">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >备注</label>
+                            <div class="controls">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="newBookRemark" name="bookRemark">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="createBook()">创建图书信息</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--修改图书模板--%>
 <div class="modal fade" id="bookEditDialog" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
     <div class="modal-dialog">
@@ -213,10 +282,26 @@
     </div>
 </div>
 <script type="text/javascript">
+    function clearBook() {
+        $("#newBookId").val("");
+        $("#newBookName").val("");
+        $("#newBookAuthor").val("");
+        $("#newBookPublishUnit").val("");
+        $("#newBookRate").val("");
+        $("#newBookRemark").val("");
+    }
+
+    function createBook() {
+        $.post("${pageContext.request.contextPath }/book/create.action",
+            $("#addBookFrom").serialize(),function(data) {
+                alert("添加成功");
+                window.location.reload();
+            } );
+    }
     function editBook(id) {
         $.ajax({
             type:"get",
-            url:"${pageContext.request.contextPath}/book/findId",
+            url:"<%=basePath%>book/findId.action",
             data:{"id":id},
             success:function (data) {
                 $("#editBookId").val(data.bookId);
@@ -228,8 +313,9 @@
             }
         })
     }
+
     function upBook() {
-        $.post("${pageContext.request.contextPath }/book/update",
+        $.post("${pageContext.request.contextPath }/book/update.action",
             $("#editBookFrom").serialize(),
             function (date) {
                 if (date == "OK"){
@@ -241,7 +327,25 @@
                     window.location.reload();
                 }
             } )
-    }   
+    }
+    function deleteBook(id) {
+        if (confirm("确定要删除该图书吗?")) {
+            $.post("<%=basePath%>book/deleteBook.action",
+                {"id":id},
+                function (date) {
+                    if (date == "OK"){
+                        alert("图书删除成功");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("图书删除失败");
+                        window.location.reload();
+                    }
+                }
+            )
+        }
+
+    }  
 </script>
 
 
