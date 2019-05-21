@@ -36,18 +36,12 @@
     <insert id="addBorrowMsg" parameterType="BorrowInfo"  >
         insert into  borrowinfo(
                                 borrowID,
-                                bookId,
-                                borrowRenewDay,
-                                borrowRemandDay,
-                                borrowPenalty,
+                                bookId,           
                                 borrowstatus
                                 ) 
         values (
                #{borrowID},
                #{bookId},
-               #{borrowRenewDay},
-               #{borrowRemandDay},
-               #{borrowPenalty},
                #{borrowstatus}
                )  
     </insert>

@@ -78,39 +78,22 @@ public class BorrowInfoController {
             return "FAIL";
         }
     }
-    @RequestMapping("/borrow/reBorrow.action")
-    @ResponseBody
-    public String reBorrow(String borrowID,String bookId){
-        BorrowInfo borrowInfo=new BorrowInfo();
-        borrowInfo.setBorrowID(borrowID);
-        borrowInfo.setBookId(bookId);
-        Date date=new Date();
-        Timestamp timeStamp = new Timestamp(date.getTime());
-        borrowInfo.setBorrowRemandDay(timeStamp);
-        int row=borrowInfoService.upBorrowMsg(borrowInfo);
-        if (row >0){
-            return "OK";
-        }
-          else {return null;}
-    }
-    @RequestMapping("/borrow/renewBorrow.action")
-    @ResponseBody
-    public String renewBorrow(String borrowID,String bookId){
-        BorrowInfo b=new BorrowInfo();
-        b.setBorrowID(borrowID);
-        b.setBookId(bookId);
-        Date date=new Date();
-        Timestamp timeStamp = new Timestamp(date.getTime());
-        b.setBorrowRenewDay(timeStamp);
-        int rows=borrowInfoService.upBorrowMsg(b) ;
-        if (rows >0){
-            return "OK";
-        }
-        else {return null;}
-    } 
     @RequestMapping("/borrow/upBorrow.action")
     @ResponseBody
-    public String upReader(BorrowInfo borrowInfo){
+    public String upReader(String borrowID,String bookId,String borrowRemandDay,String borrowRenewDay,String borrowstatus){
+        
+        BorrowInfo borrowInfo=new BorrowInfo();
+        borrowInfo.setBookId(bookId);
+        borrowInfo.setBorrowID(borrowID);
+        Date date=new Date();
+        Timestamp timeStamp = new Timestamp(date.getTime());
+        if (borrowRemandDay != null && borrowRemandDay !=""){
+            borrowInfo.setBorrowRemandDay(timeStamp);
+        }
+        if (borrowRenewDay != null && borrowRenewDay !=""){
+            borrowInfo.setBorrowRenewDay(timeStamp); 
+        }
+        borrowInfo.setBorrowstatus(new Integer(borrowstatus));
         int rows=borrowInfoService.upBorrowMsg(borrowInfo);
         if (rows>0){
             return "OK";

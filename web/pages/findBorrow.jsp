@@ -130,8 +130,7 @@
                                 ${row.borrowstatus}
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-xs"  onclick= "reBorrow(${row.borrowID},${row.bookId})">归还</a>
-                            <a href="#" class="btn btn-primary btn-xs"   onclick= "renewBorrow(${row.borrowID},${row.bookId})">续借</a>
+                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookEditDialog"  onclick= "editBorrow(${row.borrowID},${row.bookId})">修改</a>
                             <a href="#" class="btn btn-danger btn-xs" onclick="deleteBorrow(${row.borrowID}, ${row.bookId})">删除</a>
                         </td>
                     </tr>
@@ -160,7 +159,7 @@
                     <fieldset>
                         <div class="control-group">
                             <label class="control-label" >借阅证号</label>
-                            <div class="col-sm-10">
+                            <div class="controls">
                                 <select	class="form-control"  name="borrowID">
                                     <option value="">--请选择--</option>
                                     <c:forEach items="${reader.rows}" var="row">
@@ -173,7 +172,7 @@
                         </div>
                         <div class="control-group">
                             <label class="control-label" >图书编号</label>
-                            <div class="col-sm-10">
+                            <div class="controls">
                                 <select	class="form-control"  name="bookId">
                                     <option value="">--请选择--</option>
                                     <c:forEach items="${book.rows}" var="row">
@@ -187,7 +186,15 @@
                         <div class="control-group">
                             <label class="control-label" >借阅状态</label>
                             <div class="controls">
-                                <input type="text" placeholder="请输入 1 已归还 0 为在借" class="input-xlarge" name="borrowstatus" id="new_borrowstatus">
+                                <select	class="form-control"  name="borrowstatus">
+                                    <option value="">--请选择--</option>
+                                    <option value="1">
+                                        在借
+                                    </option>
+                                    <option value="2">
+                                        已归还
+                                    </option>
+                                </select>
                             </div>
                         </div>
 
@@ -201,6 +208,85 @@
         </div>
     </div>
 </div>
+
+
+%--修改模板--%>
+<div class="modal fade" id="bookEditDialog" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel2">
+                    修改借阅信息
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" id="editBookFrom">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" >借阅证号</label>
+                            <div class="controls">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editborrowID" name="borrowID">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >图书编号</label>
+                            <div class="controls">
+                                <input type="text" placeholder="请输入" class="input-xlarge" id="editbookId" name="bookId">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >归还图书</label>
+                            <div class="controls">
+                                <select	class="form-control"  name="borrowRemandDay">
+                                    <option value="">--请选择--</option>
+                                    <option value=null>
+                                        否
+                                    </option>
+                                    <option value="2">
+                                        归还
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >续借图书</label>
+                            <div class="controls">
+                                <select	class="form-control"  name="borrowRenewDay">
+                                    <option value="">--请选择--</option>
+                                    <option value=null>
+                                        否
+                                    </option>
+                                    <option value="2">
+                                        续借
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >借阅状态</label>
+                            <div class="controls">
+                                <select	class="form-control"  name="borrowstatus">
+                                    <option value="">--请选择--</option>
+                                    <option value="1">
+                                        在借
+                                    </option>
+                                    <option value="2">
+                                        已归还
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="upBorrow()">修改图书信息</button>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     /*清空数据*/
@@ -224,24 +310,26 @@
                 }
             } );
     }
-    function reBorrow(borrowID,bookId) {
-        $.post("${pageContext.request.contextPath }/borrow/reBorrow.action",
-            {"borrowID":borrowID,"bookId":bookId},function (data) {
-                if (data !=null) {
-                    alert("归还成功");
-                    window.location.reload();
-                }
-                else{
-                    alert("归还失败")
-                    window.location.reload();
-                }
-            }
-        )
+    function editBorrow(borrowID,bookId) {
+        var editborrowID=borrowID;
+        var editbookId=bookId;
+        $("#editborrowID").val(editborrowID);
+        $("#editbookId").val(editbookId);
     }
-
-    function renewBorrow(borrowID,bookId) {
+    function upBorrow() {
+        var  borrowID=$("#editborrowID").val();
+        var  bookId=$("#editbookId").val();
+        var  borrowRemandDay= $("#borrowRemandDay").val() ;
+        var  borrowRenewDay= $("#borrowRenewDay").val() ;
+        var  borrowstatus= $("#borrowstatus").val() ;
         $.post("${pageContext.request.contextPath }/borrow/renewBorrow.action",
-            {"borrowID":borrowID,"bookId":bookId},
+            {
+                "borrowID":borrowID,
+                "bookId":bookId,
+                "borrowRemandDay":borrowRemandDay,
+                "borrowRenewDay":borrowRenewDay,
+                "borrowstatus":borrowstatus
+            },
             function (data) {
                 if (data !=null) {
                     alert("续借成功");
@@ -274,7 +362,8 @@
         }
 
     }
-    
+
 </script>
+
 </body>
 </html>
