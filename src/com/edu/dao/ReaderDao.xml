@@ -14,7 +14,7 @@
     </select>
     <!--条件查询信息-->
     <!--包括按姓名,借阅证号,电话,身份证,单位-->
-    <select id="findReaderId" parameterType="Strings" resultType="Reader">
+    <select id="findReaderId" parameterType="String" resultType="Reader">
         select * from   readerinfo where borrowID =  #{borrowID}
     </select>
     <select id="findLikeReaderMsg" parameterType="String" resultType="Reader">
@@ -23,6 +23,7 @@
             <if test="borrowID !=null and borrowID !='' ">
                 and borrowID =  #{borrowID}
             </if>
+            
            <if test="readerName !=null and readerName !=''">
                <bind name="readerName" value="'%'+_parameter.getReaderName()+'%'" />
                and   readerName like #{readerName}

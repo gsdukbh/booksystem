@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.EscapedErrors;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import utils.Page;
@@ -77,6 +78,17 @@ public class ReaderController {
             return "FAIL";
         }
     }
-    
+    @RequestMapping(value = "/reader/find", method = RequestMethod.POST)
+    public String find(String borrowID,
+                       String readerName,
+                       String readerPhone,
+                       String readerIDCard,
+                       String readerUnit ,
+                       Model Model)
+    {
+        Page<Reader> readerPage= readerInfoService.findLikeReaderMsg(borrowID,readerName,readerPhone,readerIDCard,readerUnit )  ;
+        Model.addAttribute("page",readerPage);
+        return "findBoorw";
+    }
     
 }

@@ -8,10 +8,7 @@ import javafx.concurrent.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 import utils.Page;
 
@@ -31,7 +28,7 @@ public class BookInfoController {
     @Autowired 
     private  BookInfoService bookInfoService;
     
-     @RequestMapping("book/list")
+     @RequestMapping("/book/list")
     public String list(@RequestParam(defaultValue = "1")Integer page,
                        @RequestParam(defaultValue = "10") Integer rows, 
                        Model model)
@@ -55,7 +52,7 @@ public class BookInfoController {
 
             return "OK";
         } else {
-         return "FAIL"  ;
+         return null ;
         }
     }
 
@@ -91,25 +88,25 @@ public class BookInfoController {
             return "OK";
         }
        else {
-           return "FAIL";
+           return null;
         }
     }
 
     /**
-     * 没有写分类
-     * 没有成功需要重写
-     * @param find     传入值
-     * @param model   m    
+     * 
      * @return  转跳页面        
      */
-    @RequestMapping("/book/find")
-    @ResponseBody
-    public String findBookMsg(String find, Model model){
-        Page<BookInfo> bookInfoPage=bookInfoService.findBookMsgBys(null
-        ,find,null,null,null);
-        model.addAttribute("book",bookInfoPage);
-        final String admin = "findBook";
-        return admin;
+    @RequestMapping(value = "/book/find", method = RequestMethod.POST)
+    public String findBookMsg(String bookId,
+                                String bookName,
+                                String bookAuthor,
+                                String bookPublishUnit,
+                                String bookSort,Model model){
+       Page<BookInfo> bookInfoPage=bookInfoService.findBookMsgBys(bookId,bookName,bookAuthor,bookPublishUnit,bookSort) ;
+       
+        model.addAttribute("page",bookInfoPage) ;
+        
+        return  "findBook" ;
     }
     
     @RequestMapping("/book/findId")

@@ -65,8 +65,11 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      * @return 读者信息
      */
     @Override
-    public List<Reader> findLikeReaderMsg(String borrowID, String readerName, String readerPhone, String readerIDCard, String readerUnit) {
-        return this.readerDao.findLikeReaderMsg(borrowID,readerName,readerPhone,readerIDCard,readerUnit);
+    public Page<Reader> findLikeReaderMsg(String borrowID, String readerName, String readerPhone, String readerIDCard, String readerUnit) {
+        List<Reader> readerList= readerDao.findLikeReaderMsg(borrowID,readerName,readerPhone,readerIDCard,readerUnit) ;
+        Page<Reader> readerPage=new Page<>();
+        readerPage.setRows(readerList);
+        return readerPage;
     }
 
     @Override

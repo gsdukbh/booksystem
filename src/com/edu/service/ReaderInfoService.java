@@ -27,7 +27,7 @@ public interface ReaderInfoService {
      * @param readerUnit    单位
      * @return   读者信息
      */
-    public List<Reader> findLikeReaderMsg(String borrowID,String readerName,String readerPhone,String readerIDCard,String readerUnit);
+    public Page<Reader> findLikeReaderMsg(String borrowID,String readerName,String readerPhone,String readerIDCard,String readerUnit);
     public  Reader findReaderId(String borrowID);
     /**
      *  添加读者信息

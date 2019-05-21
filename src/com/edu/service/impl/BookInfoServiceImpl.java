@@ -60,10 +60,10 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public Page<BookInfo> findBookMsgBys(String bookId, String bookName, String bookAuthor, String bookPublishUnit, String bookSort) {
-        List<BookInfo> bookInfoList=   bookInfoDao.findBookMsgBys(bookId,bookName,bookAuthor,bookPublishUnit,bookSort);
-        Page<BookInfo> page=new Page<>();
-        page.setRows(bookInfoList);         
-        return  page;
+        List<BookInfo> bookInfo=bookInfoDao.findBookMsgBys(bookId,bookName,bookAuthor,bookPublishUnit,bookSort);
+        Page<BookInfo> res= new Page<>();
+        res.setRows(bookInfo);
+        return res; 
     }
 
     @Override

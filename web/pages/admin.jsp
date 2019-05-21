@@ -51,21 +51,33 @@
                             <a href="${pageContext.request.contextPath }/read/list">读者管理</a>
                         </li>
                         <li>
-                            <a href="#">借阅信息管理</a>
+                            <a href="${pageContext.request.contextPath }/borrow/list">借阅信息管理</a>
                         </li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath }/book/find" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="find" id="find"/>
-                        </div> 
-                        <button type="submit" class="btn btn-default" id="souSuo">搜索</button>
+                            <input type="text" class="form-control" name="bookName"  placeholder="请输入书名"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="bookId"  placeholder="请输入图书编号"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="bookAuthor"  placeholder="请输入作者"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="bookPublishUnit"  placeholder="请输入出版单位"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="bookSort"  placeholder="请输入分类号"/>
+                        </div>
+                        <button type="submit" class="btn btn-default" >搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">我<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="${pageContext.request.contextPath }/logout">退出登陆</a>
+                                    <a href="${pageContext.request.contextPath}/logout">退出登陆</a>
                                 </li>
                             </ul>
                         </li>
@@ -128,9 +140,6 @@
                         <td>
                             ${row.bookPublishUnit}
                         </td>
-                        <%--<td>
-                                ${row.bookSort}
-                        </td>--%>
                         <td>
                             ${row.bookRate}
                         </td>
@@ -146,12 +155,12 @@
                 </tbody>
             </table>
             <div class="col-md-12 text-right">
-                <werls:page url="${pageContext.request.contextPath }book/list" />
+                <werls:page url="${pageContext.request.contextPath }/book/list" />
             </div>
         </div>
     </div>
 </div>
-<%-- 新建图书信息模板1--%>
+<%-- 新建图书信息模板--%>
 <div class="modal fade" id="addbook" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -272,6 +281,8 @@
         </div>
     </div>
 </div>
+   <div id="find"></div>
+
 <script type="text/javascript">
     /*清空数据*/
   function clearBook() {
@@ -284,18 +295,11 @@
   }  
    
   function createBook() {
-     $.post("<%=basePath%>book/create", 
-         $("#addBookFrom").serialize(),Function(data)
-      {
-          if (data == "OK") {
-            alert("添加成功");
-            window.location.reload();
-          }
-          else{
-             alert("添加失败")
-              window.location.reload(); 
-          }  
-      }  );
+      $.post("${pageContext.request.contextPath }/book/create",
+          $("#addBookFrom").serialize(),function(data) {
+          alert("添加成功");
+          window.location.reload();
+          } );
   }
   function editBook(id) {
    $.ajax({
@@ -314,7 +318,7 @@
   }
   
   function upBook() {
-    $.post("<%=basePath%>book/update"),
+    $.post("${pageContext.request.contextPath }/book/update",
     $("#editBookFrom").serialize(),
     function (date) {
         if (date == "OK"){
@@ -325,7 +329,7 @@
             alert("图书更新失败");
             window.location.reload();
         }
-    }    
+    } )   
   }
    function deleteBook(id) {
          if (confirm("确定要删除该图书吗?")) {
@@ -345,9 +349,7 @@
          }
        
    }
-    $(document).ready(function(){
-       
-    });
+   
 </script>
 </body>
 </html>

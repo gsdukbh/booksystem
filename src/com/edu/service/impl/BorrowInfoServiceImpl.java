@@ -30,7 +30,10 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
      */
     @Override
     public Page<BorrowInfo> findAllBorrowMsg(Integer page, Integer rows) {
-        List<BorrowInfo>  borrowInfos=borrowInfoDao.findAllBorrowMsg();
+        BorrowInfo borrowInfo=new BorrowInfo();
+        borrowInfo.setStart((page - 1) * rows);
+        borrowInfo.setRows(rows);
+        List<BorrowInfo>  borrowInfos=borrowInfoDao.findAllBorrowMsg(borrowInfo);
         Integer integer=borrowInfoDao.selectBorrowListCount();
         Page<BorrowInfo> res= new Page<>();
         res.setPage(page);

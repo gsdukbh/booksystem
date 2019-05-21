@@ -34,24 +34,36 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath }/reader/list">图书管理系统</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list">图书管理系统</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li >
-                            <a href="${pageContext.request.contextPath }/reader/list">图书管理</a>
+                            <a href="${pageContext.request.contextPath}/book/list">图书管理</a>
                         </li>
                         <li class="active">
                             <a href="${pageContext.request.contextPath }/read/list">读者管理</a>
                         </li>
                         <li>
-                            <a href="#">借阅信息管理</a>
+                            <a href="${pageContext.request.contextPath }/borrow/list">借阅信息管理</a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-left" role="search" action="" method="post">
+                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath}" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" name="borrowID"  placeholder="请输入借阅证号"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="readerName"  placeholder="请输入读者姓名"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="readerUnit"  placeholder="请输入读者单位"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="readerPhone"  placeholder="请输入电话号码"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="readerIDCard"  placeholder="请输入身份号"/>
                         </div>
                         <button type="submit" class="btn btn-default">搜索</button>
                     </form>
@@ -140,7 +152,7 @@
                 </tbody>
             </table>
             <div class="col-md-12 text-right">
-                <werls:page url="${pageContext.request.contextPath }/reader/list" />
+                <werls:page url="${pageContext.request.contextPath }/read/list" />
             </div>
         </div>
     </div>
@@ -279,7 +291,7 @@
 
     function createReader() {
         $.post("${pageContext.request.contextPath }/addReader",
-            $("#addReaderFrom").serialize(),Function(data)
+            $("#addReaderFrom").serialize(),function(data)
         {
             if (data == "OK") {
                 alert("添加成功");
@@ -308,7 +320,7 @@
     }
 
     function upReader() {
-        $.post("${pageContext.request.contextPath }/reader/upReader"),
+        $.post("${pageContext.request.contextPath }/reader/upReader",
             $("#editBookFrom").serialize(),
             function (date) {
                 if (date == "OK"){
@@ -319,7 +331,7 @@
                     alert("更新失败");
                     window.location.reload();
                 }
-            }
+            })
     }
     function deleteReader(id) {
         if (confirm("确定要删除该图书吗?")) {

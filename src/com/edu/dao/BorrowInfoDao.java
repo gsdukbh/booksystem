@@ -17,7 +17,7 @@ public interface BorrowInfoDao {
      * 查看所有的借阅信息
      * @return 所有信息 BorrowInfo数组对象        
      */
-    public List<BorrowInfo> findAllBorrowMsg();
+    public List<BorrowInfo> findAllBorrowMsg(BorrowInfo borrowInfo);
     public Integer selectBorrowListCount();
     /**
      * 多条件查询
