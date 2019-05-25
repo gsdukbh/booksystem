@@ -19,7 +19,8 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+  
+
 </head>
 <body>
 <%--导航栏--%>
@@ -214,7 +215,7 @@
 </div>
 
 
-%--修改图书模板--%>
+<%--修改图书模板--%>
 <div class="modal fade" id="bookEditDialog" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -262,7 +263,7 @@
                                     <option value=null>
                                         否
                                     </option>
-                                    <option value="">
+                                    <option value="2">
                                         续借
                                     </option>
                                 </select>
@@ -292,6 +293,8 @@
         </div>
     </div>
 </div>
+
+
 <script type="text/javascript">
     /*清空数据*/
     function clearBorrow() {
@@ -303,58 +306,57 @@
     function createBorrow() {
         $.post("${pageContext.request.contextPath }/borrow/addBorrow.action",
             $("#addBorrowFrom").serialize(),function(data)
-        {
-            if (data !=null) {
-                alert("添加成功");
-                window.location.reload();
-            }
-            else{
-                alert("添加失败")
-                window.location.reload();
-            }
-        } );
+            {
+                if (data !=null) {
+                    alert("添加成功");
+                    window.location.reload();
+                }
+                else{
+                    alert("添加失败")
+                    window.location.reload();
+                }
+            } );
     }
     function editBorrow(borrowID,bookId) {
-        var editborrowID=borrowID;
-        var editbookId=bookId;
+        var editborrowID = borrowID;
+        var editbookId = bookId;
         $("#editborrowID").val(editborrowID);
         $("#editbookId").val(editbookId);
     }
-    
     function upBorrow() {
         var  borrowID=$("#editborrowID").val();
         var  bookId=$("#editbookId").val();
         var  borrowRemandDay= $("#borrowRemandDay").val() ;
         var  borrowRenewDay= $("#borrowRenewDay").val() ;
         var  borrowstatus= $("#borrowstatus").val() ;
-        $.post("${pageContext.request.contextPath }/borrow/renewBorrow.action",
-             {   
+        $.post("${pageContext.request.contextPath }/borrow/upBorrow.action",
+            {
                 "borrowID":borrowID,
-                 "bookId":bookId,
+                "bookId":bookId,
                 "borrowRemandDay":borrowRemandDay,
-                 "borrowRenewDay":borrowRenewDay,
-                 "borrowstatus":borrowstatus
-             },
-           function (data) {
-               if (data !=null) {
-                   alert("成功");
-                   window.location.reload();
-               }
-               else{
-                   alert("失败")
-                   window.location.reload();
-               }
-        })
+                "borrowRenewDay":borrowRenewDay,
+                "borrowstatus":borrowstatus
+            },
+            function (data) {
+                if (data !=null) {
+                    alert("成功");
+                    window.location.reload();
+                }
+                else{
+                    alert("失败")
+                    window.location.reload();
+                }
+            })
     }
-    
+
     function deleteBorrow(borrowID,bookId) {
         if (confirm("确定要删除该图书吗?")) {
             $.post("${pageContext.request.contextPath }/borrow/delete.action",
                 {"borrowID":borrowID,
-                 "bookId" :bookId
+                    "bookId" :bookId
                 },
                 function (date) {
-                    if (date == "OK"){
+                    if (date !=null){
                         alert("删除成功");
                         window.location.reload();
                     }
@@ -365,10 +367,8 @@
                 }
             )
         }
-
     }
-    
-</script>
 
+</script>
 </body>
 </html>

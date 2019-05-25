@@ -21,12 +21,12 @@ public class BorrowInfo {
      * borrowRenewDay
      * 续借日期
      */
-    private  Date    borrowRenewDay;
+    private  String    borrowRenewDay;
     /**
      *borrowRemandDay
      * 归还日期 
      */
-    private  Date    borrowRemandDay;
+    private  String    borrowRemandDay;
     private  Integer   borrowPenalty;
     private  Integer    borrowstatus;
     private Integer  start;
@@ -72,19 +72,19 @@ public class BorrowInfo {
         this.borrowDay = borrowDay;
     }
 
-    public Date getBorrowRenewDay() {
+    public String getBorrowRenewDay() {
         return borrowRenewDay;
     }
 
-    public void setBorrowRenewDay(Date borrowRenewDay) {
+    public void setBorrowRenewDay(String borrowRenewDay) {
         this.borrowRenewDay = borrowRenewDay;
     }
 
-    public Date getBorrowRemandDay() {
+    public String getBorrowRemandDay() {
         return borrowRemandDay;
     }
 
-    public void setBorrowRemandDay(Date borrowRemandDay) {
+    public void setBorrowRemandDay(String borrowRemandDay) {
         this.borrowRemandDay = borrowRemandDay;
     }
 

@@ -49,7 +49,6 @@ public class BookInfoController {
     public String addBookInfo(BookInfo bookInfo) {
         int rows = bookInfoService.addBookMsg(bookInfo);
         if (rows > 0) {
-
             return "OK";
         } else {
          return null ;

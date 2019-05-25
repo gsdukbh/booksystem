@@ -1,7 +1,6 @@
 package com.edu.service.impl;
 
 import com.edu.dao.BorrowInfoDao;
-import com.edu.po.BookInfo;
 import com.edu.po.BorrowInfo;
 import com.edu.service.BorrowInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.Page;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -80,26 +80,20 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
 
     /**
      * 修改借阅信息
-     *
-     * @param borrowInfo 借阅信息
      * @return integer 修改成功条数
      */
     @Override
     public Integer upBorrowMsg(BorrowInfo borrowInfo) {
-        
         return this.borrowInfoDao.upBorrowMsg(borrowInfo);
     }
 
     /**
      * 删除信息
-     *
-     * @param borrowID 借阅id
-     * @param bookId   图书id
      * @return integer 删除成功条数
      */
     @Override
-    public Integer delBorrowMsgByid(String borrowID, String bookId) {
-        return this.borrowInfoDao.delBorrowMsgByid(borrowID,bookId);
+    public Integer delBorrowMsgByid(BorrowInfo borrowInfo) {
+        return this.borrowInfoDao.delBorrowMsgByid(borrowInfo);
     }
 }
 

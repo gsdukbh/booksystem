@@ -38,7 +38,7 @@
     <orderEntry type="library" exported="" name="Spring MVC-4.3.18.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Tomcat 9.0.16" level="application_server_libraries" />
     <orderEntry type="library" exported="" name="lib" level="project" />
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library" exported="" scope="TEST">
       <library name="JUnit5.3">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.5.0-M1/junit-jupiter-api-5.5.0-M1.jar!/" />
@@ -50,5 +50,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="Tomcat 8.0.53" level="application_server_libraries" />
   </component>
 </module>

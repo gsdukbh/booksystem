@@ -13,7 +13,7 @@
     <!-- 查询总数 -->
     <select id="selectBorrowListCount" 
             resultType="Integer">
-        select count(*) from BorrowInfo
+        select count(*) from borrowInfo
     </select>
     <select id="findBorrowById"  parameterType="String"   resultType="BorrowInfo">
         select * from   borrowinfo where   borrowID=#{borrowID}  and  bookId=#{bookId}
@@ -23,11 +23,9 @@
       select * from   borrowinfo
         <where>
             <if test="borrowID !=null and borrowID !=''">
-                <bind name="borrowID" value="'%'+_parameter.getBorrowID()+'%'" />
              and  borrowID=#{borrowID}
             </if>
             <if test="bookId !=null and bookId !=''">
-                <bind name="bookId" value="'%'+_parameter.getBookId()+'%'" />
                 and  bookId=#{bookId}
             </if>
         </where>
@@ -46,26 +44,23 @@
                )  
     </insert>
     <!--修改信息-->
-    <update id="upBorrowMsg" parameterType="BorrowInfo"  >
+    <update id="upBorrowMsg" parameterType="BorrowInfo" >
         update borrowinfo
         <set>
             <if test="borrowRenewDay !=null and borrowRenewDay !=''">
-                borrowRenewDay=#{borrowRenewDay} ,
+                borrowRenewDay=#{borrowRenewDay},
             </if>
             <if test="borrowRemandDay !=null and borrowRemandDay !=''">
                 borrowRemandDay=#{borrowRemandDay},
             </if>
-            <if test="borrowPenalty !=null and borrowPenalty !=''">
-                borrowPenalty=#{borrowPenalty}  ,
-            </if>
             <if test="borrowstatus !=null and borrowstatus !=''">
-                borrowstatus=#{borrowstatus} ,
+                borrowstatus=#{borrowstatus},
             </if>
         </set>
             where  borrowID=#{borrowID} and bookId=#{bookId}
     </update>
     <!--删除信息通过id-->
-    <delete id="delBorrowMsgByid" parameterType="String" >
+    <delete id="delBorrowMsgByid" parameterType="BorrowInfo" >
         delete from  borrowinfo  where borrowID =#{borrowID} and bookId =#{bookId}
     </delete>
 </mapper>

@@ -34,17 +34,14 @@ public interface BorrowInfoService {
 
     /**
      * 修改借阅信息
-     * @param    borrowInfo    借阅信息
      * @return    integer 修改成功条数
      */
     public Integer upBorrowMsg(BorrowInfo borrowInfo);
 
     /**
      * 删除信息
-     * @param    borrowID  借阅id
-     * @param    bookId     图书id
      * @return     integer 删除成功条数
      */
-    public Integer delBorrowMsgByid(String borrowID,String bookId);
+    public Integer delBorrowMsgByid(BorrowInfo borrowInfo);
     
 }

@@ -16,8 +16,8 @@
 <html>
   <head>
     <title>Login</title>
-    <link rel="stylesheet" href="res/css/amazeui.min.css">
-    <link rel="stylesheet" href="res/css/app.css">
+    <link rel="stylesheet" href="https://love.werls.top/amazeui.min.css">
+    <link rel="stylesheet" href="https://love.werls.top/app.css">
     
   </head>
   <body>

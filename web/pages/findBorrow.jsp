@@ -78,7 +78,7 @@
             <h3 class="text-center">
                 借阅信息
             </h3>
-            <a id="modal-475217" href="#addReader" role="button" class="btn" data-toggle="modal" onclick="clearBorrow()">新建</a>
+           <%-- <a id="modal-475217" href="#addReader" role="button" class="btn" data-toggle="modal" onclick="clearBorrow()">新建</a>--%>
             <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
@@ -137,9 +137,6 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <div class="col-md-12 text-right">
-                <werls:page url="${pageContext.request.contextPath }/borrow/list.action" />
-            </div>
         </div>
     </div>
 </div>
@@ -210,7 +207,7 @@
 </div>
 
 
-%--修改模板--%>
+<%--修改模板--%>
 <div class="modal fade" id="bookEditDialog" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -239,7 +236,7 @@
                         <div class="control-group">
                             <label class="control-label" >归还图书</label>
                             <div class="controls">
-                                <select	class="form-control"  name="borrowRemandDay">
+                                <select	class="form-control"  name="borrowRemandDay" id="borrowRemandDay">
                                     <option value="">--请选择--</option>
                                     <option value=null>
                                         否
@@ -253,7 +250,7 @@
                         <div class="control-group">
                             <label class="control-label" >续借图书</label>
                             <div class="controls">
-                                <select	class="form-control"  name="borrowRenewDay">
+                                <select	class="form-control"  name="borrowRenewDay" id="borrowRenewDay">
                                     <option value="">--请选择--</option>
                                     <option value=null>
                                         否
@@ -267,7 +264,7 @@
                         <div class="control-group">
                             <label class="control-label" >借阅状态</label>
                             <div class="controls">
-                                <select	class="form-control"  name="borrowstatus">
+                                <select	class="form-control"  name="borrowstatus" id="borrowstatus">
                                     <option value="">--请选择--</option>
                                     <option value="1">
                                         在借
@@ -290,26 +287,6 @@
 </div>
 <script type="text/javascript">
     /*清空数据*/
-    function clearBorrow() {
-        $("#new_borrowID").val("");
-        $("#new_bookId").val("");
-        $("#borrowstatus").val("");
-    }
-
-    function createBorrow() {
-        $.post("${pageContext.request.contextPath }/borrow/addBorrow.action",
-            $("#addBorrowFrom").serialize(),function(data)
-            {
-                if (data !=null) {
-                    alert("添加成功");
-                    window.location.reload();
-                }
-                else{
-                    alert("添加失败")
-                    window.location.reload();
-                }
-            } );
-    }
     function editBorrow(borrowID,bookId) {
         var editborrowID=borrowID;
         var editbookId=bookId;
@@ -322,7 +299,7 @@
         var  borrowRemandDay= $("#borrowRemandDay").val() ;
         var  borrowRenewDay= $("#borrowRenewDay").val() ;
         var  borrowstatus= $("#borrowstatus").val() ;
-        $.post("${pageContext.request.contextPath }/borrow/renewBorrow.action",
+        $.post("${pageContext.request.contextPath }/borrow/upBorrow.action",
             {
                 "borrowID":borrowID,
                 "bookId":bookId,
@@ -332,11 +309,11 @@
             },
             function (data) {
                 if (data !=null) {
-                    alert("续借成功");
+                    alert("成功");
                     window.location.reload();
                 }
                 else{
-                    alert("续借失败")
+                    alert("失败")
                     window.location.reload();
                 }
             })

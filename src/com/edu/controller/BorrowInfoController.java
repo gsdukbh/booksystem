@@ -6,6 +6,8 @@ import com.edu.po.Reader;
 import com.edu.service.BookInfoService;
 import com.edu.service.BorrowInfoService;
 import com.edu.service.ReaderInfoService;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.jcp.xml.dsig.internal.SignerOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,40 +71,45 @@ public class BorrowInfoController {
     @RequestMapping("/borrow/delete.action")
     @ResponseBody
     public String del(String borrowID,String bookId){
-        int rows=borrowInfoService.delBorrowMsgByid(borrowID,bookId);
+        System.out.println(borrowID+bookId);
+        BorrowInfo borrowInfo=new BorrowInfo();
+        borrowInfo.setBookId(bookId);
+        borrowInfo.setBorrowID(borrowID); 
+        int rows=borrowInfoService.delBorrowMsgByid(borrowInfo);
         if (rows>0)
         {
             return "OK";
         }
         else {
-            return "FAIL";
+            return null;
         }
     }
     @RequestMapping("/borrow/upBorrow.action")
     @ResponseBody
-    public String upReader(String borrowID,String bookId,String borrowRemandDay,String borrowRenewDay,String borrowstatus){
-        
+    public String upReader(String borrowID,String bookId,String borrowRemandDay,String borrowRenewDay,String borrowstatus) {
         BorrowInfo borrowInfo=new BorrowInfo();
+        Date date=new Date();
         borrowInfo.setBookId(bookId);
         borrowInfo.setBorrowID(borrowID);
-        Date date=new Date();
-        Timestamp timeStamp = new Timestamp(date.getTime());
-        if (borrowRemandDay != null && borrowRemandDay !=""){
-            borrowInfo.setBorrowRemandDay(timeStamp);
-        }
-        if (borrowRenewDay != null && borrowRenewDay !=""){
-            borrowInfo.setBorrowRenewDay(timeStamp); 
-        }
+        String chick="2";
         borrowInfo.setBorrowstatus(new Integer(borrowstatus));
+        if (borrowRemandDay.equals(chick)){
+            borrowInfo.setBorrowRemandDay(date.toString());
+        }
+        if (borrowRenewDay.equals(chick)){
+            borrowInfo.setBorrowRenewDay(date.toString());
+        }
+        System.out.println(date);
+        System.out.println(borrowInfo);
         int rows=borrowInfoService.upBorrowMsg(borrowInfo);
         if (rows>0){
             return "OK";
         }
         else {
-            return "FAIL";
+            return null;
         }
-    }
-
-
+        /*  return null;*/
+    }   
+    
 }
 
