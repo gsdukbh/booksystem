@@ -3,12 +3,15 @@ package com.edu.service.impl;
 import com.edu.dao.ReaderDao;
 import com.edu.po.Reader;
 import com.edu.service.ReaderInfoService;
+import com.sun.rowset.internal.Row;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.IntegerTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.Page;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,16 +34,14 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      */
     @Override
     public Page<Reader> findAllReaderMsg(Integer page, Integer rows) {
-           Reader reader=new Reader();
-           reader.setStart((page - 1) * rows);
-           reader.setRows(rows);
-           List<Reader>  readerList=readerDao.findAllReaderMsg(reader);
-           Integer integer=readerDao.selectReaderListCount();
-           Page<Reader> readerPage=new Page<>();
-           readerPage.setRows(readerList);
-           readerPage.setPage(page);
-           readerPage.setTotal(integer);
-           readerPage.setSize(rows);
+        RowBounds rowBounds=new RowBounds((page-1)*rows,rows);
+        List<Reader> readerList = readerDao.findAllReaderMsg(rowBounds);
+        Integer integer = readerDao.selectReaderListCount();
+        Page<Reader> readerPage = new Page<>();
+        readerPage.setRows(readerList);
+        readerPage.setPage(page);
+        readerPage.setTotal(integer);
+        readerPage.setSize(rows);
         return readerPage;
     }
 
@@ -60,10 +61,15 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
      * @return 读者信息
      */
     @Override
-    public Page<Reader> findLikeReaderMsg(Reader reader) {
-        List<Reader> readerList= readerDao.findLikeReaderMsg(reader) ;
+    public Page<Reader> findLikeReaderMsg(Reader reader,Integer page, Integer rows) {
+        RowBounds rowBounds=new RowBounds((page-1)*rows,rows);
+        List<Reader> readerList= readerDao.findLikeReaderMsg(reader,rowBounds);
+        int i=readerDao.findLikeReaderMsgCount();
         Page<Reader> readerPage=new Page<>();
         readerPage.setRows(readerList);
+        readerPage.setPage(page);
+        readerPage.setSize(rows);
+        readerPage.setTotal(i);
         return readerPage;
     }
 
@@ -81,6 +87,15 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
     @Override
     public Integer addReaderMsg(Reader reader) {
         return this.readerDao.addReaderMsg(reader);
+    }
+
+    @Override
+    public Integer addReaderMsgs(List<Reader> readerList) {
+          int count=0;
+          for (Reader reader:readerList){
+              count+=this.readerDao.addReaderMsg(reader);
+          }
+        return count;
     }
 
     /**
@@ -102,6 +117,23 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
     @Override
     public Integer delReaderMsg(String borrowID) {
         return this.readerDao.delReaderMsg(borrowID);
+    }
+
+    @Override
+    public Reader finReader(String usercode, String password) {
+        
+        
+        return this.readerDao.findReaderByIdAndPassword(usercode,password);
+    }
+
+    @Override
+    public List<Reader> findReaderIds(String[] ids) {
+        List<Reader> readerList=new ArrayList<>();
+        for (String id:ids){
+            readerList.add(this.readerDao.findReaderId(id));
+        }
+        
+        return readerList;
     }
 }
 

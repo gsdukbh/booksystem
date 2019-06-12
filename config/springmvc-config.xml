@@ -16,10 +16,10 @@
 	<!-- 加载注解驱动 -->
 	<mvc:annotation-driven />
     <!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截 -->
-    <mvc:resources location="classpath*:/js/" mapping="/js/**" />
-    <mvc:resources location="classpath*:/css/" mapping="/css/**" />
-    <mvc:resources location="classpath*:/fonts/" mapping="/fonts/**" />
-    <mvc:resources location="classpath*:/images/" mapping="/images/**" />
+    <mvc:resources location="/js/" mapping="/js/**" />
+    <mvc:resources location="/css/" mapping="/css/**" />
+    <mvc:resources location="/fonts/" mapping="/fonts/**" />
+    <mvc:resources location="/images/" mapping="/images/**" />
 
 	<!-- 配置视图解析器 -->
 	<bean class=
@@ -42,6 +42,10 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/css/**"/>
+			<mvc:exclude-mapping path="/js/**"/>
+			<mvc:exclude-mapping path="/images/**"/>
+			<mvc:exclude-mapping path="/fonts/**"/>
             <bean class="utils.LoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

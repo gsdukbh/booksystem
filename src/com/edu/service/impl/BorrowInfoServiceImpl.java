@@ -3,6 +3,8 @@ package com.edu.service.impl;
 import com.edu.dao.BorrowInfoDao;
 import com.edu.po.BorrowInfo;
 import com.edu.service.BorrowInfoService;
+import com.sun.rowset.internal.Row;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,16 +32,14 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
      */
     @Override
     public Page<BorrowInfo> findAllBorrowMsg(Integer page, Integer rows) {
-        BorrowInfo borrowInfo=new BorrowInfo();
-        borrowInfo.setStart((page - 1) * rows);
-        borrowInfo.setRows(rows);
-        List<BorrowInfo>  borrowInfos=borrowInfoDao.findAllBorrowMsg(borrowInfo);
+        RowBounds rowBounds =new RowBounds((page-1)*rows,rows);
+        List<BorrowInfo>  borrowInfos=borrowInfoDao.findAllBorrowMsg(rowBounds);
         Integer integer=borrowInfoDao.selectBorrowListCount();
         Page<BorrowInfo> res= new Page<>();
         res.setPage(page);
-        res.setSize(rows);
         res.setRows(borrowInfos);
-        res.setTotal(integer);
+        res.setSize(rows);
+        res .setTotal(integer);
         return res;
     }
 
@@ -53,10 +53,15 @@ public class BorrowInfoServiceImpl implements BorrowInfoService {
      * @return BorrowInfo数组对象
      */
     @Override
-    public Page<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo) {
-        List<BorrowInfo>  borrowInfos=borrowInfoDao.findBorrowMsgById(borrowInfo);
+    public Page<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo,Integer page, Integer rows) {
+        RowBounds rowBounds =new RowBounds((page-1)*rows,rows);
+        List<BorrowInfo>  borrowInfos=borrowInfoDao.findBorrowMsgById(borrowInfo,rowBounds);
+        int i= borrowInfoDao.selectBorrowListCount();
         Page<BorrowInfo> res= new Page<>();
         res.setRows(borrowInfos);
+        res.setPage(page);
+        res.setSize(rows);
+        res.setTotal(i);
         return  res;
     }
 

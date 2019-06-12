@@ -3,11 +3,13 @@ package com.edu.service.impl;
 import com.edu.dao.BookInfoDao;
 import com.edu.po.BookInfo;
 import com.edu.service.BookInfoService;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.Page;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,17 +31,18 @@ public class BookInfoServiceImpl implements BookInfoService {
      */
     @Override
     public Page<BookInfo> findAllBookMsg(Integer page, Integer rows) {
-          BookInfo bookInfo=new BookInfo();
-          bookInfo.setStart((page - 1)*rows);
-          bookInfo.setRows(rows);
-          List<BookInfo>  bookInfoList=bookInfoDao.findAllBookMsg(bookInfo);
-          Integer integer=bookInfoDao.selectBookListCount();
-          Page<BookInfo> res= new Page<>();
-          res.setPage(page);
-          res.setSize(rows);
-          res.setRows(bookInfoList);
-          res.setTotal(integer);
-        return   res;
+
+        RowBounds rowBounds=new RowBounds((page-1)*rows,rows);
+        List<BookInfo> bookInfoList=bookInfoDao.findAllBookMsg(rowBounds);
+        
+        int  i=bookInfoDao.selectBookListCount();
+        
+        Page<BookInfo> bookInfoPage=new Page<>();
+        bookInfoPage.setPage(page);
+        bookInfoPage.setRows(bookInfoList);
+        bookInfoPage.setSize(rows);
+        bookInfoPage.setTotal(i);
+        return  bookInfoPage ;
     }
 
     @Override
@@ -50,14 +53,19 @@ public class BookInfoServiceImpl implements BookInfoService {
 
     /**
      * 查询
-     * 没有做分页处理
      * @return BookInfo
      */
     @Override
-    public Page<BookInfo> findBookMsgBys(BookInfo bookInfo) {
-        List<BookInfo> book=bookInfoDao.findBookMsgBys(bookInfo);
+    public Page<BookInfo> findBookMsgBys(BookInfo bookInfo,Integer page, Integer rows) {
+        
+        RowBounds rowBounds=new RowBounds((page-1)*rows,rows);
+        List<BookInfo> bookInfoList=bookInfoDao.findBookMsgBys(rowBounds,bookInfo);
+        int i=bookInfoDao.findBookMsgBysCount();
         Page<BookInfo> res= new Page<>();
-        res.setRows(book);
+        res.setPage(page);
+        res.setRows(bookInfoList);
+        res.setSize(rows);
+        res.setTotal(i);
         return res; 
     }
 
@@ -75,6 +83,15 @@ public class BookInfoServiceImpl implements BookInfoService {
     @Override
     public Integer addBookMsg(BookInfo bookInfo) {
         return this.bookInfoDao.addBookMsg(bookInfo);
+    }
+
+    @Override
+    public Integer addBookMsgs(List<BookInfo> bookInfos) {
+        int count=0;
+        for (BookInfo bookInfo:bookInfos){
+            count+=this.bookInfoDao.addBookMsg(bookInfo);
+        }
+        return count;
     }
 
     /**
@@ -97,6 +114,15 @@ public class BookInfoServiceImpl implements BookInfoService {
     @Override
     public Integer deleteBook(String id) {
         return this.bookInfoDao.deleteBook(id);
+    }
+
+    @Override
+    public List<BookInfo> findBookByIds(String[] id) {
+        List<BookInfo> bookInfoList=new ArrayList<>();
+        for (String ids:id){
+            bookInfoList.add(this.bookInfoDao.findBookById(ids));
+        }
+        return bookInfoList;
     }
 }
 

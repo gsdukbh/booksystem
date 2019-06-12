@@ -5,7 +5,7 @@
     
     <!--登陆查询-->
     <select id="findUser" parameterType="String" resultType="User">
-        select * from  bookDBuser where buser = #{usercode} and bpwd = #{password}
+        select * from bookUser  where buser = #{usercode} and bpwd = #{password}
     </select>
     
 </mapper>

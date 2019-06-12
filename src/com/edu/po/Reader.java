@@ -1,6 +1,7 @@
 package com.edu.po;
 
 import java.util.Date;
+import java.util.List;
 
 /**
         * @author ：lijiawei
@@ -12,6 +13,7 @@ import java.util.Date;
 public class Reader {
     private  String borrowID;
     private String readerName;
+    private String passwd;
     private String readerSex;
     private String readerUnit;
     private String readerPhone;
@@ -19,14 +21,15 @@ public class Reader {
     private String readerType;
     private Date readerTime;
     private String raederCondition;
-    private Integer  start;
-    private Integer  rows;
+    
+   private List<BookInfo> bookInfoList;
 
     @Override
     public String toString() {
         return "Reader{" +
                 "borrowID='" + borrowID + '\'' +
                 ", readerName='" + readerName + '\'' +
+                ", password='" + passwd + '\'' +
                 ", readerSex='" + readerSex + '\'' +
                 ", readerUnit='" + readerUnit + '\'' +
                 ", readerPhone='" + readerPhone + '\'' +
@@ -34,23 +37,14 @@ public class Reader {
                 ", readerType='" + readerType + '\'' +
                 ", readerTime=" + readerTime +
                 ", raederCondition='" + raederCondition + '\'' +
+                ", bookInfoList=" + bookInfoList +
                 '}';
+    } public String getPasswd() {
+        return passwd;
     }
 
-    public Integer getStart() {
-        return start;
-    }
-
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    public Integer getRows() {
-        return rows;
-    }
-
-    public void setRows(Integer rows) {
-        this.rows = rows;
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
     }
 
     public String getBorrowID() {
@@ -68,6 +62,8 @@ public class Reader {
     public void setReaderName(String readerName) {
         this.readerName = readerName;
     }
+
+    
 
     public String getReaderSex() {
         return readerSex;
@@ -123,5 +119,13 @@ public class Reader {
 
     public void setRaederCondition(String raederCondition) {
         this.raederCondition = raederCondition;
+    }
+
+    public List<BookInfo> getBookInfoList() {
+        return bookInfoList;
+    }
+
+    public void setBookInfoList(List<BookInfo> bookInfoList) {
+        this.bookInfoList = bookInfoList;
     }
 }

@@ -1,6 +1,7 @@
 package com.edu.dao;
 
 import com.edu.po.BorrowInfo;
+import org.apache.ibatis.session.RowBounds;
 import utils.Page;
 
 import java.util.List;
@@ -17,13 +18,15 @@ public interface BorrowInfoDao {
      * 查看所有的借阅信息
      * @return 所有信息 BorrowInfo数组对象        
      */
-    public List<BorrowInfo> findAllBorrowMsg(BorrowInfo borrowInfo);
+    public List<BorrowInfo> findAllBorrowMsg(RowBounds rowBounds);
+    
     public Integer selectBorrowListCount();
     /**
      * 多条件查询      
      * @return     BorrowInfo数组对象
      */
-    public List<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo);
+    public List<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo,RowBounds rowBounds );
+    
     public   BorrowInfo findBorrowById(String borrowID,String bookId);
 
     /**

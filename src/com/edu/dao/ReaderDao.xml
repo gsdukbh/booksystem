@@ -3,17 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.edu.dao.ReaderDao">
    <!--查询所有的读者用户-->
-   <select id="findAllReaderMsg" resultType="Reader" parameterType="Reader" >
-       select top(${rows})* from readerinfo
-       where  borrowID  not in(
-           select top(${start}) borrowID from  readerinfo
-       )
+   <select id="findAllReaderMsg" resultType="Reader" >
+       select * from readerinfo    
     </select>
     <!-- 查询总数 -->
     <select id="selectReaderListCount" 
             resultType="Integer">
         select count(*) from readerinfo
     </select>
+    <!--登录验证-->
+    <select id="findReaderByIdAndPassword" parameterType="String" resultType="Reader">
+        
+           select * from    readerinfo where   borrowID = #{usercode} and passwd = #{password}
+
+    </select>
+    
     <!--条件查询信息-->
     <!--包括按姓名,借阅证号,电话,身份证,单位-->
     <select id="findReaderId" parameterType="String" resultType="Reader">
@@ -32,6 +36,32 @@
            </if>
             <if test="readerPhone !=null and readerPhone !='' ">
                <bind name="readerPhone" value="'%'+_parameter.getReaderPhone()+'%'"/>
+                and readerPhone like #{readerPhone}
+            </if>
+            <if test="readerIDCard !=null and readerIDCard !='' ">
+                <bind name="readerIDCard" value="'%'+_parameter.getReaderIDCard()+'%'"/>
+                and readerIDCard like #{readerIDCard}
+            </if>
+            <if test="readerUnit !=null and readerUnit !='' ">
+                <bind name="readerUnit" value="'%'+_parameter.getReaderUnit()+'%'"/>
+                and readerUnit like #{readerUnit}
+            </if>
+        </where>
+    </select>
+
+    <select id="findLikeReaderMsgCount" parameterType="Reader" resultType="Integer">
+        select count(*) from   readerinfo
+        <where>
+            <if test="borrowID !=null and borrowID !='' ">
+                and borrowID =  #{borrowID}
+            </if>
+
+            <if test="readerName !=null and readerName !=''">
+                <bind name="readerName" value="'%'+_parameter.getReaderName()+'%'" />
+                and   readerName like #{readerName}
+            </if>
+            <if test="readerPhone !=null and readerPhone !='' ">
+                <bind name="readerPhone" value="'%'+_parameter.getReaderPhone()+'%'"/>
                 and readerPhone like #{readerPhone}
             </if>
             <if test="readerIDCard !=null and readerIDCard !='' ">
@@ -90,6 +120,8 @@
         </set>
         where borrowID=#{borrowID}
     </update>
+    
+    
       <!--按照借阅id删除信息,or 身份证删除-->
       <delete id="delReaderMsg" parameterType="String">
           delete from  readerinfo where  borrowID =#{borrowID}

@@ -1,4 +1,8 @@
 package com.edu.po;
+
+
+import java.util.List;
+
 /**
         *@author ：lijiawei
         *@date ：Created in 2019/05/2019/5/14 8:35
@@ -13,25 +17,18 @@ public class BookInfo {
     private  String   bookAuthor;
     private  String   bookPublishUnit ;
     private  Integer  bookRate;
-    private  Integer   bookSort;
+    private  String   bookSort;
     private  String   bookCover;
-    private  String   bookRemark;
-    private Integer  start;
-    private Integer  rows;
-    public Integer getStart() {
-        return start;
+    private String bookRemark;
+     
+    private List<Reader> readerList;
+
+    public List<Reader> getReaderList() {
+        return readerList;
     }
 
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    public Integer getRows() {
-        return rows;
-    }
-
-    public void setRows(Integer rows) {
-        this.rows = rows;
+    public void setReaderList(List<Reader> readerList) {
+        this.readerList = readerList;
     }
 
     @Override
@@ -43,17 +40,33 @@ public class BookInfo {
                 ", bookPublishUnit='" + bookPublishUnit + '\'' +
                 ", bookRate=" + bookRate +
                 ", bookSort='" + bookSort + '\'' +
-                ", bookCover='" + bookCover + '\'' +
+                ", bookCover=" + bookCover +
                 ", bookRemark='" + bookRemark + '\'' +
                 '}';
     }
 
-    public Integer getBookSort() {
+    public String getBookSort() {
         return bookSort;
     }
 
-    public void setBookSort(Integer bookSort) {
+    public void setBookSort(String bookSort) {
         this.bookSort = bookSort;
+    }
+
+    public String getBookCover() {
+        return bookCover;
+    }
+
+    public void setBookCover(String bookCover) {
+        this.bookCover = bookCover;
+    }
+
+    public String getBookRemark() {
+        return bookRemark;
+    }
+
+    public void setBookRemark(String bookRemark) {
+        this.bookRemark = bookRemark;
     }
 
     public String getBookId() {
@@ -97,20 +110,8 @@ public class BookInfo {
     }
     
 
-    public String getBookCover() {
-        return bookCover;
-    }
+    
 
-    public void setBookCover(String bookCover) {
-        this.bookCover = bookCover;
-    }
-
-    public String getBookRemark() {
-        return bookRemark;
-    }
-
-    public void setBookRemark(String bookRemark) {
-        this.bookRemark = bookRemark;
-    }
+    
 }
 

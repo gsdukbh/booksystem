@@ -13,72 +13,22 @@
     <title>搜索结果</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <%--<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">--%>
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-
+     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <%--  <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.js"></script>--%>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>--%>
+     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<%--导航栏--%>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list.action">图书管理系统</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li >
-                            <a href="${pageContext.request.contextPath }/book/list.action">图书管理</a>
-                        </li>
-                        <li >
-                            <a href="${pageContext.request.contextPath }/read/list.action">读者管理</a>
-                        </li>
-                        <li class="active">
-                            <a href="${pageContext.request.contextPath }/borrow/list.action">借阅信息管理</a>
-                        </li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath }/borrow/find.action" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="borrowID"  placeholder="请输入借阅证号"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="bookId"  placeholder="请输入图书编号"/>
-                        </div>
-                        <button type="submit" class="btn btn-default">搜索</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">我<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="${pageContext.request.contextPath }/logout.action">退出登陆</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <h3 class="text-center">
-                这部分被挡住了
-            </h3>
-            <h3 class="text-center">
-                借阅信息
-            </h3>
-           <%-- <a id="modal-475217" href="#addReader" role="button" class="btn" data-toggle="modal" onclick="clearBorrow()">新建</a>--%>
+           
+            <span class="label label-success">搜索结果</span>
             <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
@@ -107,7 +57,7 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${page.rows}" var="row">
-                    <tr class="warning">
+                    <tr>
                         <td>
                                 ${row.borrowID}
                         </td>
@@ -137,76 +87,12 @@
                 </c:forEach>
                 </tbody>
             </table>
-        </div>
-    </div>
-</div>
-<%-- 新建信息模板--%>
-<div class="modal fade" id="addReader" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">
-                    新建借阅信息
-                </h4>
-            </div>
-            <div class="modal-body">
-
-                <form class="form-horizontal" id="addBorrowFrom">
-                    <fieldset>
-                        <div class="control-group">
-                            <label class="control-label" >借阅证号</label>
-                            <div class="controls">
-                                <select	class="form-control"  name="borrowID">
-                                    <option value="">--请选择--</option>
-                                    <c:forEach items="${reader.rows}" var="row">
-                                        <option value="${row.borrowID}">
-                                                ${row.borrowID}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" >图书编号</label>
-                            <div class="controls">
-                                <select	class="form-control"  name="bookId">
-                                    <option value="">--请选择--</option>
-                                    <c:forEach items="${book.rows}" var="row">
-                                        <option value="${row.bookId}">
-                                                ${row.bookId}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" >借阅状态</label>
-                            <div class="controls">
-                                <select	class="form-control"  name="borrowstatus">
-                                    <option value="">--请选择--</option>
-                                    <option value="1">
-                                        在借
-                                    </option>
-                                    <option value="2">
-                                        已归还
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                    </fieldset>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="createBorrow()">创建借阅信息</button>
+            <div class="col-md-6 text-right">
+                <werls:page url="${pageContext.request.contextPath }/borrow/find.action"/>
             </div>
         </div>
     </div>
 </div>
-
-
 <%--修改模板--%>
 <div class="modal fade" id="bookEditDialog" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
     <div class="modal-dialog">

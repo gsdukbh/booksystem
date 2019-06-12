@@ -1,6 +1,7 @@
 package com.edu.po;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author ：lijiawei
@@ -28,24 +29,22 @@ public class BorrowInfo {
      */
     private  String    borrowRemandDay;
     private  Integer   borrowPenalty;
-    private  Integer    borrowstatus;
-    private Integer  start;
-    private Integer  rows;
+    private  String    borrowstatus;
+    
+    private List<Reader> readerList;
 
-    public Integer getStart() {
-        return start;
-    }
-
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    public Integer getRows() {
-        return rows;
-    }
-
-    public void setRows(Integer rows) {
-        this.rows = rows;
+    @Override
+    public String toString() {
+        return "BorrowInfo{" +
+                "borrowID='" + borrowID + '\'' +
+                ", bookId='" + bookId + '\'' +
+                ", borrowDay=" + borrowDay +
+                ", borrowRenewDay='" + borrowRenewDay + '\'' +
+                ", borrowRemandDay='" + borrowRemandDay + '\'' +
+                ", borrowPenalty=" + borrowPenalty +
+                ", borrowstatus='" + borrowstatus + '\'' +
+                ", readerList=" + readerList +
+                '}';
     }
 
     public String getBorrowID() {
@@ -96,25 +95,20 @@ public class BorrowInfo {
         this.borrowPenalty = borrowPenalty;
     }
 
-    public Integer getBorrowstatus() {
+    public String getBorrowstatus() {
         return borrowstatus;
     }
 
-    public void setBorrowstatus(Integer borrowstatus) {
+    public void setBorrowstatus(String borrowstatus) {
         this.borrowstatus = borrowstatus;
     }
 
-    @Override
-    public String toString() {
-        return "BorrowInfo{" +
-                "borrowID='" + borrowID + '\'' +
-                ", bookId='" + bookId + '\'' +
-                ", borrowDay=" + borrowDay +
-                ", borrowRenewDay=" + borrowRenewDay +
-                ", borrowRemandDay=" + borrowRemandDay +
-                ", borrowPenalty=" + borrowPenalty +
-                ", borrowstatus=" + borrowstatus +
-                '}';
+    public List<Reader> getReaderList() {
+        return readerList;
+    }
+
+    public void setReaderList(List<Reader> readerList) {
+        this.readerList = readerList;
     }
 }
 

@@ -1,6 +1,7 @@
 package com.edu.dao;
 
 import com.edu.po.BookInfo;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.IntegerTypeHandler;
 import org.apache.taglibs.standard.extra.spath.Step;
 import utils.Page;
@@ -17,17 +18,25 @@ import java.util.List;
 public interface BookInfoDao {
     /**
      * 查找所有的图书信息
-     *  @param bookInfo       BookInfo
+     * 
      * @return    BookInfo
      */
-    public List<BookInfo> findAllBookMsg(BookInfo bookInfo);
+    public List<BookInfo> findAllBookMsg(RowBounds rowBounds);
+    
     public Integer selectBookListCount();
     /**
      * 添加查询
      *  @param bookInfo       BookInfo
      * @return       BookInfo
      */
-    public List<BookInfo> findBookMsgBys(BookInfo bookInfo);
+    public List<BookInfo> findBookMsgBys(RowBounds rowBounds,BookInfo bookInfo);
+
+    /**
+     * count int
+     * @return int 
+     */
+    public Integer findBookMsgBysCount();
+    
     public  BookInfo  findBookById(String id);
 
     /**

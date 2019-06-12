@@ -1,6 +1,8 @@
 package com.edu.dao;
 
 import com.edu.po.Reader;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import utils.Page;
 
 import java.util.List;
@@ -18,13 +20,17 @@ public interface ReaderDao {
      * 查询读者信息
      * @return 读者全部信息
      */
-    public List<Reader> findAllReaderMsg(Reader reader);
+    public List<Reader> findAllReaderMsg(RowBounds rowBounds);
+    
     public Integer selectReaderListCount();
     /**
      * 条件查询信息
      * @return   读者信息
      */
-    public List<Reader> findLikeReaderMsg(Reader reader);
+    public List<Reader> findLikeReaderMsg(Reader reader,RowBounds rowBounds);
+    
+    public Integer findLikeReaderMsgCount();
+    
     public  Reader findReaderId(String borrowID);
 
     /**
@@ -48,5 +54,7 @@ public interface ReaderDao {
      * @return 信息
      */
     public Integer delReaderMsg(String borrowID);
+    
+    public Reader findReaderByIdAndPassword( @Param("usercode") String usercode,@Param("password") String password);
     
 }

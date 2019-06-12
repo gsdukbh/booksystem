@@ -3,11 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.dao.BookInfoDao">
         <!--查看分页图书信息-->
-    <select id="findAllBookMsg" resultType="BookInfo" parameterType="BookInfo" >
-        select top(${rows})* from bookinfo
-        where  bookId  not in(
-            select top(${start}) bookId from  bookinfo
-            )
+    <select id="findAllBookMsg" resultType="BookInfo" >
+        select * from bookinfo
     </select>
     <!-- 查询总数 -->
     <select id="selectBookListCount" 
@@ -19,6 +16,8 @@
     <select id="findBookById" parameterType="String" resultType="BookInfo">
         select * from bookinfo where  bookId=#{id}
     </select>
+    
+
     <select id="findBookMsgBys" resultType="BookInfo"  parameterType="BookInfo" >
         select * from bookinfo
         <where>
@@ -43,6 +42,32 @@
             </if>
         </where>
     </select>
+    
+    <select id="findBookMsgBysCount" resultType="Integer"  parameterType="BookInfo" >
+        select count(*) from bookinfo
+        <where>
+            <if test="bookId !=null and bookId !='' ">
+                and bookId = #{bookId}
+            </if>
+            <if test="bookName !=null and bookName !='' ">
+                <bind name="bookName" value="'%'+_parameter.getBookName()+'%'" />
+                and bookName like  #{bookName}
+            </if>
+            <if test="bookAuthor !=null and bookAuthor !='' ">
+                <bind name="bookAuthor" value="'%'+_parameter.getBookAuthor()+'%'" />
+                and bookAuthor like  #{bookAuthor}
+            </if>
+            <if test="bookPublishUnit !=null and bookPublishUnit !='' ">
+                <bind name="bookPublishUnit" value="'%'+_parameter.getBookPublishUnit()+'%'" />
+                and bookPublishUnit like  #{bookPublishUnit}
+            </if>
+            <if test="bookSort !=null and bookSort !='' ">
+                <bind name="bookSort" value="'%'+_parameter.getBookSort()+'%'" />
+                and bookSort like  #{bookSort}
+            </if>
+        </where>
+    </select>
+    
      <!--添加图书信息-->
     <insert id="addBookMsg" parameterType="BookInfo"  >
         insert into bookinfo  

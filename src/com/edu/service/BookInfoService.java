@@ -26,7 +26,7 @@ public interface BookInfoService {
      * 添加查询
      * @return       BookInfo
      */
-    public Page<BookInfo> findBookMsgBys(BookInfo bookInfo);
+    public Page<BookInfo> findBookMsgBys(BookInfo bookInfo,Integer page, Integer rows);
     public  BookInfo  findBookById(String id);
 
     /**
@@ -35,6 +35,7 @@ public interface BookInfoService {
      * @return     Integer
      */
     public Integer addBookMsg(BookInfo bookInfo);
+    public Integer addBookMsgs(List<BookInfo> bookInfos);
 
     /**
      * 修改图书信息 
@@ -48,4 +49,5 @@ public interface BookInfoService {
      * @return        Integer
      */
     public Integer deleteBook(String id);
+    public List<BookInfo> findBookByIds(String[] id);
 }

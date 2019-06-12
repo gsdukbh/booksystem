@@ -13,72 +13,17 @@
     <title>搜索结果</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+   
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-
+     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+   
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   
+     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<%--导航栏--%>
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list.action">图书管理系统</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li >
-                            <a href="${pageContext.request.contextPath}/book/list.action">图书管理</a>
-                        </li>
-                        <li class="active">
-                            <a href="${pageContext.request.contextPath }/read/list.action">读者管理</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/borrow/list.action">借阅信息管理</a>
-                        </li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath}/reader/find.action" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="borrowID"  placeholder="请输入借阅证号"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="readerName"  placeholder="请输入读者姓名"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="readerUnit"  placeholder="请输入读者单位"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="readerPhone"  placeholder="请输入电话号码"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="readerIDCard"  placeholder="请输入身份号"/>
-                        </div>
-                        <button type="submit" class="btn btn-default">搜索</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">我<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="${pageContext.request.contextPath }/logout.action">退出登陆</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
     <div class="row clearfix">
         <div class="col-md-12 column">
             <h3 class="text-center">
@@ -87,6 +32,7 @@
             <h3 class="text-center">
                 读者信息
             </h3>
+            <span class="label label-success">搜索结果</span>
             <a id="modal-475217" href="#addReader" role="button" class="btn" data-toggle="modal" onclick="clearReader()">新建</a>
             <table class="table table-hover table-bordered">
                 <thead>
@@ -149,6 +95,9 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <div class="col-md-12 text-right">
+                <werls:page url="${pageContext.request.contextPath }/read/list.action" />
+            </div>
         </div>
     </div>
 </div>

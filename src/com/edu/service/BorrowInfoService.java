@@ -18,12 +18,14 @@ public interface BorrowInfoService {
      * @return 所有信息 BorrowInfo数组对象        
      */
     public Page<BorrowInfo> findAllBorrowMsg(Integer page, Integer rows);
+    
     public Integer selectBorrowListCount();
     /**
      * 多条件查询      
      * @return     BorrowInfo数组对象
      */
-    public Page<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo);
+    public Page<BorrowInfo> findBorrowMsgById(BorrowInfo borrowInfo,Integer page, Integer rows);
+    
     public   BorrowInfo findBorrowById(String borrowID,String bookId);
     /**
      * 增加信息

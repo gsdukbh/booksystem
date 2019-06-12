@@ -18,143 +18,101 @@
     <title>图书管理系统</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
+     <%--<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">--%>
+    
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   
+    <%--<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.js"></script>--%>
     
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  <%--  <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>--%>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/amazeui.min.css" />
 </head>
 <body>
 <%--导航栏--%>
 <div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath }/book/list.action">图书管理系统</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="${pageContext.request.contextPath }/book/list.action">图书管理</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/read/list.action">读者管理</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/borrow/list.action">借阅信息管理</a>
-                        </li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath}/book/find.action" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="bookName"  placeholder="请输入书名"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="bookId"  placeholder="请输入图书编号"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="bookAuthor"  placeholder="请输入作者"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="bookPublishUnit"  placeholder="请输入出版单位"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="bookSort"  placeholder="请输入分类号"/>
-                        </div>
-                        <button type="submit" class="btn btn-default" >搜索</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">我<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/logout.action">退出登陆</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-
     <div class="row clearfix" id="showList">
         <div class="col-md-12 column">
-            <h3 class="text-center">
-               这部分被挡住了
-            </h3>
-            <h3 class="text-center">
-                图书信息管理
-            </h3>
-            <a id="modal-475217" href="#addbook" role="button" class="btn" data-toggle="modal" onclick="clearBook()">新建</a>
-            <table class="table table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>
-                        图书编号
-                    </th>
-                    <th>
-                        书名
-                    </th>
-                    <th>
-                        作者
-                    </th>
-                    <th>
-                        出版单位
-                    </th>
-                    <%--<th>
-                        分类号
-                    </th>--%>
-                    <th>
-                        单价
-                    </th>
-                    <th>
-                        备注
-                    </th>
-                    <th>
-                        操作
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${page.rows}" var="row">
-                    <tr class="warning">
-                        <td>
-                            ${row.bookId}
-                        </td>
-                        <td>
-                            ${row.bookName}
-                        </td>
-                        <td>
-                            ${row.bookAuthor}
-                        </td>
-                        <td>
-                            ${row.bookPublishUnit}
-                        </td>
-                        <td>
-                            ${row.bookRate}
-                        </td>
-                        <td>
-                                ${row.bookRemark}
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookEditDialog" onclick= "editBook(${row.bookId})">修改</a>
-                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteBook(${row.bookId})">删除</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            <div class="col-md-12 text-right">
+            <a id="modal-475217" href="#addbook" role="button" class="btn" data-toggle="modal" onclick="clearBook()">
+                <button class="am-btn am-btn-primary am-round">新建</button>
+            </a>
+            <a href="https://werls.top">我的网站</a>
+            
+                    <form action="${pageContext.request.contextPath}/downloadBook.action" method="post">
+                        <div class="am-panel am-panel-primary">
+                            <div class="am-panel-hd">图书信息</div>
+                            <div class="am-panel-bd">
+                        <table class="table table-hover ">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    图书编号
+                                </th>
+                                <th>
+                                    书名
+                                </th>
+                                <th>
+                                    作者
+                                </th>
+                                <th>
+                                    出版单位
+                                </th>
+                                <%--<th>
+                                    分类号
+                                </th>--%>
+                                <th>
+                                    单价
+                                </th>
+                                <th>
+                                    备注
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${page.rows}" var="row">
+                                <tr class="error">
+                                    <td>
+                                        <input type="checkbox"name="bookInfoIds" value="${row.bookId}">
+                                    </td>
+                                    <td>
+                                        <c:out value="${row.bookId}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${row.bookName}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${row.bookAuthor}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${row.bookPublishUnit} "/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${row.bookRate}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${row.bookRemark} "/>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookEditDialog" onclick= "editBook(${row.bookId})">修改</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick="deleteBook(${row.bookId})">删除</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            <button type="submit" class="am-btn am-btn-primary am-round">下载</button>
+                        </div>
+                    </form>
+            <div class="col-md-6 text-right">
                 <werls:page url="${pageContext.request.contextPath }/book/list.action" />
             </div>
         </div>

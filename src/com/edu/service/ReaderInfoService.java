@@ -22,7 +22,8 @@ public interface ReaderInfoService {
      * 条件查询信息
      * @return   读者信息
      */
-    public Page<Reader> findLikeReaderMsg(Reader reader);
+    public Page<Reader> findLikeReaderMsg(Reader reader,Integer page, Integer rows);
+    
     public  Reader findReaderId(String borrowID);
     /**
      *  添加读者信息
@@ -31,6 +32,8 @@ public interface ReaderInfoService {
      * @return  一条数据
      */
     public Integer addReaderMsg(Reader reader);
+    
+    public Integer addReaderMsgs(List<Reader> readerList);
 
     /**
      * 修改数据
@@ -45,5 +48,10 @@ public interface ReaderInfoService {
      * @return 信息
      */
     public Integer delReaderMsg(String borrowID);
+    
+    public Reader finReader(String usercode,String password);
+    
+    
+    public  List<Reader> findReaderIds(String[] ids);
     
 }

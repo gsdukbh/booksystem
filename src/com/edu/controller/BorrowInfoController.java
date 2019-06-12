@@ -49,9 +49,11 @@ public class BorrowInfoController {
     }
     
     @RequestMapping(value ="/borrow/find.action", method = RequestMethod.POST)
-    public String find( BorrowInfo borrowInfo,Model model){
+    public String find( @RequestParam(defaultValue = "1")Integer page,
+                        @RequestParam(defaultValue = "10") Integer rows,
+                        BorrowInfo borrowInfo,Model model){
         
-          Page<BorrowInfo>  borrowInfoPage=borrowInfoService.findBorrowMsgById(borrowInfo);
+          Page<BorrowInfo>  borrowInfoPage=borrowInfoService.findBorrowMsgById(borrowInfo,page,rows);
            model.addAttribute("page",borrowInfoPage);
         return "findBorrow";
     }
@@ -92,7 +94,7 @@ public class BorrowInfoController {
         borrowInfo.setBookId(bookId);
         borrowInfo.setBorrowID(borrowID);
         String chick="2";
-        borrowInfo.setBorrowstatus(new Integer(borrowstatus));
+        borrowInfo.setBorrowstatus(borrowstatus);
         if (borrowRemandDay.equals(chick)){
             borrowInfo.setBorrowRemandDay(date.toString());
         }
@@ -111,5 +113,9 @@ public class BorrowInfoController {
         /*  return null;*/
     }   
     
+    @RequestMapping("/toFindBorrow.action")
+    public String toFindBorrow(){
+        return "findBorrows";
+    }
 }
 
