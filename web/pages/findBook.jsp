@@ -13,6 +13,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName()
             + ":" + request.getServerPort() + path + "/";
 %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>搜索结果</title>
@@ -29,6 +30,21 @@
      <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/amazeui.min.css" />
+    <script type="text/javascript">
+        /*判断用户权限*/
+        $(document).ready(function () {
+            var admin='${sessionScope.USER_SESSION.buser}';
+            if ( admin!=''){
+                $("#book").hide();
+            } else {
+                $("#modal-475217").hide();
+                $("#editAdmin").hide();
+                $("#delAdmin").hide();
+                $("#book").show();
+            }
+        })
+        
+    </script>
     
 </head>
 <body>
@@ -102,10 +118,11 @@
                                         <c:out value="${row.bookRemark} "/>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                        <a id="editAdmin"  href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                                            data-target="#bookEditDialog" onclick="editBook(${row.bookId})">修改</a>
-                                        <a href="#" class="btn btn-danger btn-xs"
+                                        <a id="delAdmin"  href="#" class="btn btn-danger btn-xs"
                                            onclick="deleteBook(${row.bookId})">删除</a>
+                                        <a id="book"  href="#" class="btn btn-primary btn-xs ">预约</a>
                                     </td>
                                 </tr>
                             </c:forEach>

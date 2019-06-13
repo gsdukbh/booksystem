@@ -53,5 +53,6 @@ public interface ReaderInfoService {
     
     
     public  List<Reader> findReaderIds(String[] ids);
+    public Reader findMyBook(String borrowID);
     
 }

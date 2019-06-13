@@ -48,7 +48,7 @@
             </if>
         </where>
     </select>
-
+      <!--计算条数-->
     <select id="findLikeReaderMsgCount" parameterType="Reader" resultType="Integer">
         select count(*) from   readerinfo
         <where>
@@ -78,6 +78,7 @@
     <insert id="addReaderMsg" parameterType="Reader"    >
         insert into  readerinfo(
                                 borrowID,
+                                passwd,
                                 readerName,
                                 readerSex,
                                 readerUnit,
@@ -87,6 +88,7 @@
                                 )   
         values (
                 #{borrowID},
+                #{passwd},
                 #{readerName},
                 #{readerSex},
                 #{readerUnit},
@@ -121,6 +123,41 @@
         where borrowID=#{borrowID}
     </update>
     
+     <!--通过id联表查询-->
+    <select id="findMyBook" resultMap="myBook" parameterType="String">
+          select  * 
+          from   bookinfo y ,borrowinfo z ,readerinfo
+          where z.borrowID=#{borrowID} and y.bookId=z.bookId
+    </select>
+       <resultMap id="myBook" type="Reader" >
+           <id property="borrowID" column="borrowID"/>
+           <result property="readerName" column="readerName"/>
+           <result property="readerSex" column="readerSex"/>
+           <result property="readerUnit" column="readerUnit"/>
+           <result property="readerPhone" column="readerPhone"/>
+           <result property="readerIDCard" column="readerIDCard"/>
+           <result property="readerType" column="readerType"/>
+           <result property="readerTime" column="readerTime"/>
+           <result property="raederCondition" column="raederCondition"/>
+           <collection property="bookInfoList" ofType="BookInfo">
+               <id property="bookId" column="bookId"/>
+               <result property="bookName" column="bookName"/>
+               <result property="bookAuthor" column="bookAuthor"/>
+               <result property="bookPublishUnit" column="bookPublishUnit"/>
+               <result property="bookRate" column="bookRate"/>
+               <result property="bookSort" column="bookSort"/>
+               <result property="bookCover" column="bookCover"/>
+               <result property="bookRemark" column="bookRemark"/>
+               <collection property="borrowInfo" column="BorrowInfo">
+                   <id property="borrowID" column="borrowID"/>
+                   <result property="borrowDay" column="borrowDay"/>
+                   <result property="borrowRenewDay" column="borrowRenewDay"/>
+                   <result property="borrowRemandDay" column="borrowRemandDay"/>
+                   <result property="borrowPenalty" column="borrowPenalty"/>
+                   <result property="borrowstatus" column="borrowstatus"/>
+               </collection>
+           </collection>
+       </resultMap>
     
       <!--按照借阅id删除信息,or 身份证删除-->
       <delete id="delReaderMsg" parameterType="String">

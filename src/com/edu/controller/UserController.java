@@ -39,7 +39,7 @@ public class UserController {
         String forword="";
         if (reader !=null){
             session.setAttribute("Reader_SESSION",reader);
-            model.addAttribute("user",reader);
+            model.addAttribute("page",reader);
             forword="/Reader/index";
             return forword;
         }
@@ -73,8 +73,12 @@ public class UserController {
         
         return "zhuce";
     }
-    
-    
+
+    @RequestMapping(value = "/to404.action")
+    public String to404() {
+
+        return "404";
+    } 
     
     @RequestMapping(value = "/tologin.action")
     public String tologin() {

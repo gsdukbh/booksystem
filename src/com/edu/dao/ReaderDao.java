@@ -57,4 +57,6 @@ public interface ReaderDao {
     
     public Reader findReaderByIdAndPassword( @Param("usercode") String usercode,@Param("password") String password);
     
+    public Reader findMyBook(String borrowID);
+    
 }

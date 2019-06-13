@@ -11,7 +11,7 @@ import java.util.List;
         * @version: $version$
         */
 public class Reader {
-    private  String borrowID;
+    private String borrowID;
     private String readerName;
     private String passwd;
     private String readerSex;
@@ -21,9 +21,10 @@ public class Reader {
     private String readerType;
     private Date readerTime;
     private String raederCondition;
-    
-   private List<BookInfo> bookInfoList;
 
+    private List<BookInfo> bookInfoList;
+   
+    
     @Override
     public String toString() {
         return "Reader{" +

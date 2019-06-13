@@ -12,7 +12,11 @@
     <title>注册</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/amazeui.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css"> 
+    
+    <%--<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>--%>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -36,7 +40,7 @@
                     </h2>
                 </c:if>
                 <br>
-                <form class="am-form" id="log-form" action="${pageContext.request.contextPath}/readerRegister.action" method="post">
+                <form class="am-form" id="log-form" method="post">
                     <div class="am-input-group am-radius am-animation-slide-left">
                         <input name="email" type="email" id="doc-vld-email-2-1" class="am-radius" data-validation-message="请输入正确邮箱地址" placeholder="邮箱" required/>
                         <span class="am-input-group-label log-icon am-radius"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>
@@ -48,11 +52,11 @@
                     </div>
                     <br>
                     <div class="am-input-group am-animation-slide-left log-animation-delay-a">
-                        <input name="password" type="password" data-equal-to="#log-password" class="am-form-field am-radius log-input" placeholder="确认密码" data-validation-message="请确认密码一致" required>
+                        <input id="password" name="password" type="password" data-equal-to="#log-password" class="am-form-field am-radius log-input" placeholder="确认密码" data-validation-message="请确认密码一致" required>
                         <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
                     </div>
                     <br>
-                    <button type="submit" class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay-b">注 册</button>
+                    <button type="button" id="register" class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay-b" >注 册</button>
                     <br>
                     <div class="am-btn-group am-animation-slide-bottom log-animation-delay-b">
                         <p>已有账号?</p>
@@ -65,5 +69,27 @@
             © 2018 WERLS.TOP .
         </footer>
     </div>
+
+<script type="text/javascript">
+    /*用户注册*/
+    $(document).ready(function(){
+       
+        $("#register").click(function () {
+            $.post("${pageContext.request.contextPath}/readerRegister.action",
+             $("#log-form").serialize(),function (data) {
+                    if (data == "ok"){
+                        alert("注册成功!前往登录");
+                        window.location.href = "${pageContext.request.contextPath}/tologin.action";
+                    }else {
+                        alert("注册失败");
+                    }
+                }   
+            )
+            
+        })
+
+    }); 
+</script>
+
 </body>
 </html>

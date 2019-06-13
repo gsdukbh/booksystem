@@ -1,5 +1,6 @@
 package com.edu.controller;
 
+import com.edu.po.BookInfo;
 import com.edu.po.Reader;
 import com.edu.po.User;
 import com.edu.service.ReaderInfoService;
@@ -53,6 +54,26 @@ public class ReaderController {
             }
     }
     
+    
+    @RequestMapping("/reader/findMyBook.action")
+    public String findMyBook(HttpSession session,Model model){
+        Reader reader=(Reader)session.getAttribute("Reader_SESSION") ;
+        Reader reader1=this.readerInfoService.findMyBook(reader.getBorrowID());
+        model.addAttribute("myBooks",reader1);
+        return "myBook";
+    }
+    
+    @RequestMapping("/myinformation.action")
+    public String myinformation(){
+        
+        return "/Reader/information";
+    }
+
+    @RequestMapping("/editMyinformation.action")
+    public String editMyinformation(){
+
+        return "/Reader/editinfo";
+    }
     @RequestMapping("/read/list.action")
     public String list(@RequestParam(defaultValue = "1")Integer page,
                        @RequestParam(defaultValue = "10") Integer rows,
@@ -62,6 +83,8 @@ public class ReaderController {
         model.addAttribute("page",readerPage);
         return "reader";
     }
+    
+    
     
     @RequestMapping("/reader/delete.action")
     @ResponseBody
@@ -90,9 +113,10 @@ public class ReaderController {
     
     @RequestMapping("/reader/upReader.action")
     @ResponseBody
-    public String upReader(Reader reader){
+    public String upReader(Reader reader,HttpSession session){
         int rows=readerInfoService.upReaderMsg(reader);
         if (rows>0){
+            session.setAttribute("Reader_SESSION",reader);
             return "OK";
         }
         else {
@@ -104,7 +128,7 @@ public class ReaderController {
     public ResponseEntity<byte[]> downloadReader(Model model, String[] readerids, HttpServletRequest request)throws Exception {
 
         List<Reader> readers=readerInfoService.findReaderIds(readerids);
-        String[] titles={"借阅账号","姓名","性别","单位","电话","账户状态","借阅证件类型","注册时间","备注"};
+        String[] titles={"借阅账号","姓名","性别","单位","电话","借阅证件类型","身份证","注册时间","备注"};
         String path="/upload/";
         String filename="reader.xls";
 
@@ -153,20 +177,20 @@ public class ReaderController {
     }
 
 
-    @RequestMapping(value = "/readerRegister.action", method = RequestMethod.POST)
-    public String register(String email, String password,Model Model)
+    @RequestMapping("/readerRegister.action")
+    @ResponseBody
+    public String register(String email,String password)
     {
-        Reader reader=new Reader();
+        Reader reader = new Reader();
         reader.setBorrowID(email);
         reader.setPasswd(password);
-        int rows=readerInfoService.addReaderMsg(reader);
-        if (rows>0){
-            Model.addAttribute("msg","注册成功");
-            return "../index";
-        }
-        else {
-            Model.addAttribute("msg","该账户已存在请重新注册");
-            return "zhuce";
+        int rows = readerInfoService.addReaderMsg(reader);
+        if (rows > 0) {
+
+            return "ok";
+        } else {
+
+            return "FAIL";
         }
         
     }

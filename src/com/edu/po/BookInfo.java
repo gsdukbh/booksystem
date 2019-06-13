@@ -22,6 +22,24 @@ public class BookInfo {
     private String bookRemark;
      
     private List<Reader> readerList;
+    private List<BorrowInfo>borrowInfoList;
+    private  BorrowInfo borrowInfo;
+
+    public BorrowInfo getBorrowInfo() {
+        return borrowInfo;
+    }
+
+    public void setBorrowInfo(BorrowInfo borrowInfo) {
+        this.borrowInfo = borrowInfo;
+    }
+
+    public List<BorrowInfo> getBorrowInfoList() {
+        return borrowInfoList;
+    }
+
+    public void setBorrowInfoList(List<BorrowInfo> borrowInfoList) {
+        this.borrowInfoList = borrowInfoList;
+    }
 
     public List<Reader> getReaderList() {
         return readerList;

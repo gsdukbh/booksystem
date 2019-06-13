@@ -284,7 +284,7 @@
                     </li>
 
                     <li class="sidebar-nav-link">
-                        <a href="#">
+                        <a href="${pageContext.request.contextPath}/to404.action">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span>  ########
                         </a>
                     </li>
@@ -299,31 +299,31 @@
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub">
                     <li class="sidebar-nav-link">
-                        <a href="#">
+                        <a href="${pageContext.request.contextPath}/to404.action">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 文字列表
                         </a>
                     </li>
 
                     <li class="sidebar-nav-link">
-                        <a href="#">
+                        <a href="${pageContext.request.contextPath}/to404.action">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图文列表
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="sidebar-nav-link">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/to404.action">
                     <i class="am-icon-clone sidebar-nav-link-logo"></i> 注册
                     <span class="am-badge am-badge-secondary sidebar-nav-link-logo-ico am-round am-fr am-margin-right-sm">6</span>
                 </a>
             </li>
             <li class="sidebar-nav-link">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/to404.action">
                     <i class="am-icon-key sidebar-nav-link-logo"></i> 登录
                 </a>
             </li>
             <li class="sidebar-nav-link">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/to404.action">
                     <i class="am-icon-tv sidebar-nav-link-logo"></i> 404错误
                 </a>
             </li>

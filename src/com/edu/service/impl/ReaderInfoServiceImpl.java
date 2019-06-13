@@ -135,5 +135,11 @@ public class ReaderInfoServiceImpl implements ReaderInfoService {
         
         return readerList;
     }
+
+    @Override
+    public Reader findMyBook(String borrowID) {
+        
+        return this.readerDao.findMyBook(borrowID);
+    }
 }
 
