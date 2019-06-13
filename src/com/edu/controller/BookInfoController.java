@@ -39,6 +39,7 @@ import utils.BookExcel;
  */
 @Controller
 public class BookInfoController {
+    
     @Autowired 
     private  BookInfoService bookInfoService;
     
@@ -124,6 +125,7 @@ public class BookInfoController {
     @RequestMapping("/book/findId.action")
     @ResponseBody
     public BookInfo findId(String id){
+        
         return this.bookInfoService.findBookById(id);
     }
 

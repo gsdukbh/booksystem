@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/amazeui.min.css">
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css"> 
+    <script src="${pageContext.request.contextPath}/js/amazeui.min.js"></script>
     
     <%--<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>--%>
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>

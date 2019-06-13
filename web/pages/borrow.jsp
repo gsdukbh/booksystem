@@ -42,7 +42,6 @@
                     <table class="table table-hover ">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>
                                 借阅证号
                             </th>
