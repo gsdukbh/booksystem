@@ -22,15 +22,15 @@ public class Reader {
     private Date readerTime;
     private String raederCondition;
 
+    private String reader_shipping_address;
     private List<BookInfo> bookInfoList;
-   
-    
+
     @Override
     public String toString() {
         return "Reader{" +
                 "borrowID='" + borrowID + '\'' +
                 ", readerName='" + readerName + '\'' +
-                ", password='" + passwd + '\'' +
+                ", passwd='" + passwd + '\'' +
                 ", readerSex='" + readerSex + '\'' +
                 ", readerUnit='" + readerUnit + '\'' +
                 ", readerPhone='" + readerPhone + '\'' +
@@ -38,9 +38,21 @@ public class Reader {
                 ", readerType='" + readerType + '\'' +
                 ", readerTime=" + readerTime +
                 ", raederCondition='" + raederCondition + '\'' +
+                ", reader_shipping_address='" + reader_shipping_address + '\'' +
                 ", bookInfoList=" + bookInfoList +
                 '}';
-    } public String getPasswd() {
+    }
+
+    public String getReader_shipping_address() {
+        return reader_shipping_address;
+    }
+
+    public void setReader_shipping_address(String reader_shipping_address) {
+        this.reader_shipping_address = reader_shipping_address;
+    }
+
+
+     public String getPasswd() {
         return passwd;
     }
 

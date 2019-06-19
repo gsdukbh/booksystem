@@ -47,4 +47,6 @@ public interface BorrowInfoDao {
      * @return     integer 删除成功条数
      */
     public Integer delBorrowMsgByid(BorrowInfo borrowInfo);
+
+    public Integer findBorrowMsgByIdCount(BorrowInfo borrowInfo);
 }

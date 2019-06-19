@@ -84,7 +84,8 @@
                                 readerUnit,
                                 readerPhone,
                                 readerIDCard,
-                                readerType
+                                readerType,
+                                reader_shipping_address
                                 )   
         values (
                 #{borrowID},
@@ -94,7 +95,8 @@
                 #{readerUnit},
                 #{readerPhone},
                 #{readerIDCard},
-                #{readerType}
+                #{readerType},
+                 #{reader_shipping_address}
                 )
     </insert>
       <!--修改数据-->
@@ -118,6 +120,9 @@
             </if>
             <if test="raederCondition !=null and raederCondition !=''">
                 raederCondition=#{raederCondition} ,
+            </if>
+            <if test="reader_shipping_address !=null and reader_shipping_address !=''">
+                reader_shipping_address=#{reader_shipping_address} ,
             </if>
         </set>
         where borrowID=#{borrowID}
@@ -148,14 +153,6 @@
                <result property="bookSort" column="bookSort"/>
                <result property="bookCover" column="bookCover"/>
                <result property="bookRemark" column="bookRemark"/>
-               <collection property="borrowInfo" column="BorrowInfo">
-                   <id property="borrowID" column="borrowID"/>
-                   <result property="borrowDay" column="borrowDay"/>
-                   <result property="borrowRenewDay" column="borrowRenewDay"/>
-                   <result property="borrowRemandDay" column="borrowRemandDay"/>
-                   <result property="borrowPenalty" column="borrowPenalty"/>
-                   <result property="borrowstatus" column="borrowstatus"/>
-               </collection>
            </collection>
        </resultMap>
     

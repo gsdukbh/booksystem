@@ -20,7 +20,20 @@
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/amazeui.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
-    
+    <script type="text/javascript">
+      var  backg=[];
+      backg[0]="images/login.jpg";
+      backg[1]="images/1.jpeg";
+      backg[2]="images/2.jpg";
+      backg[3]="images/3.jpg";
+      backg[4]="images/16397.jpg";
+      var randomBgIndex = Math.round( Math.random() * 4 );
+      document.write('<style>'+'.log{'+'width:100%;\n' +
+              '    height:100% ;\n' +
+              '    background-image: url('+backg[randomBgIndex]+');\n' +
+              '    background-size:100% 100%;\n' +
+              '    color:#ffffff;}'+'</style>')
+    </script>
 
 
   </head>
@@ -30,12 +43,7 @@
      <a href="${pageContext.request.contextPath}/toRegister.action"><button type="button" class="am-btn am-btn-default am-radius log-button" >注册</button></a>
     </div>
   </header>
-  <div class="log" style=" 
-    width:100%;
-    height:100% ;
-   background-image: url(images/login.jpg);
-    background-size:100% 100%;
-    color:#ffffff;">
+  <div class="log">
     <div class="am-g">
       <div class="am-u-lg-3 am-u-md-6 am-u-sm-8 am-u-sm-centered log-content">
         <h1 class="log-title am-animation-slide-top">图书管理系统</h1>
