@@ -102,7 +102,7 @@
                 bookSort=#{bookSort}  ,
             </if>
             <if test="bookCover !=null and bookCover !=''">
-                bookCover=#{bookCover}  ,
+                bookCover=#{bookCover} ,
             </if>
             <if test="bookRemark !=null and bookRemark !=''">
                 bookRemark=#{bookRemark} ,

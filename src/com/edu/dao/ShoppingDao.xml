@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.dao.ShoppingDao">
+    <!--查询-->
+    <select id="findShopping" parameterType="string" resultMap="result">
+        select x.bookId as shoppingId,y.*
+        from  shopping x,bookinfo y
+        where x.borrowID=#{borrowID} and y.bookId=x.bookId
+    </select>
+   <resultMap id="result" type="Shopping">
+       <id property="bookId" column="shoppingId"/>
+       <result property="borrowID" column="borrowID"/>
+       <result property="quantity" column="quantity"/>
+       <collection property="bookInfo" ofType="BookInfo">
+           <id property="bookId" column="bookId"/>
+           <result property="bookName" column="bookName"/>
+           <result property="bookAuthor" column="bookAuthor"/>
+           <result property="bookPublishUnit" column="bookPublishUnit"/>
+           <result property="bookRate" column="bookRate"/>
+           <result property="bookSort" column="bookSort"/>
+           <result property="bookCover" column="bookCover"/>
+           <result property="bookRemark" column="bookRemark"/>
+       </collection>
+   </resultMap>
+    <!--增加-->
+    <insert id="addShopping" parameterType="Shopping">
+        insert into shopping(
+                            bookId,
+                            borrowID,
+                            quantity
+                             )
+                      values (
+                             #{bookId},
+                             #{borrowID},
+                             #{quantity}
+                             )
+    </insert>
+    <!--del-->
+    <delete id="delShopping" parameterType="Shopping">
+        delete from shopping where bookId=#{bookId} and borrowID= #{borrowID}
+    </delete>
+
+    <!--edit-->
+    <update id="upShopping" parameterType="Shopping" >
+        update shopping
+        <set>
+            <if test="quantity !=null and quantity !=''">
+                quantity=#{quantity},
+            </if>
+        </set>
+        where bookId=#{bookId} and borrowID= #{borrowID}
+    </update>
+</mapper>

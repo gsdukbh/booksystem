@@ -1,8 +1,10 @@
 package com.edu.controller;
 
 import com.edu.po.BookInfo;
+import com.edu.po.Order_form;
 import com.edu.po.User;
 import com.edu.service.BookInfoService;
+import com.edu.service.Order_formService;
 import com.sun.istack.internal.NotNull;
 import javafx.concurrent.Worker;
 import org.apache.commons.io.FileUtils;
@@ -42,7 +44,8 @@ public class BookInfoController {
     
     @Autowired 
     private  BookInfoService bookInfoService;
-    
+    @Autowired
+    private Order_formService orderFormService;
      @RequestMapping("/book/list.action")
     public String list(@RequestParam(defaultValue = "1")Integer page,
                        @RequestParam(defaultValue = "10") Integer rows, 
@@ -54,6 +57,17 @@ public class BookInfoController {
         /*转跳*/
     }
 
+
+    @RequestMapping("/book/bookShopping.action")
+    public String bookShopping(@RequestParam(defaultValue = "1")Integer page,
+                       @RequestParam(defaultValue = "10") Integer rows,
+                       Model model)
+    {
+        Page<BookInfo> bookInfoList=bookInfoService.findAllBookMsg(page,rows);
+        model.addAttribute("page",bookInfoList);
+        return "/Reader/bookShop";
+        /*转跳*/
+    }
     /**
      * 添加图书信息
      * @param bookInfo       图书对象
@@ -69,7 +83,6 @@ public class BookInfoController {
          return null ;
         }
     }
-
     /**
      * 修改
      * @param bookInfo   图书对象
@@ -129,6 +142,32 @@ public class BookInfoController {
         return this.bookInfoService.findBookById(id);
     }
 
+    @RequestMapping("/book/Id.action")
+    public String findIdss(@RequestParam(value = "id") String id,
+                           @RequestParam(defaultValue = "1")Integer page,
+                           @RequestParam(defaultValue = "10") Integer rows,
+                           Model model){
+        System.out.println("id="+id);
+        BookInfo bookInfo=this.bookInfoService.findBookById(id);
+        model.addAttribute("book",bookInfo);
+        Order_form order_form=new Order_form();
+        order_form.setBookId(id);
+        Page<Order_form> order_formList=this.orderFormService.findOrder_formBys(page,rows,order_form);
+        model.addAttribute("From",order_formList);
+
+        return "bookinfo";
+    }
+
+    @RequestMapping("/book/Details.action")
+    public String Details(@RequestParam(value = "id") String id,
+                           @RequestParam(defaultValue = "1")Integer page,
+                           @RequestParam(defaultValue = "10") Integer rows,
+                           Model model){
+        System.out.println("id="+id);
+        BookInfo bookInfo=this.bookInfoService.findBookById(id);
+        model.addAttribute("book",bookInfo);
+        return "/Reader/BookInfo";
+    }
 
     @RequestMapping(value = "/downloadBook.action",method = RequestMethod.POST)
     public ResponseEntity<byte[]> downloadBook(Model model, String[] bookInfoIds, HttpServletRequest request)throws Exception {
@@ -171,8 +210,53 @@ public class BookInfoController {
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
                 headers, HttpStatus.OK);
     }
+    @RequestMapping("/book/bookimg.action")
+    @ResponseBody
+    public String bookimg(@RequestParam("uploadfile") List<MultipartFile> uploadfile, @RequestParam("id") String id,
+                          HttpServletRequest request,Model msg){
+        int rows=0;
+        // 判断所上传文件是否存在
+        if (!uploadfile.isEmpty() && uploadfile.size() > 0) {
+            //循环输出上传的文件
+            for (MultipartFile file : uploadfile) {
+                // 获取上传文件的原始名称
+                String originalFilename = file.getOriginalFilename();
+                // 设置上传文件的保存地址目录
+                String dirPath =
+                        request.getServletContext().getRealPath("/images/");
 
+                File filePath = new File(dirPath);
 
+                System.out.println("dirPath:"+dirPath);
+
+                // 如果保存文件的地址不存在，就先创建目录
+                if (!filePath.exists()) {
+                    filePath.mkdirs();
+                }
+                // 使用UUID重新命名上传的文件名称(上传人_uuid_原始文件名称)
+                String newFilename = "_"+ UUID.randomUUID() +
+                        "_"+originalFilename;
+                try {
+                    // 使用MultipartFile接口的方法完成文件上传到指定位置
+                    file.transferTo(new File(dirPath + newFilename));
+                    BookInfo bookInfo=new BookInfo();
+                    bookInfo.setBookId(id);
+                    bookInfo.setBookCover("/images/"+newFilename);
+                    this.bookInfoService.upBookMsgBys(bookInfo);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "error";
+                }
+            }
+            msg.addAttribute("msg",rows);
+            // 跳转到成功页面
+            return "success";
+        }else{
+            return"error";
+        }
+
+    }
     @RequestMapping("/bookUpfile.action")
     public String BookFileUpload(@RequestParam("uploadfile") List<MultipartFile> uploadfile,
                                     HttpServletRequest request,Model msg) {

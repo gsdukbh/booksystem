@@ -6,14 +6,23 @@ public class Order_form {
     private String orde_form_id;
     private String bookId;
     private String borrowID;
+
     private Date orde_form_create_time;
+
     private String orde_form_Pay_time;
+
     private String orde_form_delivery_address;
+
     private String orde_form_shipper;
+
     private String orde_form_courier_company;
+
     private String orde_form_shipping_address;
+
     private String orde_form_consignee;
+
     private String orde_form_shipment_number;
+
     private Integer orde_form_order_amount;
 
     @Override

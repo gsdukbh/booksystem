@@ -1,8 +1,11 @@
 package com.edu.controller;
 
 import com.edu.po.Reader;
+import com.edu.po.Shopping;
 import com.edu.po.User;
+import com.edu.service.Order_formService;
 import com.edu.service.ReaderInfoService;
+import com.edu.service.ShoppingService;
 import com.edu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author ：lijiawei
@@ -25,8 +29,15 @@ public class UserController {
      */
     @Autowired
     private UserService userService;
+
     @Autowired
     private ReaderInfoService readerInfoService;
+
+    @Autowired
+    private Order_formService orderFormService;
+
+    @Autowired
+    private ShoppingService shoppingService;
     /**
      * 用户登录
      */
@@ -39,13 +50,18 @@ public class UserController {
         String forword="";
         if (reader !=null){
             session.setAttribute("Reader_SESSION",reader);
+            List<Shopping> shopping=this.shoppingService.findShopping(reader.getBorrowID());
+            int row=shopping.size();
             model.addAttribute("page",reader);
+            model.addAttribute("shu",row);
             forword="/Reader/index";
             return forword;
         }
         else if (user !=null){
             // 将用户对象添加到Session
             session.setAttribute("USER_SESSION", user);
+            model.addAttribute("number",this.orderFormService.findOrder_formconut());
+
             // 跳转到主页面
             final String s = "ad";
             return s;
@@ -72,6 +88,12 @@ public class UserController {
     public String register() {
         
         return "zhuce";
+    }
+
+    @RequestMapping(value = "/totoREder.action")
+    public String toREder() {
+
+        return "/Reader/index";
     }
 
     @RequestMapping(value = "/to404.action")

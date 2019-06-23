@@ -46,7 +46,7 @@
   <div class="log">
     <div class="am-g">
       <div class="am-u-lg-3 am-u-md-6 am-u-sm-8 am-u-sm-centered log-content">
-        <h1 class="log-title am-animation-slide-top">图书管理系统</h1>
+        <h1 class="log-title am-animation-slide-top">纸媒书城管理系统</h1>
         <c:if test="${msg} !null" >
           <h2 class="log-title am-animation-slide-top">
             <c:out value="${msg}">

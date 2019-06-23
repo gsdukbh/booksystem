@@ -19,7 +19,7 @@ public class BookInfo {
     private  Integer  bookRate;
     private  String   bookSort;
     private  String   bookCover;
-    private String bookRemark;
+    private String    bookRemark;
      
     private List<Reader> readerList;
     private List<BorrowInfo>borrowInfoList;

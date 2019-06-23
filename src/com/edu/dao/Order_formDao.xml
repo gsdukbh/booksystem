@@ -4,11 +4,14 @@
 <mapper namespace="com.edu.dao.Order_formDao">
     <!--查询所有订单-->
     <select id="findOrder_form" resultType="Order_form">
-        select * form order_form
+        select * form order_form order by orde_form_Pay_time desc
+    </select>
+    <select id="findOrder_formconut" resultType="integer">
+        select count(*) from order_form
     </select>
     <!--创建订单-->
-    <insert id="addOrder_form">
-     inner into order_form(
+    <insert id="addOrder_form" parameterType="Order_form" >
+     insert into order_form(
                             orde_form_id,
                             bookId,
                             borrowID,
@@ -21,8 +24,82 @@
                             orde_form_shipment_number,
                             orde_form_order_amount
                             )
-                            values (
-
-                            )
+                    values (
+                            #{orde_form_id},
+                            #{bookId},
+                            #{borrowID},
+                            #{orde_form_Pay_time},
+                            #{orde_form_delivery_address},
+                            #{orde_form_shipper},
+                             #{orde_form_courier_company},
+                            #{orde_form_shipping_address},
+                            #{orde_form_consignee},
+                            #{orde_form_shipment_number},
+                            #{orde_form_order_amount}
+                        )
     </insert>
+    <!--查询-->
+    <select id="findOrder_formBys" parameterType="Order_form" resultType="Order_form">
+        select * from order_form
+        <where>
+            <if test="orde_form_id !=null and orde_form_id !='' ">
+                and orde_form_id = #{orde_form_id}
+            </if>
+            <if test="borrowID !=null and borrowID !='' ">
+                and borrowID = #{borrowID}
+            </if>
+            <if test="bookId !=null and bookId !='' ">
+                and bookId = #{bookId}
+            </if>
+        </where>
+        order by orde_form_Pay_time desc
+    </select>
+    <select id="findOrder_formByIds" parameterType="string" resultType="Order_form">
+        select * from order_form where orde_form_id = #{id}
+    </select>
+    <select id="findOrder_formBysCount" parameterType="Order_form" resultType="integer">
+        select count(*) from order_form
+        <where>
+            <if test="orde_form_id !=null and orde_form_id !='' ">
+                and orde_form_id = #{orde_form_id}
+            </if>
+            <if test="borrowID !=null and borrowID !='' ">
+                and borrowID = #{borrowID}
+            </if>
+            <if test="bookId !=null and bookId !='' ">
+                and bookId = #{bookId}
+            </if>
+        </where>
+    </select>
+
+    <!--修改信息-->
+    <update id="editOrder_form" parameterType="Order_form">
+        update order_form
+        <set>
+            <if test="orde_form_delivery_address !=null and orde_form_delivery_address !=''">
+                orde_form_delivery_address=#{orde_form_delivery_address} ,
+            </if>
+            <if test="orde_form_shipper !=null and orde_form_shipper !=''">
+                orde_form_shipper=#{orde_form_shipper},
+            </if>
+            <if test="orde_form_courier_company !=null and orde_form_courier_company !=''">
+                orde_form_courier_company=#{orde_form_courier_company} ,
+            </if>
+            <if test="orde_form_shipping_address !=null and orde_form_shipping_address !=''">
+                orde_form_shipping_address=#{orde_form_shipping_address} ,
+            </if>
+            <if test="orde_form_consignee !=null and orde_form_consignee !=''">
+                orde_form_consignee=#{orde_form_consignee}  ,
+            </if>
+            <if test="orde_form_shipment_number !=null and orde_form_shipment_number !=''">
+                orde_form_shipment_number=#{orde_form_shipment_number}  ,
+            </if>
+        </set>
+        where orde_form_id=#{orde_form_id}
+    </update>
+    <!--删除订单-->
+    <delete id="delOrder_form" parameterType="Order_form" >
+    delete order_form where orde_form_id=#{orde_form_id}
+    </delete>
+
 </mapper>

@@ -23,6 +23,7 @@ public class Reader {
     private String raederCondition;
 
     private String reader_shipping_address;
+
     private List<BookInfo> bookInfoList;
 
     @Override

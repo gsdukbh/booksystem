@@ -2,6 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.dao.StockDao">
-
-
+    <!--查询库存-->
+    <select id="findStockBys" parameterType="Stock" resultType="Stock">
+        SELECT * FROM stock
+        <where>
+            <if test="bookId !=null and bookId !='' ">
+                and bookId = #{bookId}
+            </if>
+            <if test="stock_principal !=null and stock_principal !='' ">
+                and stock_principal = #{stock_principal}
+            </if>
+        </where>
+    </select>
+    <select id="findStock" parameterType="string" resultType="Stock">
+        select * FROM stock where bookId = #{bookId}
+    </select>
+    <select id="findStockBysCount" parameterType="Stock" resultType="Integer">
+        SELECT count(*) FROM stock
+        <where>
+            <if test="bookId !=null and bookId !='' ">
+                and bookId = #{bookId}
+            </if>
+            <if test="stock_principal !=null and stock_principal !='' ">
+                and stock_principal = #{stock_principal}
+            </if>
+        </where>
+    </select>
+    <!--减少库存-->
+    <update id="reduceStock" parameterType="Stock" >
+        update stock
+        <set>
+            <if test="stock_inventory !=null and stock_inventory !=''">
+                stock_inventory=#{stock_inventory} ,
+            </if>
+        </set>
+        where bookId=#{bookId}
+    </update>
+    <!--添加库存信息-->
+    <insert id="addStock" parameterType="Stock">
+        insert into stock(
+                          bookId,
+                          stock_inventory,
+                          stock_warehouse,
+                          stock_principal)
+                    values (
+                    #{bookId},
+                    #{stock_inventory},
+                    #{stock_warehouse},
+                    #{stock_principal},
+                    )
+    </insert>
+   <!--修改库存信息-->
+    <update id="editStock" parameterType="Stock">
+        update stock
+        <set>
+            <if test="stock_inventory !=null and stock_inventory !=''">
+                stock_inventory=#{stock_inventory} ,
+            </if>
+            <if test="stock_warehouse !=null and stock_warehouse !=''">
+                stock_warehouse=#{stock_warehouse} ,
+            </if>
+            <if test="stock_principal !=null and stock_principal !=''">
+                stock_principal=#{stock_principal} ,
+            </if>
+        </set>
+        where bookId=#{bookId}
+    </update>
 </mapper>

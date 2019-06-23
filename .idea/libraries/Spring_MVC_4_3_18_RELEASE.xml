@@ -6,6 +6,7 @@
       <root url="jar://$PROJECT_DIR$/lib/spring-websocket-4.3.18.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-webmvc-4.3.18.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-web-4.3.18.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/alipay-sdk-java-3.7.89.ALL.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/amazeui.datatables.min.css" />
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app1.css">
-    
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1249044_8eibci7bn7i.css">
 </head>
 <body>
 <script src="${pageContext.request.contextPath}/js/theme.js"></script>
@@ -64,7 +64,7 @@
                     </li>
 
                     <!-- 新邮件 -->
-                    <li class="am-dropdown tpl-dropdown" data-am-dropdown>
+                    <%--<li class="am-dropdown tpl-dropdown" data-am-dropdown>
                         <a href="#" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>
                             <i class="am-icon-envelope"></i>
                             <span class="am-badge am-badge-success am-round item-feed-badge">4</span>
@@ -115,12 +115,12 @@
                             </li>
                         </ul>
                     </li>
-
+--%>
                     <!-- 新提示 -->
                     <li class="am-dropdown" data-am-dropdown>
                         <a href="#" class="am-dropdown-toggle" data-am-dropdown-toggle>
-                            <i class="am-icon-bell"></i>
-                            <span class="am-badge am-badge-warning am-round item-feed-badge">5</span>
+                            <i class="iconfont icongouwuchekong"></i>
+                            <span class="am-badge am-badge-warning am-round item-feed-badge">${shu}</span>
                         </a>
 
                         <!-- 弹出列表 -->
@@ -213,31 +213,31 @@
         <ul class="sidebar-nav">
             <li class="sidebar-nav-heading">功能 <span class="sidebar-nav-heading-info"> </span></li>
             <li class="sidebar-nav-link">
-                <a href="#" >
+                <a href="${pageContext.request.contextPath}/book/bookShopping.action" target="table" >
                     <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                 </a>
             </li>
             <li class="sidebar-nav-link">
-                <a href="${pageContext.request.contextPath}/reader/findMyBook.action" target="table" class="sidebar-nav-sub-title">
-                    <i class="am-icon-table sidebar-nav-link-logo "></i> 我的图书
+                <a href="${pageContext.request.contextPath}/me/MyShop.action" target="table" class="sidebar-nav-sub-title">
+                    <i class="iconfont icongouwuchekong"></i> 我的购物车
                     <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub">
                     <li class="sidebar-nav-link">
-                        <a href="${pageContext.request.contextPath}/tofindBook.action"  target="table" >
-                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图书查找
+                        <a href="${pageContext.request.contextPath}/to404.action"  target="table" >
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 物流信息
                         </a>
                     </li>
 
                     <li class="sidebar-nav-link">
                         <a href="${pageContext.request.contextPath}/to404.action" target="table">
-                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图书预订
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图书推荐
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="sidebar-nav-link">
-                <a href="${pageContext.request.contextPath}/myinformation.action" target="table" class="sidebar-nav-sub-title">
+                <a href="${pageContext.request.contextPath}/to404.action" target="table" class="sidebar-nav-sub-title">
                     <i class="am-icon-calendar sidebar-nav-link-logo"></i> 我的信息
                     <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                 </a>
@@ -304,12 +304,8 @@
             <div class="row">
                 <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
                     <div class="page-header-heading">
-                        <span class="am-icon-home page-header-heading-icon"></span> 图书管理系统首页 <small>welcome</small></div>
-                    <p class="page-header-description">这是一个简单的图书管理系统</p>
-                </div>
-                
-                <div class="am-u-lg-3 tpl-index-settings-button">
-                    <button type="button" class="page-header-button"><span class="am-icon-paint-brush"></span> 设置</button>
+                        <span class="am-icon-home page-header-heading-icon"></span> 纸媒书城 <small>welcome</small></div>
+                    <p class="page-header-description">看你想看</p>
                 </div>
             </div>
         </div>
@@ -319,9 +315,6 @@
 
             </iframe>
         </div>
-
-
-
     </div>
 </div>
 

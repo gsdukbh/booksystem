@@ -15,10 +15,13 @@
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css"> 
     <script src="${pageContext.request.contextPath}/js/amazeui.min.js"></script>
-    
-    <%--<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>--%>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layui.css">
+
+<%--<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>--%>
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layui.css">
     <script type="text/javascript">
         var  backg=[];
         backg[0]="images/login.jpg";
@@ -43,17 +46,16 @@
     <div class="log" >
         <div class="am-g">
             <div class="am-u-lg-3 am-u-md-6 am-u-sm-8 am-u-sm-centered log-content">
-                <h1 class="log-title am-animation-slide-top">读者注册</h1>
-                <c:if test="${msg} !null" >
-                    <h2 class="log-title am-animation-slide-top">
-                        <c:out value="${msg}">
-                        </c:out>
-                    </h2>
-                </c:if>
+                <h1 class="log-title am-animation-slide-top">注册</h1>
                 <br>
-                <form class="am-form" id="log-form" method="post">
+                <form class="am-form " id="log-form" method="post">
                     <div class="am-input-group am-radius am-animation-slide-left">
                         <input name="email" type="email" id="doc-vld-email-2-1" class="am-radius" data-validation-message="请输入正确邮箱地址" placeholder="邮箱" required/>
+                        <span class="am-input-group-label log-icon am-radius"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>
+                    </div>
+                    <br>
+                    <div class="am-input-group am-radius am-animation-slide-left">
+                        <input type="email" id="doc-vld-email-2-2" class="am-radius" placeholder="验证码" required/>
                         <span class="am-input-group-label log-icon am-radius"><i class="am-icon-user am-icon-sm am-icon-fw"></i></span>
                     </div>
                     <br>
@@ -75,6 +77,7 @@
                     </div>
                 </form>
             </div>
+
         </div>
         <footer class="log-footer">
             © 2018 WERLS.TOP .
@@ -86,6 +89,11 @@
     $(document).ready(function(){
        
         $("#register").click(function () {
+
+            if ($("#doc-vld-email-2-2").val()!=4396){
+                alert("验证码错误！！请重新输入");
+            }
+            else if ($("#log-password").val()==$("#password").val()) {
             $.post("${pageContext.request.contextPath}/readerRegister.action",
              $("#log-form").serialize(),function (data) {
                     if (data == "ok"){
@@ -96,7 +104,10 @@
                     }
                 }   
             )
-            
+           }
+            else {
+                alert("两次密码错误请重新输入")
+            }
         })
 
     }); 

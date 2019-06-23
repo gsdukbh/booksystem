@@ -31,7 +31,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/amazeui.min.css" />
 </head>
 <body>
-<%--导航栏--%>
 <div class="container">
     <div class="row clearfix" id="showList">
         <div class="col-md-12 column">
@@ -66,9 +65,9 @@
                                 <th>
                                     单价
                                 </th>
-                                <th>
-                                    备注
-                                </th>
+                                <%--<th>
+                                  详情
+                                </th>--%>
                                 <th>
                                     操作
                                 </th>
@@ -95,11 +94,12 @@
                                     <td>
                                         <c:out value="${row.bookRate}"/>
                                     </td>
-                                    <td>
+                                   <%-- <td>
                                         <c:out value="${row.bookRemark} "/>
-                                    </td>
+                                    </td>--%>
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookEditDialog" onclick= "editBook(${row.bookId})">修改</a>
+                                        <a href="${pageContext.request.contextPath}/book/Id.action?id=${row.bookId}" class="btn btn-primary btn-xs" >详情</a>
                                         <a href="#" class="btn btn-danger btn-xs" onclick="deleteBook(${row.bookId})">删除</a>
                                     </td>
                                 </tr>
@@ -133,37 +133,37 @@
                 <form class="form-horizontal" id="addBookFrom">
                     <fieldset>
                         <div class="control-group">
-                            <label class="control-label" >图书编号</label>
+                            <label class="control-label"  for="newBookId">图书编号</label>
                             <div class="controls">
                                 <input type="text" placeholder="请输入" class="input-xlarge" id="newBookId" name="bookId">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >书名</label>
+                            <label class="control-label" for="newBookName">书名</label>
                             <div class="controls">
                                 <input type="text" placeholder="请输入" class="input-xlarge" id="newBookName" name="bookName">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >作者</label>
+                            <label class="control-label" for="newBookAuthor">作者</label>
                             <div class="controls">
                                 <input type="text" placeholder="请输入" class="input-xlarge" id="newBookAuthor" name="bookAuthor">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >出版单位</label>
+                            <label class="control-label" for="newBookPublishUnit">出版单位</label>
                                 <div class="controls">
                                 <input type="text" placeholder="请输入" class="input-xlarge" id="newBookPublishUnit" name="bookPublishUnit">
                                  </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >单价</label>
+                            <label class="control-label" for="newBookRate">单价</label>
                             <div class="controls">
                                 <input type="text" placeholder="输入数字" class="input-xlarge" id="newBookRate" name="bookRate">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" >备注</label>
+                            <label class="control-label" for="newBookRemark">详情</label>
                             <div class="controls">
                                 <input type="text" placeholder="请输入" class="input-xlarge" id="newBookRemark" name="bookRemark">
                             </div>
