@@ -1,0 +1,1 @@
+UPDATE DookDb.dbo.bookUser SET bpwd = 'qq1361404576', bphone = '1521564684', bname = null WHERE buser = 'admin@admin.com';
