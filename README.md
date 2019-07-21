@@ -17,7 +17,7 @@ demo 展示
  
  * 数据创建：
  
-   ````
+   ````sql
    create  database DookDb
     
    create table bookinfo(
